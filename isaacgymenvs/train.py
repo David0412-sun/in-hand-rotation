@@ -45,7 +45,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utils.reformat import omegaconf_to_dict, print_dict
 
 from utils.utils import set_np_formatting, set_seed
-import random
+from isaacgymenvs.utils.object_tasks import configure_output_directory
 ## OmegaConf & Hydra Config
 
 # Resolvers used in hydra configs (see https://omegaconf.readthedocs.io/en/2.1_branch/usage.html#resolvers)
@@ -61,6 +61,7 @@ def launch_rlg_hydra(cfg: DictConfig):
     from isaacgymenvs.learning import amp_network_builder
     import isaacgymenvs
 
+    experiment_dir = configure_output_directory(cfg)
     time_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     run_name = f"{cfg.wandb_name}_{time_str}"
 
@@ -141,21 +142,8 @@ def launch_rlg_hydra(cfg: DictConfig):
 
         return runner
 
-    time_prefix = time_str + '-' + str(random.randint(0, 100000))
-    need_set_prefix = False
-
-    if hasattr(cfg.train.params.config, 'user_prefix'):
-        prefix = cfg.train.params.config.prefix = cfg.train.params.config.user_prefix \
-                                                  + cfg.train.params.config.auto_prefix \
-                                                  + time_prefix
-    else:
-        prefix = time_prefix
-        need_set_prefix = True
-
     rlg_config_dict = omegaconf_to_dict(cfg.train)
     print(rlg_config_dict)
-    if need_set_prefix:
-        rlg_config_dict['params']['config']['prefix'] = prefix
     # convert CLI arguments into dictionory
     # create runner and set the settings
     runner = build_runner(RLGPUAlgoObserver())
@@ -164,12 +152,10 @@ def launch_rlg_hydra(cfg: DictConfig):
 
     # dump config dict
 
-    experiment_dir = os.path.join('runs', cfg.train.params.config.name)
-    experiment_dir = os.path.join(experiment_dir, prefix)
-
-    os.makedirs(experiment_dir, exist_ok=True)
-    with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
-        f.write(OmegaConf.to_yaml(cfg))
+    if not cfg.test:
+        os.makedirs(experiment_dir, exist_ok=True)
+        with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
+            f.write(OmegaConf.to_yaml(cfg))
 
     runner.run({
         'train': not cfg.test,

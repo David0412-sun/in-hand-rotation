@@ -28,6 +28,7 @@ env:
   sensor: "thick" 
   objInit: "new"
   objSet: "0"
+  objectName: "" # Select one object from objSet; empty trains the original full set.
   pc_category: "mug"  
   skill_step: 500
   spin_coef: 1.0

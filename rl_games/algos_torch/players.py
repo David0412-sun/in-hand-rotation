@@ -159,9 +159,7 @@ class PpoPlayerContinuous(BasePlayer):
         env_reward = np.zeros(16)
         end_flag = False
 
-        n_object_dict = {'C': 16, 27: 27, 'poly': 162, 'non-convex': 40, 'cuboid': 1, 'cross': 5, 'ball': 1, 'block': 1, 'asymmetry': 172, 'duck': 1, 'giraffe': 1, 'symmetry': 1, 'designer-cube': 1, "cross_bmr": 1, "cross5": 1, "designer-cube2": 1, "cross_y": 1, "cross3": 1, "cross_t": 1, "designer-cube3": 1,
-                            'i': 1, 'c': 1, 'r': 1, 'a': 1, 'mouse': 1, 0: 1}
-        n_object = n_object_dict[self.env.cfg['env']['objSet']]
+        n_object = self.env.num_training_objects
         object_count_dict = {'game_count': np.zeros(n_object), 'reward_sum': np.zeros(n_object), 'step_sum': np.zeros(n_object)}
         n_games = 500
         print(n_games, self.max_steps, self.n_game_life)

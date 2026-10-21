@@ -25,6 +25,45 @@ For detailed instruction, see [install.md](install.md).
 ## Launch Training
 ### Teacher Policy Training
 
+Training outputs use fixed object/task directories. Select one object with
+`task.env.objectName=<name>` while keeping its original `task.env.objSet`.
+For example:
+
+```bash
+bash scripts/teacher_cross.sh 0 task.env.objectName=cross4_0 headless=True wandb_activate=False max_iterations=2000
+bash scripts/teacher_axis.sh 0 task.env.objectName=set_obj1_regular_block task.env.axis=x headless=True wandb_activate=False max_iterations=2000
+```
+
+These save checkpoints under `runs/cross4_0/z-axis/nn/` and
+`runs/set_obj1_regular_block/x-axis/nn/`. Each task directory also contains
+`config.yaml` and `summaries/`. Changing training parameters, `experiment`, or
+`user_prefix` does not create another run directory. The same task reuses its
+directory: the latest training config and best-model filename may be overwritten,
+while periodic checkpoints and TensorBoard event files remain there. Teacher
+playback (`test=True`) creates no run directory and does not overwrite its config.
+Use the same object selection and axis when replaying or resuming a checkpoint.
+
+The available objects are:
+
+| Object set | Object names |
+| --- | --- |
+| `ball` | `ball` (the Baoding task still contains two balls per environment) |
+| `cross` | `cross4_0`, `cross4_1`, `cross4_2`, `cross4_3`, `cross4_4` |
+| `C` | `set_obj1_regular_block`, `set_obj2_block`, `set_obj3_block`, `set_obj4_block`, `set_obj5_block`, `set_obj6_block_corner`, `set_obj7_block`, `set_obj8_short_block`, `set_obj9_thin_block`, `set_obj10_thin_block_corner`, `set_obj11_cylinder`, `set_obj12_cylinder_corner`, `set_obj13_irregular_block`, `set_obj14_irregular_block_cross`, `set_obj15_irregular_block_time`, `set_obj16_cylinder_axis` |
+
+The C objects support separate X/Y/Z training tasks. With an empty `objectName`,
+the original whole-set training remains available and saves to the fixed
+`runs/_object_sets/<objSet>/<axis>-axis/` directory. The single-entry ball set
+always saves to `runs/ball/<axis>-axis/`.
+
+Student training and teacher-data collection use fixed `student/` and
+`collection/` subdirectories under the same object/task directory; explicit
+teacher checkpoint and demonstration input paths are unchanged.
+
+The preserved 2000-iteration Baoding run is archived under
+`runs/ball/z-axis/archive_2000/`: `best.pth`, `epoch_2000.pth`, and the original
+`config.yaml`. New training writes to `nn/` and does not overwrite this archive.
+
 (1) For training a state-based policy for double-ball rotation, run
 ```
 scripts/teacher_baoding.sh 0
