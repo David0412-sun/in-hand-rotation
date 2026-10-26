@@ -1,0 +1,13 @@
+{
+  "steps": 160,
+  "green_pad_samples": 3774,
+  "green_to_red_transitions": 289,
+  "adjacent_links_different": true,
+  "screenshot": "tactile_colors.png",
+  "env0_green_pads": [
+    "RMCPS_TACTILE"
+  ],
+  "reset_colors_red": true,
+  "colors_match_policy_contacts": true,
+  "passed": true
+}

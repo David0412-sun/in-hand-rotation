@@ -1,0 +1,12 @@
+defaults:
+  - AllegroArmMOARPPO
+  - _self_
+
+# Reuse the original PPO actor/local critic and central critic networks.
+params:
+  config:
+    train_dir: runs/rapidhand
+    auto_prefix: ""
+    minibatch_size: 1024
+    central_value_config:
+      minibatch_size: 1024

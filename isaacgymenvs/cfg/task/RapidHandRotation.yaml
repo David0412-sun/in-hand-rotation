@@ -1,0 +1,137 @@
+name: RapidHandRotation
+physics_engine: ${..physics_engine}
+
+env:
+  numEnvs: ${resolve_default:256,${...num_envs}}
+  numAgents: 1
+  # Runtime checks derive these dimensions from the imported Vision hand schema.
+  numActions: 20
+  numObservations: ${if:${eq:${.objSet},ball},258,245}
+  numStates: ${if:${eq:${.objSet},ball},154,141}
+  envSpacing: 0.4
+  episodeLength: 500
+  controlFrequencyInv: 6
+  frameStack: 4
+  clipObservations: 10.0
+  clipActions: 1.0
+  legacy_obs: True
+  is_distillation: False
+  ablation_mode: no-pc
+  asymmetric_observations: True
+  pc_category: rapidhand
+  observation:
+    obs: null
+  enableDebugVis: False
+
+  handName: vision_hand
+  handAssetRoot: assets/rapidhand
+  handAssetFile: urdf/vision_hand.urdf
+  # Excludes fixed assemblies, direct joint neighbors and the mounts below.
+  selfCollision: True
+  # Palm / two-axis finger-mount housings overlap by design (including convex hulls).
+  selfCollisionIgnorePairs:
+    - [BASE, TMCPS]
+    - [BASE, IMCPS]
+    - [BASE, MMCPS]
+    - [BASE, RMCPS]
+    - [BASE, LMCPS]
+  assetRoot: assets
+  objSet: cross
+  # cross defaults to cross4_0; other sets default to their full set (ball has one type).
+  # Explicit objectName='' always selects the full set, as in the Allegro task.
+  objectName: '${if:${eq:${.objSet},cross},cross4_0,""}'
+  axis: z
+
+  # Euler angles are radians. Local -Y is the palm normal; Rx(-pi/2) faces it up.
+  handPosition: [0.0, 0.0, 0.30]
+  handRotationEuler: [-1.5707963267948966, 0.0, 0.0]
+  palmNormalLocal: [0.0, -1.0, 0.0]
+  objectPositionLocal: [0.005, -0.055, 0.11]
+  # Object orientation is in the environment/world frame, unlike its local position.
+  objectRotationEuler: [0.0, 0.0, 0.0]
+  objectPositionNoise: 0.002
+  objectScale: 1.0
+  objectMass: 0.05
+  # objSet=ball selects two balls; all other supported sets use one object.
+  # ballRadius records the URDF sphere radius; change objectScale to resize it.
+  ballRadius: 0.022
+  ballPositionsLocal:
+    - [-0.020, -0.055, 0.11]
+    - [0.030, -0.055, 0.11]
+  minBallSeparation: 0.040
+  maxBallSeparation: 0.10
+  minBallHeightLocal: 0.0
+  centroidVelocityPenaltyScale: 0.1
+  orbitTiltPenaltyScale: 0.1
+  objectAngularDamping: 0.01
+  friction: 1.0
+  stiffness: 3.0
+  damping: 0.5
+  actionScale: 0.10
+  targetSmoothing: 0.8
+  resetDofPositionNoise: 0.03
+  defaultJointPositions:
+    IF: 0.65
+    IS: 0.0
+    IP: 0.8
+    ID: 0.25
+    MF: 0.65
+    MS: 0.0
+    MP: 0.8
+    MD: 0.25
+    RF: 0.65
+    RS: 0.0
+    RP: 0.8
+    RD: 0.25
+    LF: 0.65
+    LS: 0.0
+    LP: 0.8
+    LD: 0.25
+    TF: 0.65
+    TS: 0.7
+    TP: 0.4
+    TD: 0.3
+
+  contactThreshold: 0.05
+  spinRewardScale: 1.0
+  maxSpinReward: 10.0
+  # Single-object reset on negligible net rotation; disabled unless a preset opts in.
+  rotationStallTimeout: 0.0
+  rotationStallGracePeriod: 2.0
+  rotationStallMinAngleDeg: 5.0
+  contactRewardScale: 0.2
+  positionPenaltyScale: 2.0
+  fingerDistancePenaltyScale: 0.1
+  actionPenaltyScale: 0.002
+  velocityPenaltyScale: 0.0001
+  # Height is dot(object_position_in_hand_frame, palmNormalLocal).
+  dropHeightLocal: -0.02
+  maxObjectDistance: 0.18
+  fallPenalty: -15.0
+  viewerPosition: [0.45, -0.45, 0.65]
+  viewerTarget: [0.0, 0.08, 0.34]
+
+task:
+  randomize: False
+  enableCameraSensors: False
+
+sim:
+  dt: 0.01667
+  substeps: 2
+  up_axis: z
+  use_gpu_pipeline: ${eq:${...pipeline},"gpu"}
+  gravity: [0.0, 0.0, -9.81]
+  physx:
+    num_threads: ${....num_threads}
+    solver_type: ${....solver_type}
+    use_gpu: ${contains:"cuda",${....sim_device}}
+    num_position_iterations: 8
+    num_velocity_iterations: 0
+    max_gpu_contact_pairs: 8388608
+    num_subscenes: ${....num_subscenes}
+    contact_offset: 0.002
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.2
+    max_depenetration_velocity: 100.0
+    default_buffer_size_multiplier: 5.0
+    contact_collection: 2

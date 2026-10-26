@@ -1,0 +1,5200 @@
+{
+  "status": "completed",
+  "root": "/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation",
+  "policy": "Per task/hand/object folder, retain the highest recorded-reward checkpoint and the latest saved checkpoint of the latest non-test training run. Deduplicate when they coincide. Remove identified test checkpoints. Keep code, assets, configs, logs, and validation reports unchanged.",
+  "checkpoints": [
+    {
+      "path": "runs/ball/z-axis/archive_2000/best.pth",
+      "size": 6982988,
+      "mtime_ns": 1792074478054187243,
+      "mtime": "2026-10-15T22:27:58.054187",
+      "epoch": 1876,
+      "frame": 245891072,
+      "historical_best_reward": 1372.3406982421875,
+      "filename_reward": null,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "7b93fcaa07687903d26d1a6887dcb28b18133b613890d16903fee9840738a72d",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          366
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [
+        "best"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/ball/z-axis/archive_2000/epoch_2000.pth",
+      "size": 6984912,
+      "mtime_ns": 1792075620074824596,
+      "mtime": "2026-10-15T22:47:00.074825",
+      "epoch": 2000,
+      "frame": 262144000,
+      "historical_best_reward": 1372.3406982421875,
+      "filename_reward": null,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "e12fe77a34eef3e92a52f3d37cf2cbf5748c9a82eeabef32b244130eac09f9a9",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          366
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [
+        "last"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/best_before_resume_2000.pth",
+      "size": 6873570,
+      "mtime_ns": 1792389892555181299,
+      "mtime": "2026-10-19T14:04:52.555181",
+      "epoch": 1987,
+      "frame": 260440064,
+      "historical_best_reward": 234.3837432861328,
+      "filename_reward": null,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "2dc8d87c1de70b1397930def29c1a16867296c81ebecbad09512b38b8cc5988f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [
+        "best"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/cross4_0_z.pth",
+      "size": 6873570,
+      "mtime_ns": 1792414337970354630,
+      "mtime": "2026-10-19T20:52:17.970355",
+      "epoch": 3994,
+      "frame": 523501568,
+      "historical_best_reward": 149.10447692871094,
+      "filename_reward": null,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "bb34ac0f7722597313d9a314aec621f454b394769e21650640fff54a410d78ec",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1000_rew_104.59979.pth",
+      "size": 6875716,
+      "mtime_ns": 1792143056549529129,
+      "mtime": "2026-10-16T17:30:56.549529",
+      "epoch": 1000,
+      "frame": 131072000,
+      "historical_best_reward": 108.66497802734375,
+      "filename_reward": 104.59979,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "64068398ce0fe14632bfb0f1ab7e29688d41429b26937872965672cb32b67d5d",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1000_rew_108.54398.pth",
+      "size": 6875716,
+      "mtime_ns": 1792396608522046790,
+      "mtime": "2026-10-19T15:56:48.522047",
+      "epoch": 1000,
+      "frame": 131072000,
+      "historical_best_reward": 111.21505737304688,
+      "filename_reward": 108.54398,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "6340eb45f66bf846176d563349ddb952261133e02d522b64729195fb39dc3a8f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1100_rew_105.11587.pth",
+      "size": 6875716,
+      "mtime_ns": 1792397242518406485,
+      "mtime": "2026-10-19T16:07:22.518406",
+      "epoch": 1100,
+      "frame": 144179200,
+      "historical_best_reward": 111.44490814208984,
+      "filename_reward": 105.11587,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "8450790753df4e236039ef2d8526a1ae5c887f5be63c3257ad1382f884340cc6",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1100_rew_109.084076.pth",
+      "size": 6875786,
+      "mtime_ns": 1792143700757069418,
+      "mtime": "2026-10-16T17:41:40.757069",
+      "epoch": 1100,
+      "frame": 144179200,
+      "historical_best_reward": 110.59589385986328,
+      "filename_reward": 109.084076,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "f91cdfa31d0febd4f14e78eef6081b39096132ac535fb088c790120545ff5a57",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1200_rew_106.84096.pth",
+      "size": 6875716,
+      "mtime_ns": 1792397873112404973,
+      "mtime": "2026-10-19T16:17:53.112405",
+      "epoch": 1200,
+      "frame": 157286400,
+      "historical_best_reward": 112.32080078125,
+      "filename_reward": 106.84096,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "cc6a22ce6014c372a86dc1c0ae96051204dcec5669bb7c3c21a24f27a7efe91b",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1200_rew_108.9434.pth",
+      "size": 6875646,
+      "mtime_ns": 1792144345329239704,
+      "mtime": "2026-10-16T17:52:25.329240",
+      "epoch": 1200,
+      "frame": 157286400,
+      "historical_best_reward": 113.83302307128906,
+      "filename_reward": 108.9434,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "58c5234a990f78f54064f61730c0bd09dc2786cbda6f75f95aae15d21a042efc",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1300_rew_109.46136.pth",
+      "size": 6875716,
+      "mtime_ns": 1792144985331547932,
+      "mtime": "2026-10-16T18:03:05.331548",
+      "epoch": 1300,
+      "frame": 170393600,
+      "historical_best_reward": 114.94593811035156,
+      "filename_reward": 109.46136,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "8a15202ebb2d9704daa256b81db780f0e37982112899d175134c061c59c25182",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1300_rew_111.981735.pth",
+      "size": 6875786,
+      "mtime_ns": 1792398498315480014,
+      "mtime": "2026-10-19T16:28:18.315480",
+      "epoch": 1300,
+      "frame": 170393600,
+      "historical_best_reward": 114.695068359375,
+      "filename_reward": 111.981735,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "dad7982fdb72f968ea9ff57d9522ed55b841a60cc27f4cc5683506a1bbf7deb8",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1400_rew_112.82441.pth",
+      "size": 6875716,
+      "mtime_ns": 1792399114976895891,
+      "mtime": "2026-10-19T16:38:34.976896",
+      "epoch": 1400,
+      "frame": 183500800,
+      "historical_best_reward": 114.695068359375,
+      "filename_reward": 112.82441,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "48e72426eda0c4bf1fe82e29042cd04c530e7f14a132261ff88c0527a836f3a1",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1400_rew_114.81264.pth",
+      "size": 6875716,
+      "mtime_ns": 1792145628119226824,
+      "mtime": "2026-10-16T18:13:48.119227",
+      "epoch": 1400,
+      "frame": 183500800,
+      "historical_best_reward": 115.68791961669922,
+      "filename_reward": 114.81264,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "47a1874e9bd118a001bc41496269ebaefd06beb6651705dab01c675a35283551",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1500_rew_112.208755.pth",
+      "size": 6875786,
+      "mtime_ns": 1792399736309682614,
+      "mtime": "2026-10-19T16:48:56.309683",
+      "epoch": 1500,
+      "frame": 196608000,
+      "historical_best_reward": 114.695068359375,
+      "filename_reward": 112.208755,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ee18caac893e5eab438eeaaa36368957aa9d80d468e3b211a69c1b96759c2a64",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1500_rew_112.449234.pth",
+      "size": 6875786,
+      "mtime_ns": 1792146272192920658,
+      "mtime": "2026-10-16T18:24:32.192921",
+      "epoch": 1500,
+      "frame": 196608000,
+      "historical_best_reward": 116.46888732910156,
+      "filename_reward": 112.449234,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "0e1a07211b28194e8741eb71b90127a8448ed1c85ac5c90a6d2a8023eaf8b995",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1600_rew_111.80003.pth",
+      "size": 6875716,
+      "mtime_ns": 1792400353868760228,
+      "mtime": "2026-10-19T16:59:13.868760",
+      "epoch": 1600,
+      "frame": 209715200,
+      "historical_best_reward": 115.33794403076172,
+      "filename_reward": 111.80003,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "eea052988fdc36ac031ce790565e81682c3e00023fe675ec0467814fb83557fa",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1600_rew_116.4597.pth",
+      "size": 6875646,
+      "mtime_ns": 1792146908782565233,
+      "mtime": "2026-10-16T18:35:08.782565",
+      "epoch": 1600,
+      "frame": 209715200,
+      "historical_best_reward": 119.81951141357422,
+      "filename_reward": 116.4597,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "c84e032df85b2dd31de1a6486f3ad77fdf98284ab49d6b3346a9e004598cc9d5",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1700_rew_109.85512.pth",
+      "size": 6875716,
+      "mtime_ns": 1792400970629218402,
+      "mtime": "2026-10-19T17:09:30.629218",
+      "epoch": 1700,
+      "frame": 222822400,
+      "historical_best_reward": 117.2708740234375,
+      "filename_reward": 109.85512,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "531bb621f167440b1ad431352a9f74379fb56fc594284801d5e0f6c6ed40aa04",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1700_rew_147.2239.pth",
+      "size": 6875646,
+      "mtime_ns": 1792147523669100970,
+      "mtime": "2026-10-16T18:45:23.669101",
+      "epoch": 1700,
+      "frame": 222822400,
+      "historical_best_reward": 147.8837432861328,
+      "filename_reward": 147.2239,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "042e8f54b5958a08d8a245dfe98abbfcef8b994eff7be815a5e6a45c9947ad6f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1800_rew_111.41382.pth",
+      "size": 6875716,
+      "mtime_ns": 1792401588737944535,
+      "mtime": "2026-10-19T17:19:48.737945",
+      "epoch": 1800,
+      "frame": 235929600,
+      "historical_best_reward": 117.2708740234375,
+      "filename_reward": 111.41382,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "260d33edcb277a66a5ff4df2dcb571cf15cf41b91bf9d959497bab34b76b5fe3",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1800_rew_171.3556.pth",
+      "size": 6875646,
+      "mtime_ns": 1792148117325908071,
+      "mtime": "2026-10-16T18:55:17.325908",
+      "epoch": 1800,
+      "frame": 235929600,
+      "historical_best_reward": 179.5750732421875,
+      "filename_reward": 171.3556,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "9eeb07bb4d3f8e8fb7073c10bedf141e2d92e116e9ce5df6ff9f3f23a981bea3",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1900_rew_114.64356.pth",
+      "size": 6875716,
+      "mtime_ns": 1792402201615236733,
+      "mtime": "2026-10-19T17:30:01.615237",
+      "epoch": 1900,
+      "frame": 249036800,
+      "historical_best_reward": 118.60722351074219,
+      "filename_reward": 114.64356,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "018cdb0c0ef6a495128a14a69da1d8d3a9fead0b79e23e4e0c08976d5d8cefaf",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1900_rew_189.43417.pth",
+      "size": 6875716,
+      "mtime_ns": 1792148702602484530,
+      "mtime": "2026-10-16T19:05:02.602484",
+      "epoch": 1900,
+      "frame": 249036800,
+      "historical_best_reward": 214.6074981689453,
+      "filename_reward": 189.43417,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "6398e6fa18845e94dca595fdd4433e53a5672f379e60ee74c0db82dfe9ce92c1",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2000_rew_115.038315.pth",
+      "size": 6875786,
+      "mtime_ns": 1792402814892541692,
+      "mtime": "2026-10-19T17:40:14.892542",
+      "epoch": 2000,
+      "frame": 262144000,
+      "historical_best_reward": 119.63488006591797,
+      "filename_reward": 115.038315,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "aa11c0e25c1779cfad98ceec33f8108dba7571dba0daa5bc51616f42607504f3",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2000_rew_224.82614.pth",
+      "size": 6875716,
+      "mtime_ns": 1792149282725142968,
+      "mtime": "2026-10-16T19:14:42.725143",
+      "epoch": 2000,
+      "frame": 262144000,
+      "historical_best_reward": 234.3837432861328,
+      "filename_reward": 224.82614,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "c5953a6f21617b79d39d6b7a6796938765873a61404b860ad20701d6cdf16988",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_200_rew_81.62506.pth",
+      "size": 6875576,
+      "mtime_ns": 1792391330854828766,
+      "mtime": "2026-10-19T14:28:50.854829",
+      "epoch": 200,
+      "frame": 26214400,
+      "historical_best_reward": 83.64248657226562,
+      "filename_reward": 81.62506,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "3c51719c9f7589c704576f1fab090f1b078b974413893ba408a232b14e6b6fda",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_200_rew_86.152245.pth",
+      "size": 6875646,
+      "mtime_ns": 1792137776117545535,
+      "mtime": "2026-10-16T16:02:56.117546",
+      "epoch": 200,
+      "frame": 26214400,
+      "historical_best_reward": 86.40384674072266,
+      "filename_reward": 86.152245,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "5e0fa37087e54ae4c6a7a35afb5b287970e936bea1ecd15edddc7b20a82cb3ad",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2100_rew_114.61365.pth",
+      "size": 6875716,
+      "mtime_ns": 1792403415697093080,
+      "mtime": "2026-10-19T17:50:15.697093",
+      "epoch": 2100,
+      "frame": 275251200,
+      "historical_best_reward": 120.08838653564453,
+      "filename_reward": 114.61365,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "5bcfdd9bb2440600aa049dbd38e24960d05d5064d92e4b81390f489166eaa10d",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2200_rew_119.513466.pth",
+      "size": 6875786,
+      "mtime_ns": 1792404006026039489,
+      "mtime": "2026-10-19T18:00:06.026040",
+      "epoch": 2200,
+      "frame": 288358400,
+      "historical_best_reward": 121.54496765136719,
+      "filename_reward": 119.513466,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "d69264eab82718db017be6fbb3363dc8b8eab69ee9ea5d56929b928940729b6c",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2300_rew_117.9299.pth",
+      "size": 6875646,
+      "mtime_ns": 1792404590549963365,
+      "mtime": "2026-10-19T18:09:50.549963",
+      "epoch": 2300,
+      "frame": 301465600,
+      "historical_best_reward": 121.7890396118164,
+      "filename_reward": 117.9299,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ddb49b097a06d9ad69f2c032e0f4181db6c27823fff61e18b2e458065768a366",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2400_rew_118.56683.pth",
+      "size": 6875716,
+      "mtime_ns": 1792405168569192182,
+      "mtime": "2026-10-19T18:19:28.569192",
+      "epoch": 2400,
+      "frame": 314572800,
+      "historical_best_reward": 124.40486907958984,
+      "filename_reward": 118.56683,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "6796335fda7d0ee91a028a3bce3957580a48252e523997f79b42317275141724",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2500_rew_117.815544.pth",
+      "size": 6875786,
+      "mtime_ns": 1792405748054682156,
+      "mtime": "2026-10-19T18:29:08.054682",
+      "epoch": 2500,
+      "frame": 327680000,
+      "historical_best_reward": 124.40486907958984,
+      "filename_reward": 117.815544,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "4a2f13c18cf71314d11185c724a54e96ba9ae620708fcd5781db62dda8d8f5d8",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2600_rew_122.01767.pth",
+      "size": 6875716,
+      "mtime_ns": 1792406325403289445,
+      "mtime": "2026-10-19T18:38:45.403290",
+      "epoch": 2600,
+      "frame": 340787200,
+      "historical_best_reward": 124.40486907958984,
+      "filename_reward": 122.01767,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "cbc9dcb86b97dfae5a60bb8d6db0345d7090875c53ec76046dbbe9130978ffaa",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2700_rew_118.860954.pth",
+      "size": 6875786,
+      "mtime_ns": 1792406904349278893,
+      "mtime": "2026-10-19T18:48:24.349279",
+      "epoch": 2700,
+      "frame": 353894400,
+      "historical_best_reward": 124.40486907958984,
+      "filename_reward": 118.860954,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "20a8e804a7c5715933ce34070b9a8ef6f12b548eb8458eeb1b2201d6937c34fa",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2800_rew_122.79169.pth",
+      "size": 6875716,
+      "mtime_ns": 1792407485586580703,
+      "mtime": "2026-10-19T18:58:05.586581",
+      "epoch": 2800,
+      "frame": 367001600,
+      "historical_best_reward": 124.40486907958984,
+      "filename_reward": 122.79169,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "354ac9238a8ce4ff472de7b05e110edb83eb065b045abe39f2ecc0774ffb255c",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2900_rew_115.29644.pth",
+      "size": 6875716,
+      "mtime_ns": 1792408069501222382,
+      "mtime": "2026-10-19T19:07:49.501222",
+      "epoch": 2900,
+      "frame": 380108800,
+      "historical_best_reward": 125.2835922241211,
+      "filename_reward": 115.29644,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "98425e550c597ef763b6c9e45a49a50ae7b646b0dee214ddcf1152f46d50d6bd",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3000_rew_125.69076.pth",
+      "size": 6875716,
+      "mtime_ns": 1792408644333509389,
+      "mtime": "2026-10-19T19:17:24.333509",
+      "epoch": 3000,
+      "frame": 393216000,
+      "historical_best_reward": 125.87173461914062,
+      "filename_reward": 125.69076,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "8bb57b5e3ea9b236f09e1e33a52820f480073f80bd3868288a094b0d65284bc9",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_300_rew_85.9101.pth",
+      "size": 6875506,
+      "mtime_ns": 1792138458984428936,
+      "mtime": "2026-10-16T16:14:18.984429",
+      "epoch": 300,
+      "frame": 39321600,
+      "historical_best_reward": 93.99240112304688,
+      "filename_reward": 85.9101,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "5e27020a7ba877e6b4f9000e788a252d57669195c7d440c48c80ee9f6aae7735",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_300_rew_85.938736.pth",
+      "size": 6875646,
+      "mtime_ns": 1792391991420496485,
+      "mtime": "2026-10-19T14:39:51.420496",
+      "epoch": 300,
+      "frame": 39321600,
+      "historical_best_reward": 91.64876556396484,
+      "filename_reward": 85.938736,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "84bf3f2185451c32dec06b394d3fbcc2873d1c8dc98db6b1634395f24fab661e",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3100_rew_118.76521.pth",
+      "size": 6875716,
+      "mtime_ns": 1792409219284388679,
+      "mtime": "2026-10-19T19:26:59.284389",
+      "epoch": 3100,
+      "frame": 406323200,
+      "historical_best_reward": 126.06846618652344,
+      "filename_reward": 118.76521,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "399b08c601986214627fb99013638a34ffb7eb204d2921aa365e9af393171622",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3200_rew_122.67325.pth",
+      "size": 6875716,
+      "mtime_ns": 1792409793320360287,
+      "mtime": "2026-10-19T19:36:33.320360",
+      "epoch": 3200,
+      "frame": 419430400,
+      "historical_best_reward": 126.06846618652344,
+      "filename_reward": 122.67325,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "9e69d71369882c5942d5a4d3482c1c5ec1f0b41f16e3a21f841ff3b516b70515",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3400_rew_120.971245.pth",
+      "size": 6875786,
+      "mtime_ns": 1792410939725564419,
+      "mtime": "2026-10-19T19:55:39.725564",
+      "epoch": 3400,
+      "frame": 445644800,
+      "historical_best_reward": 129.0304718017578,
+      "filename_reward": 120.971245,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "4fa238f8c7c48b543e86adb8b0313db4c87f796dc720a138399d4f0db0c96cca",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3500_rew_127.303024.pth",
+      "size": 6875786,
+      "mtime_ns": 1792411511764221900,
+      "mtime": "2026-10-19T20:05:11.764222",
+      "epoch": 3500,
+      "frame": 458752000,
+      "historical_best_reward": 130.26885986328125,
+      "filename_reward": 127.303024,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "1d4994ac39e32dfdc2bb0431079fa3389fd0e5bb947247b2653547f13a8fafdf",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3600_rew_118.15483.pth",
+      "size": 6875716,
+      "mtime_ns": 1792412086009883945,
+      "mtime": "2026-10-19T20:14:46.009884",
+      "epoch": 3600,
+      "frame": 471859200,
+      "historical_best_reward": 131.67807006835938,
+      "filename_reward": 118.15483,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "2a96c7af88180869b3725d3dbd5ab52011f432a33707a96b0a3a294f3ada001c",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3700_rew_125.592224.pth",
+      "size": 6875786,
+      "mtime_ns": 1792412657176389498,
+      "mtime": "2026-10-19T20:24:17.176389",
+      "epoch": 3700,
+      "frame": 484966400,
+      "historical_best_reward": 132.3419952392578,
+      "filename_reward": 125.592224,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "495e45b21546dd8ee1547b6dcc81b3dc7c5178dd6379a3cff8dba55d72f83522",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3800_rew_131.14412.pth",
+      "size": 6875716,
+      "mtime_ns": 1792413227812609107,
+      "mtime": "2026-10-19T20:33:47.812609",
+      "epoch": 3800,
+      "frame": 498073600,
+      "historical_best_reward": 138.1451873779297,
+      "filename_reward": 131.14412,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "d390a5fbd89bd8eab830d0cb433e8b5e4ef91e59cf550df606bc2dd24e51ee27",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3900_rew_136.27583.pth",
+      "size": 6875716,
+      "mtime_ns": 1792413799414479532,
+      "mtime": "2026-10-19T20:43:19.414479",
+      "epoch": 3900,
+      "frame": 511180800,
+      "historical_best_reward": 141.40333557128906,
+      "filename_reward": 136.27583,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "6673462f97414d1d057a2d42c990cd03d3c18bce90c038cd9decd3a566f789d2",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_4000_rew_131.50197.pth",
+      "size": 6875716,
+      "mtime_ns": 1792414372431820618,
+      "mtime": "2026-10-19T20:52:52.431821",
+      "epoch": 4000,
+      "frame": 524288000,
+      "historical_best_reward": 149.10447692871094,
+      "filename_reward": 131.50197,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "83f3e829b29f04f61b966598eaf33c8e590c07d4edc7088807307a684e90e78c",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [
+        "last"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_400_rew_89.88867.pth",
+      "size": 6875576,
+      "mtime_ns": 1792392657638540298,
+      "mtime": "2026-10-19T14:50:57.638540",
+      "epoch": 400,
+      "frame": 52428800,
+      "historical_best_reward": 93.53597259521484,
+      "filename_reward": 89.88867,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ade390ee862837fe4332451a220129803a21ab56f61e70a1b858f97afd3d4aeb",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_400_rew_95.19674.pth",
+      "size": 6875576,
+      "mtime_ns": 1792139145735169726,
+      "mtime": "2026-10-16T16:25:45.735170",
+      "epoch": 400,
+      "frame": 52428800,
+      "historical_best_reward": 97.57059478759766,
+      "filename_reward": 95.19674,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "723fda2c6bc192e46d9d4e92f9d7a4b0eb11f347d729a7b95ea49100de5befc1",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_500_rew_101.20804.pth",
+      "size": 6875646,
+      "mtime_ns": 1792139816778814867,
+      "mtime": "2026-10-16T16:36:56.778815",
+      "epoch": 500,
+      "frame": 65536000,
+      "historical_best_reward": 103.94123077392578,
+      "filename_reward": 101.20804,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "42c95dd560f65bf4aa93996cdd338ec798210be61b558aeac7f8f59fe9a1a8c5",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_500_rew_97.45519.pth",
+      "size": 6875576,
+      "mtime_ns": 1792393340726256433,
+      "mtime": "2026-10-19T15:02:20.726256",
+      "epoch": 500,
+      "frame": 65536000,
+      "historical_best_reward": 98.51919555664062,
+      "filename_reward": 97.45519,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "f353df17c02ade94038c30b15db95d88ee3cc840d3e27e3b83479291e954870c",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_600_rew_103.062614.pth",
+      "size": 6875716,
+      "mtime_ns": 1792394002763497906,
+      "mtime": "2026-10-19T15:13:22.763498",
+      "epoch": 600,
+      "frame": 78643200,
+      "historical_best_reward": 103.25591278076172,
+      "filename_reward": 103.062614,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "d0283c9884331c36205a4ab9e10202363d2b130ba6a9f5317b72cc0e5a697120",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_600_rew_97.417534.pth",
+      "size": 6875646,
+      "mtime_ns": 1792140496521416021,
+      "mtime": "2026-10-16T16:48:16.521416",
+      "epoch": 600,
+      "frame": 78643200,
+      "historical_best_reward": 103.99871063232422,
+      "filename_reward": 97.417534,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "92efc6d1626723a869a85203e6312612a40f2cdaaa258370b5adabbeaeab033d",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_700_rew_97.446815.pth",
+      "size": 6875646,
+      "mtime_ns": 1792394663253137065,
+      "mtime": "2026-10-19T15:24:23.253137",
+      "epoch": 700,
+      "frame": 91750400,
+      "historical_best_reward": 106.3292465209961,
+      "filename_reward": 97.446815,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "cbf625cdd5cb08bc6be2d4e02ed6119f9ceb4f4095a0ab5131d687e854a566e1",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_700_rew_99.15058.pth",
+      "size": 6875576,
+      "mtime_ns": 1792141133982747309,
+      "mtime": "2026-10-16T16:58:53.982747",
+      "epoch": 700,
+      "frame": 91750400,
+      "historical_best_reward": 103.99871063232422,
+      "filename_reward": 99.15058,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "bdbe9dd3dbf5cb6758a4db3f2f48dadce9b07a0b29ae049c69bea4fca7cc146a",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_800_rew_101.667.pth",
+      "size": 6875506,
+      "mtime_ns": 1792141764386873705,
+      "mtime": "2026-10-16T17:09:24.386874",
+      "epoch": 800,
+      "frame": 104857600,
+      "historical_best_reward": 105.34793090820312,
+      "filename_reward": 101.667,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "7fe28fe68dadf7744bc61ec2d81253e897a797ba22d034c33e5ce1b534b5819a",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_800_rew_104.99939.pth",
+      "size": 6875646,
+      "mtime_ns": 1792395318774872754,
+      "mtime": "2026-10-19T15:35:18.774873",
+      "epoch": 800,
+      "frame": 104857600,
+      "historical_best_reward": 107.44755554199219,
+      "filename_reward": 104.99939,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "f5b3290fa9ddbdd54eb4a186238146af54217a772d68bfee330e3fa60a664768",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_900_rew_101.73328.pth",
+      "size": 6875646,
+      "mtime_ns": 1792142413276193591,
+      "mtime": "2026-10-16T17:20:13.276194",
+      "epoch": 900,
+      "frame": 117964800,
+      "historical_best_reward": 107.96575164794922,
+      "filename_reward": 101.73328,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "c85a8915bbf38f2f04a12e25c7d27f19f04db1bba70f20e3c6a76edd8bf3839b",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_900_rew_106.339615.pth",
+      "size": 6875716,
+      "mtime_ns": 1792395966170128136,
+      "mtime": "2026-10-19T15:46:06.170128",
+      "epoch": 900,
+      "frame": 117964800,
+      "historical_best_reward": 110.34889221191406,
+      "filename_reward": 106.339615,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "becb6db8d83117b1d55731e42a2cb550399fcba0282dad15d6a5550a387c76aa",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_zep2000rew[224.83].pth",
+      "size": 6875366,
+      "mtime_ns": 1792149282733143606,
+      "mtime": "2026-10-16T19:14:42.733144",
+      "epoch": 2000,
+      "frame": 262144000,
+      "historical_best_reward": 234.3837432861328,
+      "filename_reward": 224.83,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "7d852e462938ea5001510bcf53b3a0535f56459950f051c8b56815594da9419f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/cross4_0/z-axis/nn/last_cross4_0_zep4000rew[131.5].pth",
+      "size": 6875296,
+      "mtime_ns": 1792414372439821850,
+      "mtime": "2026-10-19T20:52:52.439822",
+      "epoch": 4000,
+      "frame": 524288000,
+      "historical_best_reward": 149.10447692871094,
+      "filename_reward": 131.5,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "f867ef9c0f15252c2551ee85ac89393552314cefe28a853c9ae8a321a9ef6c7d",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          353
+        ],
+        "a2c_network.mu.weight": [
+          22,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/ball_z.pth",
+      "size": 6205578,
+      "mtime_ns": 1792588398439880120,
+      "mtime": "2026-10-21T21:13:18.439880",
+      "epoch": 3864,
+      "frame": 253231104,
+      "historical_best_reward": 85.33075714111328,
+      "filename_reward": null,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "b87c2fd2bb16a77025de2239e5d1c484e0799506843f1eb8128fe8c601a2a8c7",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [
+        "best"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1000_rew_69.70162.pth",
+      "size": 6209638,
+      "mtime_ns": 1792579106586523695,
+      "mtime": "2026-10-21T18:38:26.586524",
+      "epoch": 1000,
+      "frame": 65536000,
+      "historical_best_reward": 70.46878814697266,
+      "filename_reward": 69.70162,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "e0e58b6264e29a010ce844e5773026645a8964139cebc7e3e6ef19ac93a68c6e",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1100_rew_74.07216.pth",
+      "size": 6209638,
+      "mtime_ns": 1792579418942117867,
+      "mtime": "2026-10-21T18:43:38.942118",
+      "epoch": 1100,
+      "frame": 72089600,
+      "historical_best_reward": 75.04692077636719,
+      "filename_reward": 74.07216,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "b587c5009b9032dd1922e5098dca7eb849f026a847ba7578f20fa96b3403b909",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1200_rew_75.72968.pth",
+      "size": 6209638,
+      "mtime_ns": 1792579729669255690,
+      "mtime": "2026-10-21T18:48:49.669256",
+      "epoch": 1200,
+      "frame": 78643200,
+      "historical_best_reward": 77.28996276855469,
+      "filename_reward": 75.72968,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "94063374f24a87b768e57696f19b5df5fac5efa593c59c049feda5ca1bc53b86",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1300_rew_76.59628.pth",
+      "size": 6209638,
+      "mtime_ns": 1792580041328164525,
+      "mtime": "2026-10-21T18:54:01.328165",
+      "epoch": 1300,
+      "frame": 85196800,
+      "historical_best_reward": 77.92159271240234,
+      "filename_reward": 76.59628,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "b8283fd6669ee42d2a63e2893c0ccd6c960dfedda2c02e0f5889b58e9fd6e65f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1400_rew_77.44585.pth",
+      "size": 6209638,
+      "mtime_ns": 1792580352586723068,
+      "mtime": "2026-10-21T18:59:12.586723",
+      "epoch": 1400,
+      "frame": 91750400,
+      "historical_best_reward": 78.09285736083984,
+      "filename_reward": 77.44585,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "529910f36b9b66498fbd7cf90d13a3e4eef152292876232d0348a76c0e8d422c",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1500_rew_77.36441.pth",
+      "size": 6209638,
+      "mtime_ns": 1792580664307357483,
+      "mtime": "2026-10-21T19:04:24.307358",
+      "epoch": 1500,
+      "frame": 98304000,
+      "historical_best_reward": 78.44274139404297,
+      "filename_reward": 77.36441,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ca015fd5a1e28e37e218653678779f7fdda6374c7e20d9042eece47e8fa0c1c4",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1600_rew_78.71573.pth",
+      "size": 6209638,
+      "mtime_ns": 1792580975622171802,
+      "mtime": "2026-10-21T19:09:35.622172",
+      "epoch": 1600,
+      "frame": 104857600,
+      "historical_best_reward": 78.87612915039062,
+      "filename_reward": 78.71573,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "d1e79193e83b3ab1d4f51ea677be91ee591963447ae3400ef8523d625c7da207",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1700_rew_77.40269.pth",
+      "size": 6209638,
+      "mtime_ns": 1792581285042166351,
+      "mtime": "2026-10-21T19:14:45.042166",
+      "epoch": 1700,
+      "frame": 111411200,
+      "historical_best_reward": 79.24927520751953,
+      "filename_reward": 77.40269,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "afc90aa7e2bfa42c238f90e67f84760c3ca035d819a7ddcab03a19b856446732",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1800_rew_78.855934.pth",
+      "size": 6209708,
+      "mtime_ns": 1792581595362801080,
+      "mtime": "2026-10-21T19:19:55.362801",
+      "epoch": 1800,
+      "frame": 117964800,
+      "historical_best_reward": 79.44367218017578,
+      "filename_reward": 78.855934,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "17febe584e082e9294f4f9542ed868cc7039d87c3927005825e0ca5708f78f86",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1900_rew_79.1631.pth",
+      "size": 6209568,
+      "mtime_ns": 1792581906043786832,
+      "mtime": "2026-10-21T19:25:06.043787",
+      "epoch": 1900,
+      "frame": 124518400,
+      "historical_best_reward": 79.44367218017578,
+      "filename_reward": 79.1631,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ff6bfe1a299639b2ba1dc27aee6b0851dbe7a64789884cebe22518ba816d04c0",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2000_rew_78.99613.pth",
+      "size": 6209638,
+      "mtime_ns": 1792582217060964924,
+      "mtime": "2026-10-21T19:30:17.060965",
+      "epoch": 2000,
+      "frame": 131072000,
+      "historical_best_reward": 79.61219787597656,
+      "filename_reward": 78.99613,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "3c85e5d92fc5643c3f6b561048437f24c22727f07b92ab87219d43d5c1dc9da1",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_200_rew_52.178074.pth",
+      "size": 6209638,
+      "mtime_ns": 1792576631564159188,
+      "mtime": "2026-10-21T17:57:11.564159",
+      "epoch": 200,
+      "frame": 13107200,
+      "historical_best_reward": 53.447509765625,
+      "filename_reward": 52.178074,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "4d1fbd09a75b4fb889c82044048445e6e2a98c59ed3e25322a948398d93f65c9",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2100_rew_78.35813.pth",
+      "size": 6209638,
+      "mtime_ns": 1792582528854792759,
+      "mtime": "2026-10-21T19:35:28.854793",
+      "epoch": 2100,
+      "frame": 137625600,
+      "historical_best_reward": 80.20797729492188,
+      "filename_reward": 78.35813,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "060760d9362c25a4688bb7b8c92877d16fce1157663cd938eb1b91f291e0a3e4",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2200_rew_80.209274.pth",
+      "size": 6209708,
+      "mtime_ns": 1792582841551887468,
+      "mtime": "2026-10-21T19:40:41.551888",
+      "epoch": 2200,
+      "frame": 144179200,
+      "historical_best_reward": 81.389892578125,
+      "filename_reward": 80.209274,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ec468307176e391b69b3ef239dbd97ccc3d00b0dba2ed500917d83a92e18cf28",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2300_rew_81.46929.pth",
+      "size": 6209638,
+      "mtime_ns": 1792583154273229726,
+      "mtime": "2026-10-21T19:45:54.273230",
+      "epoch": 2300,
+      "frame": 150732800,
+      "historical_best_reward": 82.60738372802734,
+      "filename_reward": 81.46929,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ceb76dfe206563a67ebf804929a75a15ad5315701bbd7a1ab5fe58bb6fe4f40e",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2400_rew_82.500435.pth",
+      "size": 6209708,
+      "mtime_ns": 1792583466080887782,
+      "mtime": "2026-10-21T19:51:06.080888",
+      "epoch": 2400,
+      "frame": 157286400,
+      "historical_best_reward": 83.27354431152344,
+      "filename_reward": 82.500435,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "7a25aa4bffc7bcf746434afcb500df891c358e07d5b9a368dc9fc828b5aff42f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2500_rew_83.64001.pth",
+      "size": 6209638,
+      "mtime_ns": 1792583777273796680,
+      "mtime": "2026-10-21T19:56:17.273797",
+      "epoch": 2500,
+      "frame": 163840000,
+      "historical_best_reward": 83.88943481445312,
+      "filename_reward": 83.64001,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "fa4a664d61dd1a24bb377c3ab10bb8ca86d1d910e03116e2659ba4fb97ccadff",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2600_rew_83.217316.pth",
+      "size": 6209708,
+      "mtime_ns": 1792584088831378096,
+      "mtime": "2026-10-21T20:01:28.831378",
+      "epoch": 2600,
+      "frame": 170393600,
+      "historical_best_reward": 84.13994598388672,
+      "filename_reward": 83.217316,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "2f13fe6f3f6091af95ab58669db2992d06be0038a5c95f67ba04e076b41f9d2f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2700_rew_82.89741.pth",
+      "size": 6209638,
+      "mtime_ns": 1792584403913305708,
+      "mtime": "2026-10-21T20:06:43.913306",
+      "epoch": 2700,
+      "frame": 176947200,
+      "historical_best_reward": 84.13994598388672,
+      "filename_reward": 82.89741,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "2b98ceec48aa9e14d2448a27352853cacf987e02431b95d74b6687a71c252ce8",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2800_rew_83.50795.pth",
+      "size": 6209638,
+      "mtime_ns": 1792584722482847959,
+      "mtime": "2026-10-21T20:12:02.482848",
+      "epoch": 2800,
+      "frame": 183500800,
+      "historical_best_reward": 84.4154281616211,
+      "filename_reward": 83.50795,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "d104320b7ed733360380e518bdcebcc8556b44aa9e866be2e2deb3070b3f2d93",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2900_rew_83.85606.pth",
+      "size": 6209638,
+      "mtime_ns": 1792585046827456232,
+      "mtime": "2026-10-21T20:17:26.827456",
+      "epoch": 2900,
+      "frame": 190054400,
+      "historical_best_reward": 84.66954040527344,
+      "filename_reward": 83.85606,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "711a06b5adf88b0ffccc7586382d2c5c06c3081c9ddf77a6e71d6876c22e8636",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3000_rew_83.643936.pth",
+      "size": 6209708,
+      "mtime_ns": 1792585373743449143,
+      "mtime": "2026-10-21T20:22:53.743449",
+      "epoch": 3000,
+      "frame": 196608000,
+      "historical_best_reward": 84.69775390625,
+      "filename_reward": 83.643936,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "a70d43a571bfa1d6b6a7a01fb8e904e5bf1c4b9e3924a040f23f9b3f36ced2dd",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_300_rew_55.119442.pth",
+      "size": 6209638,
+      "mtime_ns": 1792576938064017416,
+      "mtime": "2026-10-21T18:02:18.064018",
+      "epoch": 300,
+      "frame": 19660800,
+      "historical_best_reward": 55.73036193847656,
+      "filename_reward": 55.119442,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "c22c64a6b2e4f82df36739315d854f06915dc80e10df11e362057d761f29c988",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3100_rew_83.75297.pth",
+      "size": 6209638,
+      "mtime_ns": 1792585703420978357,
+      "mtime": "2026-10-21T20:28:23.420978",
+      "epoch": 3100,
+      "frame": 203161600,
+      "historical_best_reward": 84.79035949707031,
+      "filename_reward": 83.75297,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "e6e4571e1cfcf713e3e03f227a1e1e8325030dd29eae1e86cec91c7ab6eb1710",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3200_rew_84.8732.pth",
+      "size": 6209568,
+      "mtime_ns": 1792586035921202746,
+      "mtime": "2026-10-21T20:33:55.921203",
+      "epoch": 3200,
+      "frame": 209715200,
+      "historical_best_reward": 84.99201965332031,
+      "filename_reward": 84.8732,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "503d54fbfe67fd09321a0ae4f6ec1b36dc1e1c6a786fbc06ab54e7ed0f791789",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3300_rew_84.43126.pth",
+      "size": 6209638,
+      "mtime_ns": 1792586373076762735,
+      "mtime": "2026-10-21T20:39:33.076763",
+      "epoch": 3300,
+      "frame": 216268800,
+      "historical_best_reward": 85.01155853271484,
+      "filename_reward": 84.43126,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "a20c9a7c49a317ac6e6ce6912595d562bbf08d272b3287e8477d890caa9ea780",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3400_rew_84.37639.pth",
+      "size": 6209638,
+      "mtime_ns": 1792586715444165743,
+      "mtime": "2026-10-21T20:45:15.444166",
+      "epoch": 3400,
+      "frame": 222822400,
+      "historical_best_reward": 85.21492004394531,
+      "filename_reward": 84.37639,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "57ce3172643086d30c7853069e564963696454b56f6ae01bff20fe5d654e6ef7",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3500_rew_83.83421.pth",
+      "size": 6209638,
+      "mtime_ns": 1792587068499376570,
+      "mtime": "2026-10-21T20:51:08.499377",
+      "epoch": 3500,
+      "frame": 229376000,
+      "historical_best_reward": 85.21492004394531,
+      "filename_reward": 83.83421,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "4be069dab9b2b761f882790ebba1bb9e4bce69568c53d255a07102f3ec00ca22",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3600_rew_84.51309.pth",
+      "size": 6209638,
+      "mtime_ns": 1792587428163919264,
+      "mtime": "2026-10-21T20:57:08.163919",
+      "epoch": 3600,
+      "frame": 235929600,
+      "historical_best_reward": 85.21492004394531,
+      "filename_reward": 84.51309,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "9266522e329d8d79c6d7974e5fdc252dda96e11087c490a6ac101098fbe7b8a2",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3700_rew_84.9474.pth",
+      "size": 6209568,
+      "mtime_ns": 1792587791677153465,
+      "mtime": "2026-10-21T21:03:11.677153",
+      "epoch": 3700,
+      "frame": 242483200,
+      "historical_best_reward": 85.21492004394531,
+      "filename_reward": 84.9474,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "8122395e6c1a31cb0a70f8b4bb587ce5a5f950188649b97f4555a6e1833f8dd2",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3800_rew_84.4832.pth",
+      "size": 6209568,
+      "mtime_ns": 1792588160438751558,
+      "mtime": "2026-10-21T21:09:20.438751",
+      "epoch": 3800,
+      "frame": 249036800,
+      "historical_best_reward": 85.22466278076172,
+      "filename_reward": 84.4832,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "6167db5a524f30fb2c7019cd461b630983846f37119bfcfa1904191e3cba0305",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3900_rew_83.85332.pth",
+      "size": 6209638,
+      "mtime_ns": 1792588532104534179,
+      "mtime": "2026-10-21T21:15:32.104534",
+      "epoch": 3900,
+      "frame": 255590400,
+      "historical_best_reward": 85.33075714111328,
+      "filename_reward": 83.85332,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "5e62e16f88172181ac977084fcbcf5c076b39f5daef6e5fc48560be0cd15ed78",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_4000_rew_84.21817.pth",
+      "size": 6209638,
+      "mtime_ns": 1792588905486432962,
+      "mtime": "2026-10-21T21:21:45.486433",
+      "epoch": 4000,
+      "frame": 262144000,
+      "historical_best_reward": 85.33075714111328,
+      "filename_reward": 84.21817,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "180f9c53b89dbc4f26ec38a1afd6c9c9f1a62370a366ed0f3b315740fa640344",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [
+        "last"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_400_rew_57.70156.pth",
+      "size": 6209568,
+      "mtime_ns": 1792577247936160936,
+      "mtime": "2026-10-21T18:07:27.936161",
+      "epoch": 400,
+      "frame": 26214400,
+      "historical_best_reward": 58.375038146972656,
+      "filename_reward": 57.70156,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "c9e82c116c5e1377f051398dc9447444e2017359654b833cd288a3cd9c895b3f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_500_rew_59.76237.pth",
+      "size": 6209568,
+      "mtime_ns": 1792577553102720846,
+      "mtime": "2026-10-21T18:12:33.102721",
+      "epoch": 500,
+      "frame": 32768000,
+      "historical_best_reward": 60.05533981323242,
+      "filename_reward": 59.76237,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "faae560a221855d7e02a7b94601006bdc13dcdc769de0bdbaec532d0e41b6778",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_600_rew_59.924988.pth",
+      "size": 6209638,
+      "mtime_ns": 1792577859438565674,
+      "mtime": "2026-10-21T18:17:39.438566",
+      "epoch": 600,
+      "frame": 39321600,
+      "historical_best_reward": 60.82251739501953,
+      "filename_reward": 59.924988,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "fb559aa4999e447b137a05503be658b163d519b354f317feb1e6def5488dbe84",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_700_rew_61.448368.pth",
+      "size": 6209638,
+      "mtime_ns": 1792578166323122884,
+      "mtime": "2026-10-21T18:22:46.323123",
+      "epoch": 700,
+      "frame": 45875200,
+      "historical_best_reward": 61.6103515625,
+      "filename_reward": 61.448368,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "0f54aa571c7c0caa65ef408fdde9172d0657c928a8ded6cf170190f5c0f6e126",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_800_rew_61.909782.pth",
+      "size": 6209638,
+      "mtime_ns": 1792578477724124573,
+      "mtime": "2026-10-21T18:27:57.724125",
+      "epoch": 800,
+      "frame": 52428800,
+      "historical_best_reward": 62.25635528564453,
+      "filename_reward": 61.909782,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "3951da36336378f8c978400e73c1d7e64a7c013e2154b89dfff1792d9c88945f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_900_rew_64.63696.pth",
+      "size": 6209568,
+      "mtime_ns": 1792578792470089797,
+      "mtime": "2026-10-21T18:33:12.470090",
+      "epoch": 900,
+      "frame": 58982400,
+      "historical_best_reward": 64.91825103759766,
+      "filename_reward": 64.63696,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "f81dd5c17f254e36f67a58e8ea559324857df5ce7bdbc4d48a088e696c928e36",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_zep10rew[3.41].pth",
+      "size": 6208822,
+      "mtime_ns": 1792568715259665955,
+      "mtime": "2026-10-21T15:45:15.259666",
+      "epoch": 10,
+      "frame": 40960,
+      "historical_best_reward": -100500,
+      "filename_reward": 3.41,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "18963810731cf4a7da7c15c22ce21c229582cf86a9d5ba23c21c90944dd4c723",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": true
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/nn/last_ball_zep4000rew[84.22].pth",
+      "size": 6209224,
+      "mtime_ns": 1792588905490432884,
+      "mtime": "2026-10-21T21:21:45.490433",
+      "epoch": 4000,
+      "frame": 262144000,
+      "historical_best_reward": 85.33075714111328,
+      "filename_reward": 84.22,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "915627155840d637c839841ac4facd04f7db3bce1decab097a5a129b665f6255",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/ball_z.pth",
+      "size": 6205578,
+      "mtime_ns": 1792740051588268954,
+      "mtime": "2026-10-23T15:20:51.588269",
+      "epoch": 401,
+      "frame": 13139968,
+      "historical_best_reward": 935.2586669921875,
+      "filename_reward": null,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "828305c005bfa66bd0aa1c88767b9786af4ac0a841b78c9e9f3c06470e8590cf",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [
+        "best",
+        "last"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_1000_rew_59.62829.pth",
+      "size": 6209638,
+      "mtime_ns": 1792669524812950268,
+      "mtime": "2026-10-22T19:45:24.812950",
+      "epoch": 1000,
+      "frame": 65536000,
+      "historical_best_reward": 60.008216857910156,
+      "filename_reward": 59.62829,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "cb56f29fd6a6a76550947c6c3c0dc0a16ae0d5591410c1271c97397d086a879f",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_200_rew_36.789654.pth",
+      "size": 6209574,
+      "mtime_ns": 1792654665692914860,
+      "mtime": "2026-10-22T15:37:45.692915",
+      "epoch": 200,
+      "frame": 13107200,
+      "historical_best_reward": 37.071468353271484,
+      "filename_reward": 36.789654,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "cf8bfd1d8ba97d921b810d73fda5daa1814ba692929a10ee143790596924374a",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_200_rew_54.55632.pth",
+      "size": 6209504,
+      "mtime_ns": 1792661930773705575,
+      "mtime": "2026-10-22T17:38:50.773705",
+      "epoch": 200,
+      "frame": 13107200,
+      "historical_best_reward": 54.74166488647461,
+      "filename_reward": 54.55632,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "e792bb846d37673523981b6291a95011096c09ba6b9567655308f4b1e5a775da",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_200_rew_610.7434.pth",
+      "size": 6209504,
+      "mtime_ns": 1792736979013568358,
+      "mtime": "2026-10-23T14:29:39.013568",
+      "epoch": 200,
+      "frame": 6553600,
+      "historical_best_reward": 620.5371704101562,
+      "filename_reward": 610.7434,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "de27582d10f0c40f48c2d92bfda18076f53d3b7d2f4ea331c68af09debc49310",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_300_rew_37.888004.pth",
+      "size": 6209638,
+      "mtime_ns": 1792655132833709959,
+      "mtime": "2026-10-22T15:45:32.833710",
+      "epoch": 300,
+      "frame": 19660800,
+      "historical_best_reward": 37.913414001464844,
+      "filename_reward": 37.888004,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "578c42421b89d0dba4b39a00178ad65250c82c672282c2cfd3a883ee57ad231c",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_300_rew_55.590385.pth",
+      "size": 6209638,
+      "mtime_ns": 1792662450880622246,
+      "mtime": "2026-10-22T17:47:30.880622",
+      "epoch": 300,
+      "frame": 19660800,
+      "historical_best_reward": 56.11643600463867,
+      "filename_reward": 55.590385,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "d928fe45f268c04858b34393b0ecce655a5f4e77873d123e757d56a23642ef17",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_300_rew_783.27515.pth",
+      "size": 6209638,
+      "mtime_ns": 1792738390334993816,
+      "mtime": "2026-10-23T14:53:10.334994",
+      "epoch": 300,
+      "frame": 9830400,
+      "historical_best_reward": 793.612548828125,
+      "filename_reward": 783.27515,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "176d72d25c917c54cc15bf207e0c4f061e7fb34b51b6fbf46f88c2ee41a3e0ae",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_400_rew_925.1914.pth",
+      "size": 6209504,
+      "mtime_ns": 1792740034245778980,
+      "mtime": "2026-10-23T15:20:34.245779",
+      "epoch": 400,
+      "frame": 13107200,
+      "historical_best_reward": 925.6567993164062,
+      "filename_reward": 925.1914,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "044f94d048bf46076c99e887aa2ee3c0ab291524b7dc5039b46fd4ae0d945a5a",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_500_rew_37.85233.pth",
+      "size": 6209568,
+      "mtime_ns": 1792656071795960605,
+      "mtime": "2026-10-22T16:01:11.795961",
+      "epoch": 500,
+      "frame": 32768000,
+      "historical_best_reward": 38.154354095458984,
+      "filename_reward": 37.85233,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ea98a867007b7e7acc37d88a47901beeadfdc110fa23fa9ab5ef90e7dab93b84",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_600_rew_38.26382.pth",
+      "size": 6209568,
+      "mtime_ns": 1792656548388593364,
+      "mtime": "2026-10-22T16:09:08.388593",
+      "epoch": 600,
+      "frame": 39321600,
+      "historical_best_reward": 38.436649322509766,
+      "filename_reward": 38.26382,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "147cd8d340b6a572fddb83eb9d727dbd949a1ae74165e27e3c4f53c356f736b1",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_600_rew_58.31364.pth",
+      "size": 6209568,
+      "mtime_ns": 1792664870080400837,
+      "mtime": "2026-10-22T18:27:50.080401",
+      "epoch": 600,
+      "frame": 39321600,
+      "historical_best_reward": 58.6169548034668,
+      "filename_reward": 58.31364,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "dcf56055e6ddba917961bb20742dc6a35fb6a64fb93259862d3e5e5222dd87bf",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_700_rew_38.72625.pth",
+      "size": 6209568,
+      "mtime_ns": 1792657040059477789,
+      "mtime": "2026-10-22T16:17:20.059478",
+      "epoch": 700,
+      "frame": 45875200,
+      "historical_best_reward": 39.90576934814453,
+      "filename_reward": 38.72625,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "1c4d0922acff96f980602334e4f2cd1915d4963265a34c16daad7222c1bf22d6",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_700_rew_58.546947.pth",
+      "size": 6209638,
+      "mtime_ns": 1792665917271464965,
+      "mtime": "2026-10-22T18:45:17.271465",
+      "epoch": 700,
+      "frame": 45875200,
+      "historical_best_reward": 59.423309326171875,
+      "filename_reward": 58.546947,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "202043bf205f7741a33e5ba61eda14f532e26a682c94469de316098e4af9dbcf",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_800_rew_41.70942.pth",
+      "size": 6209504,
+      "mtime_ns": 1792657552767054135,
+      "mtime": "2026-10-22T16:25:52.767054",
+      "epoch": 800,
+      "frame": 52428800,
+      "historical_best_reward": 43.04117965698242,
+      "filename_reward": 41.70942,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "18ed478c9e9ae8ff6f97534fb85ec6a62898dd650b1236013c301afff1373736",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_900_rew_46.48117.pth",
+      "size": 6209504,
+      "mtime_ns": 1792658115158276954,
+      "mtime": "2026-10-22T16:35:15.158277",
+      "epoch": 900,
+      "frame": 58982400,
+      "historical_best_reward": 46.78237533569336,
+      "filename_reward": 46.48117,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "64c9861bf465ff0ac07245dd4586e8fc2caee8e4c99b0440706a6763896863e3",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          258
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/box_50x50x50/z-axis/nn/last_box_50x50x50_zep10rew[-22.06].pth",
+      "size": 6102770,
+      "mtime_ns": 1792650529656400422,
+      "mtime": "2026-10-22T14:28:49.656400",
+      "epoch": 10,
+      "frame": 40960,
+      "historical_best_reward": -100500,
+      "filename_reward": -22.06,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "63c14c65f27d741e14b8cc620f58c8679086c98dbc0f29faae9062095406baf2",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": true
+    },
+    {
+      "path": "runs/rapidhand/box_99x79x108/z-axis/nn/last_box_99x79x108_zep10rew[-10.73].pth",
+      "size": 6102840,
+      "mtime_ns": 1792650012567235768,
+      "mtime": "2026-10-22T14:20:12.567236",
+      "epoch": 10,
+      "frame": 40960,
+      "historical_best_reward": -100500,
+      "filename_reward": -10.73,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "eb8b8cb54926e745a7406bb6008b472cb45afa60e535a05845fda88b089180ec",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": true
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/nn/cross4_0_z.pth",
+      "size": 6100962,
+      "mtime_ns": 1792565574663792217,
+      "mtime": "2026-10-21T14:52:54.663792",
+      "epoch": 7,
+      "frame": 28672,
+      "historical_best_reward": 29.85074234008789,
+      "filename_reward": null,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "5f8e04656adffe4c4a327cc11d67c8a9a54f82394299f0220f9fad66c84692c4",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": true
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep10rew[1.89].pth",
+      "size": 6102094,
+      "mtime_ns": 1792566556302870301,
+      "mtime": "2026-10-21T15:09:16.302870",
+      "epoch": 10,
+      "frame": 40960,
+      "historical_best_reward": -100500,
+      "filename_reward": 1.89,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "ad304de7e26bbd107e5844a48a445024f02ed27bc3d8221b2d0c71893999bd76",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": true
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep20rew[-31.97].pth",
+      "size": 6102426,
+      "mtime_ns": 1792565589947843976,
+      "mtime": "2026-10-21T14:53:09.947844",
+      "epoch": 20,
+      "frame": 81920,
+      "historical_best_reward": 29.85074234008789,
+      "filename_reward": -31.97,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "70bfb0bc3ae62244eb8609f7d2b1f9a9b1e45b906efae4f6ae14caa551a727ff",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": true
+    },
+    {
+      "path": "runs/rapidhand/set_obj1_regular_block/z-axis/nn/last_set_obj1_regular_block_zep10rew[-9.37].pth",
+      "size": 6103464,
+      "mtime_ns": 1792651254619362468,
+      "mtime": "2026-10-22T14:40:54.619362",
+      "epoch": 10,
+      "frame": 40960,
+      "historical_best_reward": -100500,
+      "filename_reward": -9.37,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "e1546cb46ab3aba80d3ba7099657f3343a9fee1ef20da3fe929a73691a68ba26",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": true
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_1000_rew_76.926476.pth",
+      "size": 6104146,
+      "mtime_ns": 1792755110694019463,
+      "mtime": "2026-10-23T19:31:50.694020",
+      "epoch": 1000,
+      "frame": 32768000,
+      "historical_best_reward": 78.35663604736328,
+      "filename_reward": 76.926476,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "07d39b9cf3c7cf84e72d58705a7a45763be33c52f05546524b19bb295d80dee0",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [
+        "last"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_300_rew_62.98478.pth",
+      "size": 6104006,
+      "mtime_ns": 1792748402785683982,
+      "mtime": "2026-10-23T17:40:02.785684",
+      "epoch": 300,
+      "frame": 9830400,
+      "historical_best_reward": 68.61610412597656,
+      "filename_reward": 62.98478,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "726a6fa37aed09641a42281754e4a9a53f5543581e3cee158f1bdf19f4a090a3",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_400_rew_64.9725.pth",
+      "size": 6103936,
+      "mtime_ns": 1792748963755710300,
+      "mtime": "2026-10-23T17:49:23.755710",
+      "epoch": 400,
+      "frame": 13107200,
+      "historical_best_reward": 69.0338134765625,
+      "filename_reward": 64.9725,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "4e783f0bbaffdfd3c24475c57b2a98e1be4827d9c7467124d34017431a7c691b",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_500_rew_69.81933.pth",
+      "size": 6104006,
+      "mtime_ns": 1792749769833705805,
+      "mtime": "2026-10-23T18:02:49.833706",
+      "epoch": 500,
+      "frame": 16384000,
+      "historical_best_reward": 70.33849334716797,
+      "filename_reward": 69.81933,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "536bd72f1338476943888638ea2457c2da50e611975070880259eeb8b81994c3",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_600_rew_71.792114.pth",
+      "size": 6104076,
+      "mtime_ns": 1792750794692800260,
+      "mtime": "2026-10-23T18:19:54.692800",
+      "epoch": 600,
+      "frame": 19660800,
+      "historical_best_reward": 73.02027893066406,
+      "filename_reward": 71.792114,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "eaf03033e7307c044d1ef191a0195793168dad6f178d08bc74f36d1e9ed5caa9",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_700_rew_70.1152.pth",
+      "size": 6103936,
+      "mtime_ns": 1792751823407275699,
+      "mtime": "2026-10-23T18:37:03.407276",
+      "epoch": 700,
+      "frame": 22937600,
+      "historical_best_reward": 74.55084991455078,
+      "filename_reward": 70.1152,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "7495d5f2d510953b9f527947f99e7296b0e4669e2c2416dc6e17694349a2dbf7",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_800_rew_71.66734.pth",
+      "size": 6104006,
+      "mtime_ns": 1792752865445042609,
+      "mtime": "2026-10-23T18:54:25.445043",
+      "epoch": 800,
+      "frame": 26214400,
+      "historical_best_reward": 74.95474243164062,
+      "filename_reward": 71.66734,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "082128335474aae2aa53f585c8bfba6cd830c54ffdecbd909bd6b2a04dea72ed",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_900_rew_72.722466.pth",
+      "size": 6104076,
+      "mtime_ns": 1792753953764527535,
+      "mtime": "2026-10-23T19:12:33.764528",
+      "epoch": 900,
+      "frame": 29491200,
+      "historical_best_reward": 75.36611938476562,
+      "filename_reward": 72.722466,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "38f1770fd732573171db7f92e24f1d6ee7aeac231877d90297b3a57447f88f07",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_zep1000rew[76.93].pth",
+      "size": 6103726,
+      "mtime_ns": 1792755110702019326,
+      "mtime": "2026-10-23T19:31:50.702019",
+      "epoch": 1000,
+      "frame": 32768000,
+      "historical_best_reward": 78.35663604736328,
+      "filename_reward": 76.93,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "3d5395b588d68264378ff8a24fdbdc2e9d26e8dbf65c98c6cf93860c474e0e9d",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": false
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_zep10rew-inf.pth",
+      "size": 6103184,
+      "mtime_ns": 1792741629730186077,
+      "mtime": "2026-10-23T15:47:09.730186",
+      "epoch": 10,
+      "frame": 40960,
+      "historical_best_reward": -100500,
+      "filename_reward": "-inf",
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "70e16e3a79ca0a6b2bcb8782ebb8c443946681653b6678bd534c3f491b9e83d5",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [],
+      "action": "delete",
+      "test_checkpoint": true
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth",
+      "size": 6101936,
+      "mtime_ns": 1792754910061840870,
+      "mtime": "2026-10-23T19:28:30.061841",
+      "epoch": 984,
+      "frame": 32243712,
+      "historical_best_reward": 78.35663604736328,
+      "filename_reward": null,
+      "keys": [
+        "central_val_stats",
+        "model",
+        "epoch",
+        "optimizer",
+        "assymetric_vf_nets",
+        "frame",
+        "last_mean_rewards",
+        "env_state"
+      ],
+      "sha256": "0cf3de60a91dbb6436214d06c355d15b7b9a0b717a52461dc8020c4090dafa2c",
+      "model_shapes": {
+        "a2c_network.actor_mlp.0.weight": [
+          512,
+          245
+        ],
+        "a2c_network.mu.weight": [
+          20,
+          256
+        ]
+      },
+      "roles": [
+        "best"
+      ],
+      "action": "keep",
+      "test_checkpoint": false
+    }
+  ],
+  "protected_nonweight_files": [
+    {
+      "path": "runs/ball/z-axis/archive_2000/config.yaml",
+      "size": 7578,
+      "mtime_ns": 1792057170637142835,
+      "sha256": "c5004fb1f829ccb1c9b68fc95dcab508cbdc09675e3f79d9090d96c65d66a468"
+    },
+    {
+      "path": "runs/cross4_0/z-axis/config.yaml",
+      "size": 7536,
+      "mtime_ns": 1792390020061668022,
+      "sha256": "f525724329161075020cc0169b360aefd6b3b6a175e9174ef556ab8ca66bbc44"
+    },
+    {
+      "path": "runs/cross4_0/z-axis/config_first2000.yaml",
+      "size": 7536,
+      "mtime_ns": 1792389892563181459,
+      "sha256": "ec84f56ba8406918b729502d37ea280830fdcd62bb043a73ca5d7854ea38629c"
+    },
+    {
+      "path": "runs/cross4_0/z-axis/summaries/events.out.tfevents.1792136433.steve-System-Product-Name",
+      "size": 3069227,
+      "mtime_ns": 1792149282733143606,
+      "sha256": "fb0ae708e2ec93371e7df5932ef83794c040d10ae9abb0fd00d27e4eac058c43"
+    },
+    {
+      "path": "runs/cross4_0/z-axis/summaries/events.out.tfevents.1792389899.steve-System-Product-Name",
+      "size": 12280,
+      "mtime_ns": 1792389951612348608,
+      "sha256": "cabb482890d4fe75ae33fc56ac2d4b371fc03f0fe4269c5441c019f665c6a375"
+    },
+    {
+      "path": "runs/cross4_0/z-axis/summaries/events.out.tfevents.1792390023.steve-System-Product-Name",
+      "size": 6182415,
+      "mtime_ns": 1792414372439821850,
+      "sha256": "3758ae2870242b8a016414cc3c575b512797932f898e02ad4f0ea2060cb3b6ce"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/config.yaml",
+      "size": 6345,
+      "mtime_ns": 1792576016048604047,
+      "sha256": "499a287d3c738b9b8958503f202806614992e13bc5dab6a8ca35b3b3fee3fff4"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/preview.png",
+      "size": 336027,
+      "mtime_ns": 1792568748804978000,
+      "sha256": "bd5e52619fc2a72dc5f2731f94770c42c4caa0c167c78cd05efcd8113d796384"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/replay.log",
+      "size": 240419,
+      "mtime_ns": 1792571364396437681,
+      "sha256": "99c8a57569dbf0cb59f0181b512e35d8d7c0bbcd1fd29c0d9f6c297ed2461bd5"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/replay.pid",
+      "size": 7,
+      "mtime_ns": 1792568736169975276,
+      "sha256": "3f67630dcfe285d0a93b1c0c79c21fe5c22338968bb84d960f9084926b4c9bbc"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/replay_ready.json",
+      "size": 226,
+      "mtime_ns": 1792568748804978000,
+      "sha256": "4624649f8d1b4c30cafc9b8aee0991a08068094129a7de7d8b87c2d448e821d6"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/summaries/events.out.tfevents.1792568681.steve-System-Product-Name",
+      "size": 35951,
+      "mtime_ns": 1792568715407653812,
+      "sha256": "31d95c4460d7eb149f9fb887eda4f58f282c547aae58fcd1bfc3ac0baa153000"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/summaries/events.out.tfevents.1792574571.steve-System-Product-Name",
+      "size": 112461,
+      "mtime_ns": 1792574761706960553,
+      "sha256": "839e7a87f7dc6487c37314d01206d3e8dedefbcc9b0e6c467f72fce5107a7f09"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/summaries/events.out.tfevents.1792575146.steve-System-Product-Name",
+      "size": 3536,
+      "mtime_ns": 1792575158561002100,
+      "sha256": "f4117d2cb92a4576ad1710e03a3adc60e3761450d4d95b68e7c58b7cb0fbd7fc"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/summaries/events.out.tfevents.1792575637.steve-System-Product-Name",
+      "size": 149017,
+      "mtime_ns": 1792575959679157939,
+      "sha256": "2f08d596548ce326f6596a905ce7a01c8aae8f6f531397ac36407c6753a0fd9e"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/summaries/events.out.tfevents.1792576018.steve-System-Product-Name",
+      "size": 14680568,
+      "mtime_ns": 1792588905494432806,
+      "sha256": "b0cb296a378e3d8fe9919bbb3e2b130dfb0f358f025ac526b20fbb59d2e614e2"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/train_10iter.log",
+      "size": 18122,
+      "mtime_ns": 1792568715259665955,
+      "sha256": "6658c18ad35b08d1b939d115a8e181fc2d4baadb9a76f792fb0c1c8c6397d61b"
+    },
+    {
+      "path": "runs/rapidhand/ball/z-axis/validation.json",
+      "size": 11029,
+      "mtime_ns": 1792568812628203249,
+      "sha256": "9943cf7e7555712995ee2e80e3b8699179306859324f90164caf8aaed3478a48"
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/config.yaml",
+      "size": 6375,
+      "mtime_ns": 1792735495726328810,
+      "sha256": "d3aaa197b49e89e640997dcaa684ba18c3c2a3bb1b2328d4f7cee554405bd7d0"
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/summaries/events.out.tfevents.1792653763.steve-System-Product-Name",
+      "size": 4200003,
+      "mtime_ns": 1792660326671029424,
+      "sha256": "c2589498c18a4805b25d7d7d94e530fdea4ee7315db4b36f12ff1950634df0a1"
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/summaries/events.out.tfevents.1792660727.steve-System-Product-Name",
+      "size": 40,
+      "mtime_ns": 1792660737739577941,
+      "sha256": "699086adf28102fbedd0b7626e2cc6a483e17e7a5c2110aa7bd5db61bbc156e0"
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/summaries/events.out.tfevents.1792661098.steve-System-Product-Name",
+      "size": 3876941,
+      "mtime_ns": 1792670284787350575,
+      "sha256": "3b77e88e576fe4f23093510cab303545b5f515186665b8dd46fef5256533600f"
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/summaries/events.out.tfevents.1792734498.steve-System-Product-Name",
+      "size": 283746,
+      "mtime_ns": 1792735007382540606,
+      "sha256": "6a1eaf9f4b2a84140243fd7e214eda754e1dada548c546c7f22b33eeb6977d86"
+    },
+    {
+      "path": "runs/rapidhand/ball_55mm/ball/z-axis/summaries/events.out.tfevents.1792735497.steve-System-Product-Name",
+      "size": 1471332,
+      "mtime_ns": 1792740087801398943,
+      "sha256": "5c8f1700487c443769439789b25a8cd28a663ff12faf4cec32a1dc9c8088b0ec"
+    },
+    {
+      "path": "runs/rapidhand/box_50x50x50/z-axis/config.yaml",
+      "size": 6363,
+      "mtime_ns": 1792650515181063037,
+      "sha256": "acbdd2cb3793e1f07155d14661df7c808787de0a98538ee55155db656e2be3ce"
+    },
+    {
+      "path": "runs/rapidhand/box_50x50x50/z-axis/summaries/events.out.tfevents.1792650516.steve-System-Product-Name",
+      "size": 24910,
+      "mtime_ns": 1792650529740396709,
+      "sha256": "f4ccf538414d355b5d3612f7450080c0dd75090fb0cba0932c50046602a420fe"
+    },
+    {
+      "path": "runs/rapidhand/box_99x79x108/z-axis/config.yaml",
+      "size": 6366,
+      "mtime_ns": 1792649996690038285,
+      "sha256": "30386b53386d47c4704eb472cdfc33f6267bf1f36dce2f8f10003bbb9732375f"
+    },
+    {
+      "path": "runs/rapidhand/box_99x79x108/z-axis/summaries/events.out.tfevents.1792649998.steve-System-Product-Name",
+      "size": 25564,
+      "mtime_ns": 1792650012659242675,
+      "sha256": "70f18169761049b8a24a80ab0f540be9fa9bc134b17aa070a69c394e5bc76494"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/config.yaml",
+      "size": 5853,
+      "mtime_ns": 1792566522981644813,
+      "sha256": "dcf442c94c841a03fb41a7c4c31eed5486af572a4448d081a06d3130f6acaf03"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/nn/cross4_0_z.config.yaml",
+      "size": 5850,
+      "mtime_ns": 1792565565259765656,
+      "sha256": "2bd6b50b3dee402babfe53291970143a4865b47008e150cf76e5cb564e029ab3"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/preview.png",
+      "size": 294758,
+      "mtime_ns": 1792565622819988774,
+      "sha256": "02391e7c3816e8f0e97b982e4aa9f8ec6a2817e4cc7f73736059ba9db8af0a56"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/replay_10iter.log",
+      "size": 22586,
+      "mtime_ns": 1792568121080573798,
+      "sha256": "699fdeea73793520e9534a7532bf0a51d881458c250e306b42e68425e219a6e8"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/replay_10iter.pid",
+      "size": 7,
+      "mtime_ns": 1792567741902497472,
+      "sha256": "60dde0806507edcf147a6eeb1812747822bf8d68275d4bb09241e1f67b5110e4"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/replay_10iter.png",
+      "size": 337928,
+      "mtime_ns": 1792567754346772537,
+      "sha256": "4cdbb0f37d9a483707a84399d16af2671a2849f5556c9646a9bb5333ca6b89d6"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/replay_10iter_ready.json",
+      "size": 133,
+      "mtime_ns": 1792567754346772537,
+      "sha256": "44b6fd2f6315133355a8d473adbed495a7e92d2d656ef7e7e2b6789f2f2c3abe"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/self_collision_preview.png",
+      "size": 336263,
+      "mtime_ns": 1792567675833028982,
+      "sha256": "b3b44b31c175b0621fd6d57f3ee405515cae39212f786ae2016a5ebbd73c0d18"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/self_collision_validation.json",
+      "size": 23291,
+      "mtime_ns": 1792567739498444281,
+      "sha256": "25794f92457ae107c71ac892477facd9db35f3b8bfa58606a640caf9b8f4918a"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/summaries/events.out.tfevents.1792565567.steve-System-Product-Name",
+      "size": 51252,
+      "mtime_ns": 1792565590087844498,
+      "sha256": "d80422109e974d7c1345ca2af095c9001f4abad8b061f07ab1a07fcc859a7e63"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/summaries/events.out.tfevents.1792566525.steve-System-Product-Name",
+      "size": 24910,
+      "mtime_ns": 1792566556306870447,
+      "sha256": "a6b4673c038d6de294201c88078de3f857d33e7a4425763c54f70b32282a438c"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/tactile_colors.png",
+      "size": 364381,
+      "mtime_ns": 1792566970111834089,
+      "sha256": "de6606bf21c05ec8e63a50588f8e7be8b23745e3b8e04e0962a9e20a9859e64e"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/tactile_colors_validation.json",
+      "size": 290,
+      "mtime_ns": 1792566987068299463,
+      "sha256": "b7b1813818b8d306e52736d36077cc8505382f25e8be6609916c068155475c4a"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/training_10iter.log",
+      "size": 17285,
+      "mtime_ns": 1792566556302870301,
+      "sha256": "f238fea7945611dd122a25a284bcfea69b4050f7f12602ca8cba8b631496524c"
+    },
+    {
+      "path": "runs/rapidhand/cross4_0/z-axis/validation.json",
+      "size": 12452,
+      "mtime_ns": 1792565770377079469,
+      "sha256": "4439905c391a705c7ccdaf889002fa532e6e9cbd754df196e450d3f4b85c3aa7"
+    },
+    {
+      "path": "runs/rapidhand/set_obj11_cylinder/z-axis/config.yaml",
+      "size": 6413,
+      "mtime_ns": 1792574113240699615,
+      "sha256": "7a7163024780b00d9dd17d448cb8c91008dd48c6b20970812af2e1bb6f8717a6"
+    },
+    {
+      "path": "runs/rapidhand/set_obj11_cylinder/z-axis/summaries/events.out.tfevents.1792574115.steve-System-Product-Name",
+      "size": 21915,
+      "mtime_ns": 1792574151208385548,
+      "sha256": "61d1c81c912b9f92efc7f3ffe51d9a3e8eddb9d56e65a8e0ff49276fcb90c160"
+    },
+    {
+      "path": "runs/rapidhand/set_obj1_regular_block/z-axis/config.yaml",
+      "size": 6388,
+      "mtime_ns": 1792651219661871512,
+      "sha256": "f50b18efd1db2b32081c4b56de13072f1b92c86a2faf72be76499f98c08342f2"
+    },
+    {
+      "path": "runs/rapidhand/set_obj1_regular_block/z-axis/summaries/events.out.tfevents.1792651221.steve-System-Product-Name",
+      "size": 24254,
+      "mtime_ns": 1792651254623363066,
+      "sha256": "773b552ded7307be346fb4af45d340c4d22928b620556be26448270c842df549"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/config.yaml",
+      "size": 6504,
+      "mtime_ns": 1792747206272133833,
+      "sha256": "3203c40ec3eceb81bdfe2b56362b932a43c61250733fda7d5cfd0fd46be6d387"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/summaries/events.out.tfevents.1792741595.steve-System-Product-Name",
+      "size": 23270,
+      "mtime_ns": 1792741629734184267,
+      "sha256": "b5981bd9ed26630d6c128e1a02f96fe1df73ea1bd4367f61b7d5e87daa44e5bc"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/summaries/events.out.tfevents.1792741765.steve-System-Product-Name",
+      "size": 40,
+      "mtime_ns": 1792741776055862456,
+      "sha256": "06541170a65818a63322c13c418edd2fa2e69e1eb68e9941b5d4ff2556b6ddaa"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/summaries/events.out.tfevents.1792741785.steve-System-Product-Name",
+      "size": 511878,
+      "mtime_ns": 1792743497695665930,
+      "sha256": "a923ade9a07aa582b2094b358583825e17e126a8ff7d9710b48e5e7094d8db56"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/summaries/events.out.tfevents.1792747208.steve-System-Product-Name",
+      "size": 3108256,
+      "mtime_ns": 1792755110706019257,
+      "sha256": "e0339e22ab6217fcc837b92068938acfc71aea5637c4265032a9c77c3eeaa607"
+    },
+    {
+      "path": "runs/set_obj6_block_corner/z-axis/config.yaml",
+      "size": 7571,
+      "mtime_ns": 1792748062929077046,
+      "sha256": "bc09d81b18d025097c4018b47cb0e40329af0c7e06284c262c4127dd3b4ffdc6"
+    },
+    {
+      "path": "runs/set_obj6_block_corner/z-axis/summaries/events.out.tfevents.1792748066.steve-System-Product-Name",
+      "size": 1477,
+      "mtime_ns": 1792748115272225384,
+      "sha256": "d72a669784c9e334d4c1e11721c8610df08727c435bd78887b4a59b260ad9818"
+    }
+  ],
+  "duplicate_pairs": [
+    [
+      "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_4000_rew_131.50197.pth",
+      "runs/cross4_0/z-axis/nn/last_cross4_0_zep4000rew[131.5].pth"
+    ],
+    [
+      "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_4000_rew_84.21817.pth",
+      "runs/rapidhand/ball/z-axis/nn/last_ball_zep4000rew[84.22].pth"
+    ],
+    [
+      "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_1000_rew_76.926476.pth",
+      "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_zep1000rew[76.93].pth"
+    ]
+  ],
+  "started_at": "2026-10-26T13:29:32.238325+08:00",
+  "deleted_paths": [
+    "runs/cross4_0/z-axis/nn/cross4_0_z.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1000_rew_104.59979.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1000_rew_108.54398.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1100_rew_105.11587.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1100_rew_109.084076.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1200_rew_106.84096.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1200_rew_108.9434.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1300_rew_109.46136.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1300_rew_111.981735.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1400_rew_112.82441.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1400_rew_114.81264.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1500_rew_112.208755.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1500_rew_112.449234.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1600_rew_111.80003.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1600_rew_116.4597.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1700_rew_109.85512.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1700_rew_147.2239.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1800_rew_111.41382.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1800_rew_171.3556.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1900_rew_114.64356.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_1900_rew_189.43417.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2000_rew_115.038315.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2000_rew_224.82614.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_200_rew_81.62506.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_200_rew_86.152245.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2100_rew_114.61365.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2200_rew_119.513466.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2300_rew_117.9299.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2400_rew_118.56683.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2500_rew_117.815544.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2600_rew_122.01767.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2700_rew_118.860954.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2800_rew_122.79169.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_2900_rew_115.29644.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3000_rew_125.69076.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_300_rew_85.9101.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_300_rew_85.938736.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3100_rew_118.76521.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3200_rew_122.67325.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3400_rew_120.971245.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3500_rew_127.303024.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3600_rew_118.15483.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3700_rew_125.592224.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3800_rew_131.14412.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_3900_rew_136.27583.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_400_rew_89.88867.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_400_rew_95.19674.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_500_rew_101.20804.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_500_rew_97.45519.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_600_rew_103.062614.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_600_rew_97.417534.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_700_rew_97.446815.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_700_rew_99.15058.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_800_rew_101.667.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_800_rew_104.99939.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_900_rew_101.73328.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_z_ep_900_rew_106.339615.pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_zep2000rew[224.83].pth",
+    "runs/cross4_0/z-axis/nn/last_cross4_0_zep4000rew[131.5].pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1000_rew_69.70162.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1100_rew_74.07216.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1200_rew_75.72968.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1300_rew_76.59628.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1400_rew_77.44585.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1500_rew_77.36441.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1600_rew_78.71573.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1700_rew_77.40269.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1800_rew_78.855934.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_1900_rew_79.1631.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2000_rew_78.99613.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_200_rew_52.178074.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2100_rew_78.35813.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2200_rew_80.209274.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2300_rew_81.46929.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2400_rew_82.500435.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2500_rew_83.64001.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2600_rew_83.217316.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2700_rew_82.89741.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2800_rew_83.50795.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_2900_rew_83.85606.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3000_rew_83.643936.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_300_rew_55.119442.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3100_rew_83.75297.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3200_rew_84.8732.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3300_rew_84.43126.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3400_rew_84.37639.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3500_rew_83.83421.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3600_rew_84.51309.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3700_rew_84.9474.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3800_rew_84.4832.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_3900_rew_83.85332.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_400_rew_57.70156.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_500_rew_59.76237.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_600_rew_59.924988.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_700_rew_61.448368.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_800_rew_61.909782.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_z_ep_900_rew_64.63696.pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_zep10rew[3.41].pth",
+    "runs/rapidhand/ball/z-axis/nn/last_ball_zep4000rew[84.22].pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_1000_rew_59.62829.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_200_rew_36.789654.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_200_rew_54.55632.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_200_rew_610.7434.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_300_rew_37.888004.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_300_rew_55.590385.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_300_rew_783.27515.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_400_rew_925.1914.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_500_rew_37.85233.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_600_rew_38.26382.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_600_rew_58.31364.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_700_rew_38.72625.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_700_rew_58.546947.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_800_rew_41.70942.pth",
+    "runs/rapidhand/ball_55mm/ball/z-axis/nn/last_ball_z_ep_900_rew_46.48117.pth",
+    "runs/rapidhand/box_50x50x50/z-axis/nn/last_box_50x50x50_zep10rew[-22.06].pth",
+    "runs/rapidhand/box_99x79x108/z-axis/nn/last_box_99x79x108_zep10rew[-10.73].pth",
+    "runs/rapidhand/cross4_0/z-axis/nn/cross4_0_z.pth",
+    "runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep10rew[1.89].pth",
+    "runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep20rew[-31.97].pth",
+    "runs/rapidhand/set_obj1_regular_block/z-axis/nn/last_set_obj1_regular_block_zep10rew[-9.37].pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_300_rew_62.98478.pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_400_rew_64.9725.pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_500_rew_69.81933.pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_600_rew_71.792114.pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_700_rew_70.1152.pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_800_rew_71.66734.pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_900_rew_72.722466.pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_zep1000rew[76.93].pth",
+    "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_zep10rew-inf.pth"
+  ],
+  "completed_at": "2026-10-26T13:29:32.365517+08:00",
+  "summary": {
+    "before_count": 138,
+    "kept_count": 9,
+    "deleted_count": 129,
+    "deleted_test_count": 8,
+    "deleted_bytes": 838740352,
+    "retained_bytes": 58544062,
+    "protected_nonweight_files_unchanged": 54
+  }
+}

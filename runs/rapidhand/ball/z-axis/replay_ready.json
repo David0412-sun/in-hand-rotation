@@ -1,0 +1,12 @@
+{
+  "checkpoint_epoch": 10,
+  "steps_verified": 64,
+  "num_envs": 16,
+  "observations": 258,
+  "actions": 20,
+  "states": 154,
+  "objects_per_environment": 2,
+  "self_collision": true,
+  "finite": true,
+  "viewer_open": true
+}

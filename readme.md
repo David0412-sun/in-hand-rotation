@@ -108,6 +108,237 @@ scripts/teacher_axis_visrl.sh 0 task.env.axis=[axis] experiment=[axis]-visualrl 
 ```
 
 
+### RapidHand / Vision Hand teacher
+
+`RapidHandRotation` uses the fixed-base, five-finger `vision_hand` from the
+adjacent `rapidhand_isaacgym` project. Its URDF and 41 meshes are self-contained
+under [assets/rapidhand](assets/rapidhand/README.md). It uses the same Isaac Gym
+Preview 4 / Python 3.8 environment as the Allegro tasks; Isaac Lab is not required.
+
+The task has 20 actions and 15 tactile channels. Every URDF link whose name
+contains `tactile` (case-insensitive) remains a separate rigid body. Its actual
+net contact force is read from the GPU tensor; contact flags enter the policy
+observation. These are link-level contact forces, not pressure images or an
+object-specific contact measurement. Camera housings remain geometry only.
+
+An optional `urdf/vision_hand_simple_collision.urdf` replaces 11 structural
+collision meshes with boxes and retains 30 collision meshes. All visual meshes, links,
+joints, inertials and 15 tactile collision meshes are preserved. Add
+`task.env.handAssetFile=urdf/vision_hand_simple_collision.urdf` to an existing
+training or replay command to select it; the original URDF remains the default.
+Use the same asset for training and replay. Output folders and network dimensions
+are unchanged. See [asset details and the tactile check](assets/rapidhand/README.md)
+for retained geometry and limitations.
+
+In the viewer, adjacent hand links alternate blue, orange, purple and cyan.
+Tactile links are red when inactive and green when triggered. Their colors use
+the same contact flags as the actor: peak force over the completed control step
+at least `contactThreshold` (default 0.05 N). Reset clears them back to red.
+Color updates run only with a viewer and do not change physics or observations.
+
+Hand self-collision is enabled by default (`task.env.selfCollision=True`).
+Different fingers, nonadjacent finger segments and distal segments against the
+palm can collide. Fixed attachments and directly joint-connected assemblies are
+filtered out. The five palm/finger-mount pairs in `selfCollisionIgnorePairs` are
+also excluded because their housings overlap by design. Tactile bodies stay
+separate, so their signals and green indicators can now include contact with
+other parts of the hand as well as the object.
+
+Checkpoints trained before self-collision was enabled still load, but the changed
+physics can change their behavior. Use `task.env.selfCollision=False` to replay
+with the earlier collision settings; train with the default `True` for policies
+that learn under self-collision.
+
+For a single object (`objSet=cross`, `C` or `custom`), the actor receives four frames of
+`[joint positions (20), joint targets (20), touch flags (15), rotation axis (3)]`
+plus the current object state (13): 245 values. The central critic receives
+`[positions (20), velocities (20), targets (20), actions (20), object state (13),
+axis (3), tactile forces (45)]`: 141 values. With `objSet=ball`, each environment
+contains two balls; their two states (26 values) give 258 actor observations and
+154 critic inputs. These input layouts are unchanged by the unified entry point.
+Single-object checkpoints and two-ball checkpoints have different
+input dimensions and cannot be exchanged. Existing two-ball checkpoints load
+through this entry point with `task.env.objSet=ball`.
+Joint positions and targets are normalized by their URDF limits; object position
+is relative to the hand base. Each reset clears that environment's observation
+history and contact accumulation. Completed environments return fresh initial
+observations together with the previous episode's terminal reward/done flags,
+so the next policy action uses the correct state. The actor and central-critic
+MLPs and PPO algorithm inherit the existing teacher configuration. Allegro
+checkpoints have different input/action dimensions and cannot be loaded into
+this task.
+
+Activate `robosyn`, then train from scratch (default: 256 environments):
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 max_iterations=2000
+```
+
+The single RapidHand task entry point is `task=RapidHandRotation`, selected by
+`scripts/teacher_rapidhand.sh`. Its default is `cross4_0`, Z rotation.
+Use `task.env.objSet` to choose `cross`, `C`, `ball` or `custom`, `task.env.objectName`
+to choose a specific object (empty means the whole set), and `task.env.axis`
+to select the rotation axis. Without an explicit object name, `cross` selects
+`cross4_0`; `C` selects its full set and `ball` selects its sole sphere type.
+For example:
+
+| Selection | Command |
+| --- | --- |
+| Single cross | `bash scripts/teacher_rapidhand.sh 0 task.env.objectName=cross4_1` |
+| Single C object | `bash scripts/teacher_rapidhand.sh 0 task.env.objSet=C task.env.objectName=set_obj1_regular_block` |
+| All cross shapes | `bash scripts/teacher_rapidhand.sh 0 task.env.objectName=` |
+| All C shapes | `bash scripts/teacher_rapidhand.sh 0 task.env.objSet=C task.env.objectName=` |
+| Two balls | `bash scripts/teacher_rapidhand.sh 0 task.env.objSet=ball` |
+
+Whole-set training distributes different shapes across environments, with one
+object per environment. The default grasp is intended for `cross4_0`; other
+shapes can need different initial poses or scale.
+
+Models, TensorBoard logs and the latest configuration stay in
+`runs/rapidhand/<object>/<axis>-axis/{nn,summaries,config.yaml}` (by default,
+`runs/rapidhand/cross4_0/z-axis/`). Whole-set policies use
+`runs/rapidhand/_object_sets/<set>/<axis>-axis/`.
+Changing hyperparameters reuses this directory; back up models you want to keep
+before starting another run. Original Allegro output directories are unaffected.
+
+Replay the best available checkpoint in a viewer:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 test=True headless=False task.env.numEnvs=16 \
+  checkpoint=runs/rapidhand/cross4_0/z-axis/nn/cross4_0_z.pth
+```
+
+Press Escape in the viewer or Ctrl+C in the terminal to exit. As in the original
+teacher, a best checkpoint is normally saved after iteration 100; a final
+checkpoint is also saved when the iteration limit is reached.
+
+With `objSet=ball`, the reward measures the two balls' rotation around their
+common center about world Z (the currently supported axis), rather than either
+ball's own spin. To train for 10 iterations with a viewer:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 task.env.objSet=ball max_iterations=10 headless=False force_render=True
+```
+
+Its models, TensorBoard logs and configuration are written under
+`runs/rapidhand/ball/z-axis/`. This short run checks the simulation and training
+pipeline; it does not establish that the policy has learned the task. Each ball
+has a 0.022 m radius from `assets/urdf/objects/ball.urdf`, scaled by `objectScale`,
+and a configured mass of 0.05 kg. Starting positions, separation limits and all
+other RapidHand settings share
+`isaacgymenvs/cfg/task/RapidHandRotation.yaml`. Camera observations and student
+distillation are not part of this task.
+
+For two 55 mm balls, select `isaacgymenvs/cfg/object/ball_55mm.yaml`:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=ball_55mm \
+  task.env.numEnvs=256 max_iterations=10 test=False \
+  headless=False force_render=True wandb_activate=False \
+  task.sim.physx.default_buffer_size_multiplier=1.0 \
+  task.sim.physx.max_gpu_contact_pairs=4194304
+```
+
+This preset scales the existing ball URDF by 1.25, keeps each ball at 50 g
+and friction at 1.0, and sets initial centres 63 mm apart. It reuses the same
+task and PPO networks. Outputs go to
+`runs/rapidhand/ball_55mm/ball/z-axis/{nn,summaries,config.yaml}`, separate
+from the original 44 mm ball models. Use `+object=ball_55mm` during replay
+as well. Ten iterations validate the pipeline; they do not establish a
+trained rotation policy.
+
+For the source 60 mm chamfered block, select
+`isaacgymenvs/cfg/object/block_corner_60mm.yaml`:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=block_corner_60mm \
+  max_iterations=10 headless=False force_render=True
+```
+
+This preset selects `set_obj6_block_corner`, the simplified-collision hand URDF
+and self-collision. It uses the previous 60 mm cube test's open-hand joint pose,
+with the object moved 30 mm toward the fingers along hand-local +Z to
+`[0.005, -0.0715, 0.14]`. Its spin reward coefficient is 2.0; other reward weights
+inherit the common defaults.
+After a 2 s settling period, each environment resets if its signed orientation
+increments about the target axis sum to less than 5 degrees in magnitude over
+the last 3 s. Back-and-forth motion cancels in this check; a short pause for
+regrasping is allowed. Stalls terminate the episode without an additional penalty.
+The same reset rule applies in training and replay. `rotationStallTimeout=0`
+disables it, which remains the default for other objects and the two-ball task.
+It sets PhysX buffers to `1.0 / 4194304` and inherits 256 environments and both
+PPO minibatches of 1024. Outputs stay in
+`runs/rapidhand/set_obj6_block_corner/z-axis/{nn,summaries,config.yaml}`.
+Use the same object preset during replay. The short run is intended to check
+the initial grasp, tactile response and training pipeline for this combination.
+
+The ideal `box_50x50x50` is a 50 x 50 x 50 mm cube, with one rigid body and
+one primitive box collision shape. It belongs to the RapidHand `custom` set.
+Select its object preset to use a matching initial position and open-hand pose:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=box_50x50x50 \
+  task.env.numEnvs=256 max_iterations=10 headless=True force_render=False \
+  task.sim.physx.default_buffer_size_multiplier=1.0 \
+  task.sim.physx.max_gpu_contact_pairs=4194304
+```
+
+The preset is `isaacgymenvs/cfg/object/box_50x50x50.yaml`; its provisional
+mass is 0.05 kg and friction is 1.0, not measured real-object values. Scale is
+1.0 and the cube is initially aligned with the world axes. `objectPositionLocal` uses hand
+coordinates; `objectRotationEuler` uses world-frame Euler angles in radians.
+The task overrides URDF mass with `task.env.objectMass` and recomputes inertia.
+Use the same `+object=box_50x50x50` preset for training and replay to retain
+the cube's initial position and finger pose. Existing object defaults
+are unchanged. A short run validates the pipeline, not learned rotation skill.
+
+Outputs go to `runs/rapidhand/box_50x50x50/<axis>-axis/`, with weights in `nn/`,
+TensorBoard events in `summaries/` and the training settings in
+`config.yaml`. The default axis is Z. To replay a saved box checkpoint, use:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=box_50x50x50 \
+  task.env.numEnvs=16 test=True headless=False force_render=True \
+  task.sim.physx.default_buffer_size_multiplier=1.0 \
+  task.sim.physx.max_gpu_contact_pairs=4194304 \
+  'checkpoint="<path-to-the-box-checkpoint.pth>"'
+```
+
+Object files and settings are stored here:
+
+| Content | Location |
+| --- | --- |
+| Box geometry, reference mass and inertia | `assets/urdf/objects/box_50x50x50.urdf` |
+| All object URDFs, including `ball.urdf`, `cross4_*.urdf` and `set_obj*.urdf` | `assets/urdf/objects/` |
+| Cross visual/collision meshes | `assets/urdf/objects/meshes/non-convex-param/` |
+| C-set visual/collision meshes | `assets/urdf/objects/meshes/set2/` |
+| Object lists and output-directory routing | `isaacgymenvs/utils/object_tasks.py` |
+| Common RapidHand physics, reward and control settings | `isaacgymenvs/cfg/task/RapidHandRotation.yaml` |
+| Common RapidHand PPO training settings | `isaacgymenvs/cfg/train/RapidHandRotationPPO.yaml` |
+
+The box and ball use primitive geometry and need no mesh files or pretrained
+point-cloud embeddings. Teacher training samples experience from simulation;
+no external dataset is required. Two-ball checkpoints have different network
+input dimensions and cannot be resumed as a single-box policy.
+
+Position control starts from the source model's stiffness 3.0, damping 0.5 and
+URDF limits (1 Nm, 1 rad/s). Objects have gravity and the hand base is fixed.
+Initial hand/object poses, contact threshold, action scale and reset noise are
+configured in `isaacgymenvs/cfg/task/RapidHandRotation.yaml`.
+
+To physically validate every tactile link with a force-driven sphere, run:
+
+```bash
+python scripts/check_rapidhand_tactile.py --headless --output /tmp/rapidhand_tactile.json
+```
+
+This uses two isolated GPU environments and checks all 15 pads: force above
+0.05 N during contact, decay after withdrawal, and no response in the untouched
+environment. The diagnostic uses an open hand and a finer physics timestep than
+training to access each pad independently. Its JSON report includes force
+vectors, probe motion and parent-body contacts. Use `--pads IDIP_TACTILE` for a
+single pad, or `--viewer` to display the probe. A failed check exits nonzero.
+
 ### Student Policy Training
 We provide an implementation of behavior cloning here. You may also implement your own method of distillation with the task environment we provide. 
 

@@ -1,0 +1,28 @@
+# @package _global_
+# Select with +object=ball_55mm when using task=RapidHandRotation.
+task:
+  env:
+    objSet: ball
+    objectName: ball
+    axis: z
+    # Reuse the 22 mm-radius URDF sphere: 2 * 0.022 * 1.25 = 0.055 m.
+    ballRadius: 0.022
+    objectScale: 1.25
+    objectMass: 0.05
+    friction: 1.0
+    # Hand-frame centres, 63 mm apart; retain the default finger pose.
+    ballPositionsLocal:
+      - [-0.0265, -0.060, 0.105]
+      - [0.0365, -0.060, 0.105]
+    minBallSeparation: 0.050
+    maxBallSeparation: 0.10
+  sim:
+    physx:
+      default_buffer_size_multiplier: 1.0
+      max_gpu_contact_pairs: 4194304
+
+train:
+  params:
+    config:
+      # The shared router appends ball/z-axis; keep 44 mm checkpoints separate.
+      train_dir: runs/rapidhand/ball_55mm

@@ -1,0 +1,8 @@
+{
+  "checkpoint_epoch": 10,
+  "steps_verified": 64,
+  "num_envs": 16,
+  "observations": 245,
+  "actions": 20,
+  "viewer_open": true
+}

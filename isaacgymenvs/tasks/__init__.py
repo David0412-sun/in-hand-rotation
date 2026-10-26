@@ -28,9 +28,11 @@
 
 
 from .allegro_arm_morb_axis import AllegroArmMOAR
+from .rapid_hand_rotation import RapidHandRotation
 
 
 # Mappings from strings to environments
 isaacgym_task_map = {
-    "AllegroArmMOAR": AllegroArmMOAR
+    "AllegroArmMOAR": AllegroArmMOAR,
+    "RapidHandRotation": RapidHandRotation,
 }

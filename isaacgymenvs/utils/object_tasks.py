@@ -7,6 +7,7 @@ from omegaconf import OmegaConf
 
 OBJECT_SETS = {
     "ball": ["ball"],
+    "custom": ["box_50x50x50"],
     "cross": ["cross4_0", "cross4_1", "cross4_2", "cross4_3", "cross4_4"],
     "C": [
         "set_obj1_regular_block", "set_obj2_block", "set_obj3_block",

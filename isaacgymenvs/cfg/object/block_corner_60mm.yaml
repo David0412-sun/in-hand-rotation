@@ -1,0 +1,31 @@
+# @package _global_
+# Select with +object=block_corner_60mm when using task=RapidHandRotation.
+task:
+  env:
+    objSet: C
+    objectName: set_obj6_block_corner
+    # The source mesh is already 60 x 60 x 60 mm after its URDF scale.
+    objectScale: 1.0
+    axis: z
+    handAssetFile: urdf/vision_hand_simple_collision.urdf
+    selfCollision: True
+    # Move 30 mm toward the four fingers along hand-local +Z; keep palm clearance.
+    objectPositionLocal: [0.005, -0.0715, 0.14]
+    spinRewardScale: 2.0
+    # After 2 s settling, reset if the last 3 s contain less than 5 deg net spin.
+    rotationStallTimeout: 3.0
+    rotationStallGracePeriod: 2.0
+    rotationStallMinAngleDeg: 5.0
+    defaultJointPositions:
+      IF: 0.3
+      IP: 0.6
+      MF: 0.3
+      MP: 0.6
+      RF: 0.3
+      RP: 0.6
+      LF: 0.3
+      LP: 0.6
+  sim:
+    physx:
+      default_buffer_size_multiplier: 1.0
+      max_gpu_contact_pairs: 4194304

@@ -1,0 +1,431 @@
+{
+  "checkpoint": "runs/rapidhand/ball/z-axis/nn/last_ball_zep10rew[3.41].pth",
+  "checkpoint_epoch": 10,
+  "scalar_samples_checked": 590,
+  "scalars": {
+    "losses/cval_loss": {
+      "samples": 10,
+      "first": 0.8059448599815369,
+      "last": 0.6157219409942627
+    },
+    "info/cval_lr": {
+      "samples": 10,
+      "first": 0.0005000000237487257,
+      "last": 0.0005000000237487257
+    },
+    "performance/step_inference_rl_update_fps": {
+      "samples": 10,
+      "first": 1053.5914306640625,
+      "last": 1188.25634765625
+    },
+    "performance/step_inference_fps": {
+      "samples": 10,
+      "first": 1084.1363525390625,
+      "last": 1206.0703125
+    },
+    "performance/step_fps": {
+      "samples": 10,
+      "first": 1108.24462890625,
+      "last": 1223.4342041015625
+    },
+    "performance/rl_update_time": {
+      "samples": 10,
+      "first": 0.10953187942504883,
+      "last": 0.050913333892822266
+    },
+    "performance/step_inference_time": {
+      "samples": 10,
+      "first": 3.778122663497925,
+      "last": 3.396153450012207
+    },
+    "performance/step_time": {
+      "samples": 10,
+      "first": 3.695935010910034,
+      "last": 3.3479528427124023
+    },
+    "losses/a_loss": {
+      "samples": 10,
+      "first": -0.00260247103869915,
+      "last": -0.008362488821148872
+    },
+    "losses/c_loss": {
+      "samples": 10,
+      "first": 0.8872007727622986,
+      "last": 0.6742381453514099
+    },
+    "losses/entropy": {
+      "samples": 10,
+      "first": 28.37960433959961,
+      "last": 28.282207489013672
+    },
+    "info/last_lr": {
+      "samples": 10,
+      "first": 0.00022499999613501132,
+      "last": 0.0003375000087544322
+    },
+    "info/lr_mul": {
+      "samples": 10,
+      "first": 1.0,
+      "last": 1.0
+    },
+    "info/e_clip": {
+      "samples": 10,
+      "first": 0.20000000298023224,
+      "last": 0.20000000298023224
+    },
+    "info/kl": {
+      "samples": 10,
+      "first": 0.009274286217987537,
+      "last": 0.02827843278646469
+    },
+    "info/epochs": {
+      "samples": 10,
+      "first": 1.0,
+      "last": 10.0
+    },
+    "tactile/contact_fraction/frame": {
+      "samples": 10,
+      "first": 0.02031250111758709,
+      "last": 0.1067708432674408
+    },
+    "tactile/contact_fraction/iter": {
+      "samples": 10,
+      "first": 0.02031250111758709,
+      "last": 0.1067708432674408
+    },
+    "tactile/contact_fraction/time": {
+      "samples": 10,
+      "first": 0.02031250111758709,
+      "last": 0.1067708432674408
+    },
+    "tactile/contact_env_rate/frame": {
+      "samples": 10,
+      "first": 0.265625,
+      "last": 0.83203125
+    },
+    "tactile/contact_env_rate/iter": {
+      "samples": 10,
+      "first": 0.265625,
+      "last": 0.83203125
+    },
+    "tactile/contact_env_rate/time": {
+      "samples": 10,
+      "first": 0.265625,
+      "last": 0.83203125
+    },
+    "tactile/peak_force/frame": {
+      "samples": 10,
+      "first": 0.06873428076505661,
+      "last": 1.0371904373168945
+    },
+    "tactile/peak_force/iter": {
+      "samples": 10,
+      "first": 0.06873428076505661,
+      "last": 1.0371904373168945
+    },
+    "tactile/peak_force/time": {
+      "samples": 10,
+      "first": 0.06873428076505661,
+      "last": 1.0371904373168945
+    },
+    "rotation/spin/frame": {
+      "samples": 10,
+      "first": 0.026838570833206177,
+      "last": 0.21017152070999146
+    },
+    "rotation/spin/iter": {
+      "samples": 10,
+      "first": 0.026838570833206177,
+      "last": 0.21017152070999146
+    },
+    "rotation/spin/time": {
+      "samples": 10,
+      "first": 0.026838570833206177,
+      "last": 0.21017152070999146
+    },
+    "rotation/position_error/frame": {
+      "samples": 10,
+      "first": 0.022067006677389145,
+      "last": 0.017879987135529518
+    },
+    "rotation/position_error/iter": {
+      "samples": 10,
+      "first": 0.022067006677389145,
+      "last": 0.017879987135529518
+    },
+    "rotation/position_error/time": {
+      "samples": 10,
+      "first": 0.022067006677389145,
+      "last": 0.017879987135529518
+    },
+    "rotation/drop_rate/frame": {
+      "samples": 10,
+      "first": 0.0234375,
+      "last": 0.00390625
+    },
+    "rotation/drop_rate/iter": {
+      "samples": 10,
+      "first": 0.0234375,
+      "last": 0.00390625
+    },
+    "rotation/drop_rate/time": {
+      "samples": 10,
+      "first": 0.0234375,
+      "last": 0.00390625
+    },
+    "rotation/nonfinite_rate/frame": {
+      "samples": 10,
+      "first": 0.0,
+      "last": 0.0
+    },
+    "rotation/nonfinite_rate/iter": {
+      "samples": 10,
+      "first": 0.0,
+      "last": 0.0
+    },
+    "rotation/nonfinite_rate/time": {
+      "samples": 10,
+      "first": 0.0,
+      "last": 0.0
+    },
+    "baoding/orbit_delta/frame": {
+      "samples": 10,
+      "first": 0.003332969266921282,
+      "last": 0.021781902760267258
+    },
+    "baoding/orbit_delta/iter": {
+      "samples": 10,
+      "first": 0.003332969266921282,
+      "last": 0.021781902760267258
+    },
+    "baoding/orbit_delta/time": {
+      "samples": 10,
+      "first": 0.003332969266921282,
+      "last": 0.021781902760267258
+    },
+    "baoding/orbit_turns/frame": {
+      "samples": 10,
+      "first": 0.004726736340671778,
+      "last": 0.1461368054151535
+    },
+    "baoding/orbit_turns/iter": {
+      "samples": 10,
+      "first": 0.004726736340671778,
+      "last": 0.1461368054151535
+    },
+    "baoding/orbit_turns/time": {
+      "samples": 10,
+      "first": 0.004726736340671778,
+      "last": 0.1461368054151535
+    },
+    "baoding/separation/frame": {
+      "samples": 10,
+      "first": 0.05393993854522705,
+      "last": 0.0603705570101738
+    },
+    "baoding/separation/iter": {
+      "samples": 10,
+      "first": 0.05393993854522705,
+      "last": 0.0603705570101738
+    },
+    "baoding/separation/time": {
+      "samples": 10,
+      "first": 0.05393993854522705,
+      "last": 0.0603705570101738
+    },
+    "baoding/centroid_speed/frame": {
+      "samples": 10,
+      "first": 0.023249637335538864,
+      "last": 0.019037943333387375
+    },
+    "baoding/centroid_speed/iter": {
+      "samples": 10,
+      "first": 0.023249637335538864,
+      "last": 0.019037943333387375
+    },
+    "baoding/centroid_speed/time": {
+      "samples": 10,
+      "first": 0.023249637335538864,
+      "last": 0.019037943333387375
+    },
+    "baoding/held_rate/frame": {
+      "samples": 10,
+      "first": 0.9765625,
+      "last": 0.99609375
+    },
+    "baoding/held_rate/iter": {
+      "samples": 10,
+      "first": 0.9765625,
+      "last": 0.99609375
+    },
+    "baoding/held_rate/time": {
+      "samples": 10,
+      "first": 0.9765625,
+      "last": 0.99609375
+    },
+    "losses/bounds_loss": {
+      "samples": 10,
+      "first": 0.0,
+      "last": 0.0013818826992064714
+    },
+    "rewards/step": {
+      "samples": 10,
+      "first": -5.070535182952881,
+      "last": 3.4087212085723877
+    },
+    "rewards/iter": {
+      "samples": 10,
+      "first": -5.070535182952881,
+      "last": 3.4087212085723877
+    },
+    "rewards/time": {
+      "samples": 10,
+      "first": -5.070535182952881,
+      "last": 3.4087212085723877
+    },
+    "episode_lengths/step": {
+      "samples": 10,
+      "first": 15.5,
+      "last": 85.27099609375
+    },
+    "episode_lengths/iter": {
+      "samples": 10,
+      "first": 15.5,
+      "last": 85.27099609375
+    },
+    "episode_lengths/time": {
+      "samples": 10,
+      "first": 15.5,
+      "last": 85.27099609375
+    }
+  },
+  "environment_check": {
+    "steps": 180,
+    "done_count": 30,
+    "contact_samples": 969,
+    "min_separation": 0.04399929195642471,
+    "max_separation": 0.09405733644962311,
+    "stationary_contact_samples": 0,
+    "touch_screenshot": true,
+    "passed": true,
+    "observations": 258,
+    "states": 154,
+    "actions": 20,
+    "objects_per_environment": 2,
+    "self_collision": true,
+    "partial_reset_isolated": true,
+    "both_ball_velocities_reset": true
+  },
+  "training_check": {
+    "mode": "train",
+    "elapsed_training_seconds": 33.86847312099417,
+    "epoch": 10,
+    "environment": {
+      "actions": 20,
+      "observations": [
+        256,
+        258
+      ],
+      "states": [
+        256,
+        154
+      ],
+      "objects": [
+        "ball"
+      ],
+      "tactile_links": [
+        "TDIP_TACTILE_DOWN",
+        "TDIP_TACTILE_UP",
+        "TPIP_TACTILE",
+        "IDIP_TACTILE",
+        "IPIP_TACTILE",
+        "IMCPS_TACTILE",
+        "MDIP_TACTILE",
+        "MPIP_TACTILE",
+        "MMCPS_TACTILE",
+        "RDIP_TACTILE",
+        "RPIP_TACTILE",
+        "RMCPS_TACTILE",
+        "LDIP_TACTILE",
+        "LPIP_TACTILE",
+        "LMCPS_TACTILE"
+      ]
+    },
+    "actor_parameter_changes": {
+      "a2c_network.sigma": 0.028272293508052826,
+      "a2c_network.actor_mlp.0.weight": 0.07279404252767563,
+      "a2c_network.actor_mlp.0.bias": 0.05385080352425575,
+      "a2c_network.actor_mlp.2.weight": 0.03696124255657196,
+      "a2c_network.actor_mlp.2.bias": 0.046322137117385864,
+      "a2c_network.actor_mlp.4.weight": 0.029888521879911423,
+      "a2c_network.actor_mlp.4.bias": 0.042516909539699554,
+      "a2c_network.value.weight": 0.02709973230957985,
+      "a2c_network.value.bias": 0.008016927167773247,
+      "a2c_network.mu.weight": 0.03326398879289627,
+      "a2c_network.mu.bias": 0.032487984746694565
+    },
+    "central_value_parameter_changes": {
+      "model.a2c_network.actor_mlp.0.weight": 0.05501105636358261,
+      "model.a2c_network.actor_mlp.0.bias": 0.04072676971554756,
+      "model.a2c_network.actor_mlp.2.weight": 0.038409583270549774,
+      "model.a2c_network.actor_mlp.2.bias": 0.0362144336104393,
+      "model.a2c_network.actor_mlp.4.weight": 0.036034852266311646,
+      "model.a2c_network.actor_mlp.4.bias": 0.0268230177462101,
+      "model.a2c_network.actor_mlp.6.weight": 0.023248467594385147,
+      "model.a2c_network.actor_mlp.6.bias": 0.01959184743463993,
+      "model.a2c_network.value.weight": 0.02110167220234871,
+      "model.a2c_network.value.bias": 0.006950377952307463
+    },
+    "passed": true
+  },
+  "cross_checkpoint_replay_check": {
+    "mode": "replay",
+    "environment": {
+      "actions": 20,
+      "observations": [
+        16,
+        245
+      ],
+      "states": [
+        16,
+        141
+      ],
+      "objects": [
+        "cross4_0"
+      ],
+      "tactile_links": [
+        "TDIP_TACTILE_DOWN",
+        "TDIP_TACTILE_UP",
+        "TPIP_TACTILE",
+        "IDIP_TACTILE",
+        "IPIP_TACTILE",
+        "IMCPS_TACTILE",
+        "MDIP_TACTILE",
+        "MPIP_TACTILE",
+        "MMCPS_TACTILE",
+        "RDIP_TACTILE",
+        "RPIP_TACTILE",
+        "RMCPS_TACTILE",
+        "LDIP_TACTILE",
+        "LPIP_TACTILE",
+        "LMCPS_TACTILE"
+      ]
+    },
+    "steps": 64,
+    "passed": true
+  },
+  "replay_check": {
+    "checkpoint_epoch": 10,
+    "steps_verified": 64,
+    "num_envs": 16,
+    "observations": 258,
+    "actions": 20,
+    "states": 154,
+    "objects_per_environment": 2,
+    "self_collision": true,
+    "finite": true,
+    "viewer_open": true
+  },
+  "passed": true,
+  "viewer_running_at_final_check": false
+}

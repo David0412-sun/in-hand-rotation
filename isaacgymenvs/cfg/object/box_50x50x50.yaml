@@ -1,0 +1,21 @@
+# @package task.env
+# Select with +object=box_50x50x50; reuse the RapidHandRotation task.
+objSet: custom
+objectName: box_50x50x50
+objectScale: 1.0
+# Provisional simulation values, not measured properties of a real object.
+objectMass: 0.05
+friction: 1.0
+# Axis-aligned 50 mm cube. Position is in the hand frame.
+objectPositionLocal: [0.005, -0.0665, 0.11]
+objectRotationEuler: [0.0, 0.0, 0.0]
+# Open the four long fingers enough to clear the box at reset.
+defaultJointPositions:
+  IF: 0.3
+  IP: 0.6
+  MF: 0.3
+  MP: 0.6
+  RF: 0.3
+  RP: 0.6
+  LF: 0.3
+  LP: 0.6

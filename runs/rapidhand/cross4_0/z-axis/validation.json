@@ -1,0 +1,473 @@
+{
+  "scope": "RapidHand Vision hand / cross4_0 / z-axis; pipeline validation, not a converged rotation policy",
+  "source_assets": "Unmodified copied Vision Hand URDF and 41 STL meshes",
+  "training": {
+    "mode": "train",
+    "epoch": 20,
+    "environment": {
+      "actions": 20,
+      "observations": [
+        256,
+        245
+      ],
+      "states": [
+        256,
+        141
+      ],
+      "objects": [
+        "cross4_0"
+      ],
+      "tactile_links": [
+        "TDIP_TACTILE_DOWN",
+        "TDIP_TACTILE_UP",
+        "TPIP_TACTILE",
+        "IDIP_TACTILE",
+        "IPIP_TACTILE",
+        "IMCPS_TACTILE",
+        "MDIP_TACTILE",
+        "MPIP_TACTILE",
+        "MMCPS_TACTILE",
+        "RDIP_TACTILE",
+        "RPIP_TACTILE",
+        "RMCPS_TACTILE",
+        "LDIP_TACTILE",
+        "LPIP_TACTILE",
+        "LMCPS_TACTILE"
+      ]
+    },
+    "actor_parameter_changes": {
+      "a2c_network.sigma": 0.023175034672021866,
+      "a2c_network.actor_mlp.0.weight": 0.1047174334526062,
+      "a2c_network.actor_mlp.0.bias": 0.04601640999317169,
+      "a2c_network.actor_mlp.2.weight": 0.03561332821846008,
+      "a2c_network.actor_mlp.2.bias": 0.049208901822566986,
+      "a2c_network.actor_mlp.4.weight": 0.03234037011861801,
+      "a2c_network.actor_mlp.4.bias": 0.03435574844479561,
+      "a2c_network.value.weight": 0.021315746009349823,
+      "a2c_network.value.bias": 0.015183968469500542,
+      "a2c_network.mu.weight": 0.028727611526846886,
+      "a2c_network.mu.bias": 0.02955448441207409
+    },
+    "central_value_parameter_changes": {
+      "model.a2c_network.actor_mlp.0.weight": 0.06291917711496353,
+      "model.a2c_network.actor_mlp.0.bias": 0.056920405477285385,
+      "model.a2c_network.actor_mlp.2.weight": 0.039864588528871536,
+      "model.a2c_network.actor_mlp.2.bias": 0.05074689909815788,
+      "model.a2c_network.actor_mlp.4.weight": 0.033390529453754425,
+      "model.a2c_network.actor_mlp.4.bias": 0.045427750796079636,
+      "model.a2c_network.actor_mlp.6.weight": 0.0309719480574131,
+      "model.a2c_network.actor_mlp.6.bias": 0.018962040543556213,
+      "model.a2c_network.value.weight": 0.02399420365691185,
+      "model.a2c_network.value.bias": 0.01804312691092491
+    },
+    "passed": true
+  },
+  "training_scalars": {
+    "event_file": "runs/rapidhand/cross4_0/z-axis/summaries/events.out.tfevents.1792565567.steve-System-Product-Name",
+    "scalars": {
+      "losses/cval_loss": {
+        "samples": 20,
+        "min": 0.19573841989040375,
+        "max": 1.3657410144805908,
+        "last": 0.2404041290283203
+      },
+      "losses/a_loss": {
+        "samples": 20,
+        "min": -0.024213282391428947,
+        "max": 0.0049137757159769535,
+        "last": -0.0035492251627147198
+      },
+      "losses/c_loss": {
+        "samples": 20,
+        "min": 0.20489513874053955,
+        "max": 1.4186137914657593,
+        "last": 0.25399431586265564
+      },
+      "losses/entropy": {
+        "samples": 20,
+        "min": 28.32227897644043,
+        "max": 28.381696701049805,
+        "last": 28.32227897644043
+      },
+      "tactile/contact_fraction/frame": {
+        "samples": 20,
+        "min": 0.02421875111758709,
+        "max": 0.12161459028720856,
+        "last": 0.02421875111758709
+      },
+      "tactile/contact_fraction/iter": {
+        "samples": 20,
+        "min": 0.02421875111758709,
+        "max": 0.12161459028720856,
+        "last": 0.02421875111758709
+      },
+      "tactile/contact_fraction/time": {
+        "samples": 20,
+        "min": 0.02421875111758709,
+        "max": 0.12161459028720856,
+        "last": 0.02421875111758709
+      },
+      "tactile/contact_env_rate/frame": {
+        "samples": 20,
+        "min": 0.26171875,
+        "max": 0.828125,
+        "last": 0.26171875
+      },
+      "tactile/contact_env_rate/iter": {
+        "samples": 20,
+        "min": 0.26171875,
+        "max": 0.828125,
+        "last": 0.26171875
+      },
+      "tactile/contact_env_rate/time": {
+        "samples": 20,
+        "min": 0.26171875,
+        "max": 0.828125,
+        "last": 0.26171875
+      },
+      "tactile/peak_force/frame": {
+        "samples": 20,
+        "min": 0.014424898661673069,
+        "max": 1.9794423580169678,
+        "last": 0.20753461122512817
+      },
+      "tactile/peak_force/iter": {
+        "samples": 20,
+        "min": 0.014424898661673069,
+        "max": 1.9794423580169678,
+        "last": 0.20753461122512817
+      },
+      "tactile/peak_force/time": {
+        "samples": 20,
+        "min": 0.014424898661673069,
+        "max": 1.9794423580169678,
+        "last": 0.20753461122512817
+      },
+      "rotation/nonfinite_rate/frame": {
+        "samples": 20,
+        "min": 0.0,
+        "max": 0.0,
+        "last": 0.0
+      },
+      "rotation/nonfinite_rate/iter": {
+        "samples": 20,
+        "min": 0.0,
+        "max": 0.0,
+        "last": 0.0
+      },
+      "rotation/nonfinite_rate/time": {
+        "samples": 20,
+        "min": 0.0,
+        "max": 0.0,
+        "last": 0.0
+      },
+      "losses/bounds_loss": {
+        "samples": 20,
+        "min": 0.0,
+        "max": 0.08029317855834961,
+        "last": 0.035491205751895905
+      }
+    },
+    "all_scalars_finite": true
+  },
+  "environment_contact_history_reset_checks": {
+    "positive_contact_samples_per_pad": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      686.0,
+      0.0,
+      0.0,
+      941.0,
+      0.0,
+      0.0,
+      13.0
+    ],
+    "passed": true,
+    "frames": 80,
+    "observations": 245,
+    "states": 141,
+    "actions": 20,
+    "tactile_links": [
+      "TDIP_TACTILE_DOWN",
+      "TDIP_TACTILE_UP",
+      "TPIP_TACTILE",
+      "IDIP_TACTILE",
+      "IPIP_TACTILE",
+      "IMCPS_TACTILE",
+      "MDIP_TACTILE",
+      "MPIP_TACTILE",
+      "MMCPS_TACTILE",
+      "RDIP_TACTILE",
+      "RPIP_TACTILE",
+      "RMCPS_TACTILE",
+      "LDIP_TACTILE",
+      "LPIP_TACTILE",
+      "LMCPS_TACTILE"
+    ],
+    "local_reset_isolated": true,
+    "tactile_reaches_actor": true
+  },
+  "tactile_physical_probe": {
+    "passed": true,
+    "pads": [
+      {
+        "name": "TDIP_TACTILE_DOWN",
+        "hold_peak": 0.09420574456453323,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "TDIP_TACTILE_UP",
+        "hold_peak": 0.09315022826194763,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "TPIP_TACTILE",
+        "hold_peak": 0.09564480185508728,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "IDIP_TACTILE",
+        "hold_peak": 0.09654345363378525,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "IPIP_TACTILE",
+        "hold_peak": 0.09600695967674255,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "IMCPS_TACTILE",
+        "hold_peak": 0.09626059234142303,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "MDIP_TACTILE",
+        "hold_peak": 0.09659110009670258,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "MPIP_TACTILE",
+        "hold_peak": 0.09600725769996643,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "MMCPS_TACTILE",
+        "hold_peak": 0.09626194089651108,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "RDIP_TACTILE",
+        "hold_peak": 0.09653761982917786,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "RPIP_TACTILE",
+        "hold_peak": 0.09600695967674255,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "RMCPS_TACTILE",
+        "hold_peak": 0.09626059234142303,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "LDIP_TACTILE",
+        "hold_peak": 0.09654859453439713,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "LPIP_TACTILE",
+        "hold_peak": 0.09599987417459488,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      },
+      {
+        "name": "LMCPS_TACTILE",
+        "hold_peak": 0.09626130759716034,
+        "released_tail_max": 0.0,
+        "other_environment_max": 0.0,
+        "required_force": 0.05,
+        "passed": true
+      }
+    ],
+    "settings": {
+      "asset_root": "/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/assets/rapidhand",
+      "asset_file": "urdf/vision_hand.urdf",
+      "pads": null,
+      "num_envs": 2,
+      "device": 0,
+      "cpu": false,
+      "headless": true,
+      "output": "/tmp/rapidhand_tactile_final.json",
+      "radius": 0.003,
+      "probe_mass": 0.02,
+      "probe_stiffness": 500.0,
+      "probe_damping": 6.0,
+      "max_probe_force": 1.0,
+      "contact_offset": 0.0002,
+      "clearance": 0.008,
+      "depths": [
+        5e-05,
+        0.00015,
+        0.0003
+      ],
+      "dt": 0.004166666666666667,
+      "baseline_steps": 12,
+      "ramp_steps": 60,
+      "hold_steps": 24,
+      "settle_steps": 24,
+      "off_samples": 8,
+      "min_force": 0.05,
+      "off_absolute": 1e-05,
+      "off_ratio": 0.1,
+      "crosstalk_tolerance": 1e-05
+    }
+  },
+  "checkpoint_replay": {
+    "mode": "replay",
+    "environment": {
+      "actions": 20,
+      "observations": [
+        16,
+        245
+      ],
+      "states": [
+        16,
+        141
+      ],
+      "objects": [
+        "cross4_0"
+      ],
+      "tactile_links": [
+        "TDIP_TACTILE_DOWN",
+        "TDIP_TACTILE_UP",
+        "TPIP_TACTILE",
+        "IDIP_TACTILE",
+        "IPIP_TACTILE",
+        "IMCPS_TACTILE",
+        "MDIP_TACTILE",
+        "MPIP_TACTILE",
+        "MMCPS_TACTILE",
+        "RDIP_TACTILE",
+        "RPIP_TACTILE",
+        "RMCPS_TACTILE",
+        "LDIP_TACTILE",
+        "LPIP_TACTILE",
+        "LMCPS_TACTILE"
+      ]
+    },
+    "steps": 64,
+    "passed": true
+  },
+  "existing_allegro_cross_replay": {
+    "mode": "replay",
+    "environment": {
+      "actions": 22,
+      "observations": [
+        16,
+        353
+      ],
+      "states": [
+        16,
+        190
+      ],
+      "objects": [
+        "cross4_0"
+      ]
+    },
+    "steps": 64,
+    "passed": true
+  },
+  "existing_allegro_ball_replay": {
+    "mode": "replay",
+    "environment": {
+      "actions": 22,
+      "observations": [
+        16,
+        366
+      ],
+      "states": [
+        16,
+        204
+      ],
+      "objects": [
+        "ball"
+      ]
+    },
+    "steps": 64,
+    "passed": true
+  },
+  "checkpoints": {
+    "runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep20rew[-31.97].pth": "70bfb0bc3ae62244eb8609f7d2b1f9a9b1e45b906efae4f6ae14caa551a727ff",
+    "runs/rapidhand/cross4_0/z-axis/nn/cross4_0_z.pth": "5f8e04656adffe4c4a327cc11d67c8a9a54f82394299f0220f9fad66c84692c4"
+  },
+  "preview": "preview.png",
+  "original_models_and_configs_unchanged": {
+    "checked_files": 66,
+    "passed": true
+  },
+  "episode_boundary": {
+    "passed": true,
+    "num_envs": 16,
+    "forced_timeout_envs": [
+      0,
+      7
+    ],
+    "return_flags_preserved": true,
+    "terminal_reward_preserved": true,
+    "reset_history_fresh": true,
+    "other_environments_isolated": true,
+    "tactile_reset_clear": true,
+    "next_native_targets_from_reset_state": true,
+    "retained_return_values_do_not_alias": true
+  },
+  "task_source_sha256": "992c0aee3534d48f02afaabb53ad163e0eab03ad6cf5d75e66a811543f28911a",
+  "passed": true
+}

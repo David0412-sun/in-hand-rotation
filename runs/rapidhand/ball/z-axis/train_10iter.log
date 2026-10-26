@@ -1,0 +1,323 @@
+Importing module 'gym_38' (/home/steve/opt/isaacgym-preview4/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/steve/opt/isaacgym-preview4/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/isaacgymenvs/train.py:52: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name="config", config_path="./cfg")
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'config': Defaults list is missing `_self_`. See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/default_composition_order for more information
+  warnings.warn(msg, UserWarning)
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/hydra/_internal/defaults_list.py:415: UserWarning: In config: Invalid overriding of hydra/job_logging:
+Default list overrides requires 'override' keyword.
+See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/defaults_list_override for more information.
+
+  deprecation_warning(msg)
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/torch/utils/cpp_extension.py:28: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import packaging  # type: ignore[attr-defined]
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/pkg_resources/__init__.py:2832: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/pkg_resources/__init__.py:2832: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+PyTorch version 2.1.2
+Device count 1
+/home/steve/opt/isaacgym-preview4/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/steve/miniconda3/envs/robosyn/var/cache/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/steve/miniconda3/envs/robosyn/var/cache/torch_extensions/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Loading extension module gymtorch...
+/home/steve/opt/isaacgym-preview4/isaacgym/python/isaacgym/torch_utils.py:135: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  def get_axis_params(value, axis_idx, x_value=0., dtype=np.float, n_dims=3):
+/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/isaacgymenvs/utils/rotation3d.py:222: DeprecationWarning: invalid escape sequence \*
+  """
+task: 
+    name: RapidHandBaoding
+    physics_engine: physx
+    env: 
+        numEnvs: 256
+        numAgents: 1
+        numActions: 20
+        numObservations: 258
+        numStates: 154
+        envSpacing: 0.4
+        episodeLength: 500
+        controlFrequencyInv: 6
+        frameStack: 4
+        clipObservations: 10.0
+        clipActions: 1.0
+        legacy_obs: True
+        is_distillation: False
+        ablation_mode: no-pc
+        asymmetric_observations: True
+        pc_category: rapidhand
+        observation: 
+            obs: None
+        enableDebugVis: False
+        handName: vision_hand
+        handAssetRoot: assets/rapidhand
+        handAssetFile: urdf/vision_hand.urdf
+        selfCollision: True
+        selfCollisionIgnorePairs: [['BASE', 'TMCPS'], ['BASE', 'IMCPS'], ['BASE', 'MMCPS'], ['BASE', 'RMCPS'], ['BASE', 'LMCPS']]
+        assetRoot: assets
+        objSet: ball
+        objectName: ball
+        axis: z
+        handPosition: [0.0, 0.0, 0.3]
+        handRotationEuler: [-1.5707963267948966, 0.0, 0.0]
+        palmNormalLocal: [0.0, -1.0, 0.0]
+        objectPositionLocal: [0.005, -0.055, 0.11]
+        objectRotationEuler: [0.0, 0.0, 0.0]
+        objectPositionNoise: 0.002
+        objectScale: 1.0
+        objectMass: 0.05
+        objectAngularDamping: 0.01
+        friction: 1.0
+        stiffness: 3.0
+        damping: 0.5
+        actionScale: 0.1
+        targetSmoothing: 0.8
+        resetDofPositionNoise: 0.03
+        defaultJointPositions: 
+            IF: 0.65
+            IS: 0.0
+            IP: 0.8
+            ID: 0.25
+            MF: 0.65
+            MS: 0.0
+            MP: 0.8
+            MD: 0.25
+            RF: 0.65
+            RS: 0.0
+            RP: 0.8
+            RD: 0.25
+            LF: 0.65
+            LS: 0.0
+            LP: 0.8
+            LD: 0.25
+            TF: 0.65
+            TS: 0.7
+            TP: 0.4
+            TD: 0.3
+        contactThreshold: 0.05
+        spinRewardScale: 1.0
+        maxSpinReward: 10.0
+        contactRewardScale: 0.2
+        positionPenaltyScale: 2.0
+        fingerDistancePenaltyScale: 0.1
+        actionPenaltyScale: 0.002
+        velocityPenaltyScale: 0.0001
+        dropHeightLocal: -0.02
+        maxObjectDistance: 0.18
+        fallPenalty: -5.0
+        viewerPosition: [0.45, -0.45, 0.65]
+        viewerTarget: [0.0, 0.08, 0.34]
+        ballRadius: 0.022
+        ballPositionsLocal: [[-0.02, -0.055, 0.11], [0.03, -0.055, 0.11]]
+        minBallSeparation: 0.04
+        maxBallSeparation: 0.1
+        minBallHeightLocal: 0.0
+        centroidVelocityPenaltyScale: 0.1
+        orbitTiltPenaltyScale: 0.1
+    task: 
+        randomize: False
+        enableCameraSensors: False
+    sim: 
+        dt: 0.01667
+        substeps: 2
+        up_axis: z
+        use_gpu_pipeline: True
+        gravity: [0.0, 0.0, -9.81]
+        physx: 
+            num_threads: 4
+            solver_type: 1
+            use_gpu: True
+            num_position_iterations: 8
+            num_velocity_iterations: 0
+            max_gpu_contact_pairs: 8388608
+            num_subscenes: 4
+            contact_offset: 0.002
+            rest_offset: 0.0
+            bounce_threshold_velocity: 0.2
+            max_depenetration_velocity: 100.0
+            default_buffer_size_multiplier: 5.0
+            contact_collection: 2
+train: 
+    params: 
+        seed: 42
+        algo: 
+            name: a2c_continuous
+        model: 
+            name: continuous_a2c_logstd
+        network: 
+            name: actor_critic
+            separate: False
+            pointnet: small
+            space: 
+                continuous: 
+                    mu_activation: None
+                    sigma_activation: None
+                    mu_init: 
+                        name: default
+                    sigma_init: 
+                        name: const_initializer
+                        val: 0
+                    fixed_sigma: True
+            mlp: 
+                units: [512, 256, 256]
+                activation: elu
+                d2rl: False
+                initializer: 
+                    name: default
+                regularizer: 
+                    name: None
+        load_checkpoint: False
+        load_path: 
+        config: 
+            name: ball_z
+            env_name: rlgpu
+            prefix: 
+            user_prefix: 
+            auto_prefix: 
+            multi_gpu: False
+            ppo: True
+            mixed_precision: False
+            normalize_input: True
+            normalize_value: True
+            value_bootstrap: True
+            num_actors: 256
+            reward_shaper: 
+                scale_value: 0.01
+            normalize_advantage: True
+            gamma: 0.99
+            tau: 0.95
+            learning_rate: 0.0001
+            lr_schedule: adaptive
+            schedule_type: standard
+            kl_threshold: 0.02
+            score_to_win: 100000
+            max_epochs: 10
+            save_best_after: 100
+            save_frequency: 100
+            print_stats: True
+            grad_norm: 1.0
+            entropy_coef: 0.0
+            truncate_grads: Trues
+            e_clip: 0.2
+            horizon_length: 16
+            minibatch_size: 1024
+            mini_epochs: 4
+            critic_coef: 5
+            clip_value: True
+            seq_length: 4
+            bptt_len: 16
+            bounds_loss_coef: 0.005
+            bc_loss_coef: 0.01
+            weight_decay: 0.0
+            player_collect: False
+            player: 
+                deterministic: True
+                games_num: 2
+                games_repeat: 1
+                desired_games: 10000
+                print_stats: True
+            central_value_config: 
+                minibatch_size: 1024
+                mini_epochs: 4
+                learning_rate: 0.0005
+                lr_schedule: adaptive
+                schedule_type: standard
+                kl_threshold: 0.016
+                clip_value: True
+                normalize_input: True
+                truncate_grads: True
+                network: 
+                    name: actor_critic
+                    central_value: True
+                    mlp: 
+                        units: [512, 512, 256, 256]
+                        activation: elu
+                        d2rl: False
+                        initializer: 
+                            name: default
+                        regularizer: 
+                            name: None
+            train_dir: runs/rapidhand
+            full_experiment_name: ball/z-axis
+task_name: RapidHandBaoding
+experiment: 
+num_envs: 
+seed: 42
+torch_deterministic: False
+max_iterations: 10
+physics_engine: physx
+pipeline: gpu
+sim_device: cuda:0
+rl_device: cuda:0
+graphics_device_id: 0
+num_threads: 4
+solver_type: 1
+num_subscenes: 4
+test: False
+checkpoint: 
+multi_gpu: False
+wandb_activate: False
+wandb_group: 
+wandb_name: ball_z
+wandb_entity: 
+wandb_project: isaacgymenvs
+capture_video: False
+capture_video_freq: 1464
+capture_video_len: 100
+force_render: True
+headless: False
+player_action_savepath: ./a.pth
+Setting seed: 42
+{'params': {'seed': 42, 'algo': {'name': 'a2c_continuous'}, 'model': {'name': 'continuous_a2c_logstd'}, 'network': {'name': 'actor_critic', 'separate': False, 'pointnet': 'small', 'space': {'continuous': {'mu_activation': 'None', 'sigma_activation': 'None', 'mu_init': {'name': 'default'}, 'sigma_init': {'name': 'const_initializer', 'val': 0}, 'fixed_sigma': True}}, 'mlp': {'units': [512, 256, 256], 'activation': 'elu', 'd2rl': False, 'initializer': {'name': 'default'}, 'regularizer': {'name': 'None'}}}, 'load_checkpoint': False, 'load_path': '', 'config': {'name': 'ball_z', 'env_name': 'rlgpu', 'prefix': '', 'user_prefix': '', 'auto_prefix': '', 'multi_gpu': False, 'ppo': True, 'mixed_precision': False, 'normalize_input': True, 'normalize_value': True, 'value_bootstrap': True, 'num_actors': 256, 'reward_shaper': {'scale_value': 0.01}, 'normalize_advantage': True, 'gamma': 0.99, 'tau': 0.95, 'learning_rate': 0.0001, 'lr_schedule': 'adaptive', 'schedule_type': 'standard', 'kl_threshold': 0.02, 'score_to_win': 100000, 'max_epochs': 10, 'save_best_after': 100, 'save_frequency': 100, 'print_stats': True, 'grad_norm': 1.0, 'entropy_coef': 0.0, 'truncate_grads': 'Trues', 'e_clip': 0.2, 'horizon_length': 16, 'minibatch_size': 1024, 'mini_epochs': 4, 'critic_coef': 5, 'clip_value': True, 'seq_length': 4, 'bptt_len': 16, 'bounds_loss_coef': 0.005, 'bc_loss_coef': 0.01, 'weight_decay': 0.0, 'player_collect': False, 'player': {'deterministic': True, 'games_num': 2, 'games_repeat': 1, 'desired_games': 10000, 'print_stats': True}, 'central_value_config': {'minibatch_size': 1024, 'mini_epochs': 4, 'learning_rate': 0.0005, 'lr_schedule': 'adaptive', 'schedule_type': 'standard', 'kl_threshold': 0.016, 'clip_value': True, 'normalize_input': True, 'truncate_grads': True, 'network': {'name': 'actor_critic', 'central_value': True, 'mlp': {'units': [512, 512, 256, 256], 'activation': 'elu', 'd2rl': False, 'initializer': {'name': 'default'}, 'regularizer': {'name': 'None'}}}}, 'train_dir': 'runs/rapidhand', 'full_experiment_name': 'ball/z-axis'}}}
+self.seed = 42
+Started to train
+Exact experiment name requested from command line: ball/z-axis
+Adding Central Value Network
+Get Override {}
+CFG DICT {'name': 'RapidHandBaoding', 'physics_engine': 'physx', 'env': {'numEnvs': 256, 'numAgents': 1, 'numActions': 20, 'numObservations': 258, 'numStates': 154, 'envSpacing': 0.4, 'episodeLength': 500, 'controlFrequencyInv': 6, 'frameStack': 4, 'clipObservations': 10.0, 'clipActions': 1.0, 'legacy_obs': True, 'is_distillation': False, 'ablation_mode': 'no-pc', 'asymmetric_observations': True, 'pc_category': 'rapidhand', 'observation': {'obs': None}, 'enableDebugVis': False, 'handName': 'vision_hand', 'handAssetRoot': 'assets/rapidhand', 'handAssetFile': 'urdf/vision_hand.urdf', 'selfCollision': True, 'selfCollisionIgnorePairs': [['BASE', 'TMCPS'], ['BASE', 'IMCPS'], ['BASE', 'MMCPS'], ['BASE', 'RMCPS'], ['BASE', 'LMCPS']], 'assetRoot': 'assets', 'objSet': 'ball', 'objectName': 'ball', 'axis': 'z', 'handPosition': [0.0, 0.0, 0.3], 'handRotationEuler': [-1.5707963267948966, 0.0, 0.0], 'palmNormalLocal': [0.0, -1.0, 0.0], 'objectPositionLocal': [0.005, -0.055, 0.11], 'objectRotationEuler': [0.0, 0.0, 0.0], 'objectPositionNoise': 0.002, 'objectScale': 1.0, 'objectMass': 0.05, 'objectAngularDamping': 0.01, 'friction': 1.0, 'stiffness': 3.0, 'damping': 0.5, 'actionScale': 0.1, 'targetSmoothing': 0.8, 'resetDofPositionNoise': 0.03, 'defaultJointPositions': {'IF': 0.65, 'IS': 0.0, 'IP': 0.8, 'ID': 0.25, 'MF': 0.65, 'MS': 0.0, 'MP': 0.8, 'MD': 0.25, 'RF': 0.65, 'RS': 0.0, 'RP': 0.8, 'RD': 0.25, 'LF': 0.65, 'LS': 0.0, 'LP': 0.8, 'LD': 0.25, 'TF': 0.65, 'TS': 0.7, 'TP': 0.4, 'TD': 0.3}, 'contactThreshold': 0.05, 'spinRewardScale': 1.0, 'maxSpinReward': 10.0, 'contactRewardScale': 0.2, 'positionPenaltyScale': 2.0, 'fingerDistancePenaltyScale': 0.1, 'actionPenaltyScale': 0.002, 'velocityPenaltyScale': 0.0001, 'dropHeightLocal': -0.02, 'maxObjectDistance': 0.18, 'fallPenalty': -5.0, 'viewerPosition': [0.45, -0.45, 0.65], 'viewerTarget': [0.0, 0.08, 0.34], 'ballRadius': 0.022, 'ballPositionsLocal': [[-0.02, -0.055, 0.11], [0.03, -0.055, 0.11]], 'minBallSeparation': 0.04, 'maxBallSeparation': 0.1, 'minBallHeightLocal': 0.0, 'centroidVelocityPenaltyScale': 0.1, 'orbitTiltPenaltyScale': 0.1}, 'task': {'randomize': False, 'enableCameraSensors': False}, 'sim': {'dt': 0.01667, 'substeps': 2, 'up_axis': 'z', 'use_gpu_pipeline': True, 'gravity': [0.0, 0.0, -9.81], 'physx': {'num_threads': 4, 'solver_type': 1, 'use_gpu': True, 'num_position_iterations': 8, 'num_velocity_iterations': 0, 'max_gpu_contact_pairs': 8388608, 'num_subscenes': 4, 'contact_offset': 0.002, 'rest_offset': 0.0, 'bounce_threshold_velocity': 0.2, 'max_depenetration_velocity': 100.0, 'default_buffer_size_multiplier': 5.0, 'contact_collection': 2}}}
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/gym/spaces/box.py:84: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+[Warning] [carb.gym.plugin] useGpu is set, forcing single scene (0 subscenes)
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/isaacgymenvs/tasks/rapid_hand_rotation.py:228: DeprecationWarning: an integer is required (got type isaacgym._bindings.linux-x86_64.gym_38.DofDriveMode).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
+  options.default_dof_drive_mode = gymapi.DOF_MODE_POS
+RapidHandBaoding: 20 DOFs, 15 pads, actor 258, critic 154, objects ball
+Box(-1.0, 1.0, (20,), float32) Box(-inf, inf, (258,), float32) Box(-inf, inf, (154,), float32)
+SEQ_LENGTH 4
+current training device: cuda:0
+build mlp: 258
+RunningMeanStd:  (1,)
+RunningMeanStd:  (258,)
+build mlp: 154
+RunningMeanStd:  (1,)
+RunningMeanStd:  (154,)
+fps step: 1108 fps step and policy inference: 1084 fps total: 1054 epoch: 1/10
+fps step: 1294 fps step and policy inference: 1274 fps total: 1255 epoch: 2/10
+fps step: 1281 fps step and policy inference: 1264 fps total: 1246 epoch: 3/10
+fps step: 1271 fps step and policy inference: 1253 fps total: 1235 epoch: 4/10
+fps step: 1297 fps step and policy inference: 1281 fps total: 1264 epoch: 5/10
+fps step: 1300 fps step and policy inference: 1281 fps total: 1262 epoch: 6/10
+fps step: 1234 fps step and policy inference: 1216 fps total: 1187 epoch: 7/10
+fps step: 1240 fps step and policy inference: 1222 fps total: 1202 epoch: 8/10
+fps step: 1301 fps step and policy inference: 1282 fps total: 1249 epoch: 9/10
+fps step: 1223 fps step and policy inference: 1206 fps total: 1188 epoch: 10/10
+=> saving checkpoint 'runs/rapidhand/ball/z-axis/nn/last_ball_zep10rew[3.41].pth'
+MAX EPOCHS NUM!

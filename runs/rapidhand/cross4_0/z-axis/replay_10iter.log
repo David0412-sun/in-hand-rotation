@@ -1,0 +1,498 @@
+Importing module 'gym_38' (/home/steve/opt/isaacgym-preview4/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/steve/opt/isaacgym-preview4/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/isaacgymenvs/train.py:52: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name="config", config_path="./cfg")
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'config': Defaults list is missing `_self_`. See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/default_composition_order for more information
+  warnings.warn(msg, UserWarning)
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/hydra/_internal/defaults_list.py:415: UserWarning: In config: Invalid overriding of hydra/job_logging:
+Default list overrides requires 'override' keyword.
+See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/defaults_list_override for more information.
+
+  deprecation_warning(msg)
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/torch/utils/cpp_extension.py:28: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import packaging  # type: ignore[attr-defined]
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/pkg_resources/__init__.py:2832: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('mpl_toolkits')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/pkg_resources/__init__.py:2832: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.
+Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages
+  declare_namespace(pkg)
+PyTorch version 2.1.2
+Device count 1
+/home/steve/opt/isaacgym-preview4/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Using /home/steve/miniconda3/envs/robosyn/var/cache/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/steve/miniconda3/envs/robosyn/var/cache/torch_extensions/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Loading extension module gymtorch...
+/home/steve/opt/isaacgym-preview4/isaacgym/python/isaacgym/torch_utils.py:135: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  def get_axis_params(value, axis_idx, x_value=0., dtype=np.float, n_dims=3):
+/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/isaacgymenvs/utils/rotation3d.py:222: DeprecationWarning: invalid escape sequence \*
+  """
+task: 
+    name: RapidHandRotation
+    physics_engine: physx
+    env: 
+        numEnvs: 16
+        numAgents: 1
+        numActions: 20
+        numObservations: 245
+        numStates: 141
+        envSpacing: 0.4
+        episodeLength: 500
+        controlFrequencyInv: 6
+        frameStack: 4
+        clipObservations: 10.0
+        clipActions: 1.0
+        legacy_obs: True
+        is_distillation: False
+        ablation_mode: no-pc
+        asymmetric_observations: True
+        pc_category: rapidhand
+        observation: 
+            obs: None
+        enableDebugVis: False
+        handName: vision_hand
+        handAssetRoot: assets/rapidhand
+        handAssetFile: urdf/vision_hand.urdf
+        selfCollision: True
+        selfCollisionIgnorePairs: [['BASE', 'TMCPS'], ['BASE', 'IMCPS'], ['BASE', 'MMCPS'], ['BASE', 'RMCPS'], ['BASE', 'LMCPS']]
+        assetRoot: assets
+        objSet: cross
+        objectName: cross4_0
+        axis: z
+        handPosition: [0.0, 0.0, 0.3]
+        handRotationEuler: [-1.5707963267948966, 0.0, 0.0]
+        palmNormalLocal: [0.0, -1.0, 0.0]
+        objectPositionLocal: [0.005, -0.055, 0.11]
+        objectRotationEuler: [0.0, 0.0, 0.0]
+        objectPositionNoise: 0.002
+        objectScale: 1.0
+        objectMass: 0.05
+        objectAngularDamping: 0.01
+        friction: 1.0
+        stiffness: 3.0
+        damping: 0.5
+        actionScale: 0.1
+        targetSmoothing: 0.8
+        resetDofPositionNoise: 0.03
+        defaultJointPositions: 
+            IF: 0.65
+            IS: 0.0
+            IP: 0.8
+            ID: 0.25
+            MF: 0.65
+            MS: 0.0
+            MP: 0.8
+            MD: 0.25
+            RF: 0.65
+            RS: 0.0
+            RP: 0.8
+            RD: 0.25
+            LF: 0.65
+            LS: 0.0
+            LP: 0.8
+            LD: 0.25
+            TF: 0.65
+            TS: 0.7
+            TP: 0.4
+            TD: 0.3
+        contactThreshold: 0.05
+        spinRewardScale: 1.0
+        maxSpinReward: 10.0
+        contactRewardScale: 0.2
+        positionPenaltyScale: 2.0
+        fingerDistancePenaltyScale: 0.1
+        actionPenaltyScale: 0.002
+        velocityPenaltyScale: 0.0001
+        dropHeightLocal: -0.02
+        maxObjectDistance: 0.18
+        fallPenalty: -5.0
+        viewerPosition: [0.45, -0.45, 0.65]
+        viewerTarget: [0.0, 0.08, 0.34]
+    task: 
+        randomize: False
+        enableCameraSensors: False
+    sim: 
+        dt: 0.01667
+        substeps: 2
+        up_axis: z
+        use_gpu_pipeline: True
+        gravity: [0.0, 0.0, -9.81]
+        physx: 
+            num_threads: 4
+            solver_type: 1
+            use_gpu: True
+            num_position_iterations: 8
+            num_velocity_iterations: 0
+            max_gpu_contact_pairs: 8388608
+            num_subscenes: 4
+            contact_offset: 0.002
+            rest_offset: 0.0
+            bounce_threshold_velocity: 0.2
+            max_depenetration_velocity: 100.0
+            default_buffer_size_multiplier: 5.0
+            contact_collection: 2
+train: 
+    params: 
+        seed: 42
+        algo: 
+            name: a2c_continuous
+        model: 
+            name: continuous_a2c_logstd
+        network: 
+            name: actor_critic
+            separate: False
+            pointnet: small
+            space: 
+                continuous: 
+                    mu_activation: None
+                    sigma_activation: None
+                    mu_init: 
+                        name: default
+                    sigma_init: 
+                        name: const_initializer
+                        val: 0
+                    fixed_sigma: True
+            mlp: 
+                units: [512, 256, 256]
+                activation: elu
+                d2rl: False
+                initializer: 
+                    name: default
+                regularizer: 
+                    name: None
+        load_checkpoint: True
+        load_path: /media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep10rew[1.89].pth
+        config: 
+            name: cross4_0_z
+            env_name: rlgpu
+            prefix: 
+            user_prefix: 
+            auto_prefix: 
+            multi_gpu: False
+            ppo: True
+            mixed_precision: False
+            normalize_input: True
+            normalize_value: True
+            value_bootstrap: True
+            num_actors: 16
+            reward_shaper: 
+                scale_value: 0.01
+            normalize_advantage: True
+            gamma: 0.99
+            tau: 0.95
+            learning_rate: 0.0001
+            lr_schedule: adaptive
+            schedule_type: standard
+            kl_threshold: 0.02
+            score_to_win: 100000
+            max_epochs: 20100
+            save_best_after: 100
+            save_frequency: 100
+            print_stats: True
+            grad_norm: 1.0
+            entropy_coef: 0.0
+            truncate_grads: Trues
+            e_clip: 0.2
+            horizon_length: 16
+            minibatch_size: 1024
+            mini_epochs: 4
+            critic_coef: 5
+            clip_value: True
+            seq_length: 4
+            bptt_len: 16
+            bounds_loss_coef: 0.005
+            bc_loss_coef: 0.01
+            weight_decay: 0.0
+            player_collect: False
+            player: 
+                deterministic: True
+                games_num: 2
+                games_repeat: 1
+                desired_games: 10000
+                print_stats: True
+            central_value_config: 
+                minibatch_size: 1024
+                mini_epochs: 4
+                learning_rate: 0.0005
+                lr_schedule: adaptive
+                schedule_type: standard
+                kl_threshold: 0.016
+                clip_value: True
+                normalize_input: True
+                truncate_grads: True
+                network: 
+                    name: actor_critic
+                    central_value: True
+                    mlp: 
+                        units: [512, 512, 256, 256]
+                        activation: elu
+                        d2rl: False
+                        initializer: 
+                            name: default
+                        regularizer: 
+                            name: None
+            train_dir: runs/rapidhand
+            full_experiment_name: cross4_0/z-axis
+task_name: RapidHandRotation
+experiment: 
+num_envs: 
+seed: 42
+torch_deterministic: False
+max_iterations: 
+physics_engine: physx
+pipeline: gpu
+sim_device: cuda:0
+rl_device: cuda:0
+graphics_device_id: 0
+num_threads: 4
+solver_type: 1
+num_subscenes: 4
+test: True
+checkpoint: /media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep10rew[1.89].pth
+multi_gpu: False
+wandb_activate: False
+wandb_group: 
+wandb_name: cross4_0_z
+wandb_entity: 
+wandb_project: isaacgymenvs
+capture_video: False
+capture_video_freq: 1464
+capture_video_len: 100
+force_render: True
+headless: False
+player_action_savepath: ./a.pth
+Setting seed: 42
+{'params': {'seed': 42, 'algo': {'name': 'a2c_continuous'}, 'model': {'name': 'continuous_a2c_logstd'}, 'network': {'name': 'actor_critic', 'separate': False, 'pointnet': 'small', 'space': {'continuous': {'mu_activation': 'None', 'sigma_activation': 'None', 'mu_init': {'name': 'default'}, 'sigma_init': {'name': 'const_initializer', 'val': 0}, 'fixed_sigma': True}}, 'mlp': {'units': [512, 256, 256], 'activation': 'elu', 'd2rl': False, 'initializer': {'name': 'default'}, 'regularizer': {'name': 'None'}}}, 'load_checkpoint': True, 'load_path': '/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep10rew[1.89].pth', 'config': {'name': 'cross4_0_z', 'env_name': 'rlgpu', 'prefix': '', 'user_prefix': '', 'auto_prefix': '', 'multi_gpu': False, 'ppo': True, 'mixed_precision': False, 'normalize_input': True, 'normalize_value': True, 'value_bootstrap': True, 'num_actors': 16, 'reward_shaper': {'scale_value': 0.01}, 'normalize_advantage': True, 'gamma': 0.99, 'tau': 0.95, 'learning_rate': 0.0001, 'lr_schedule': 'adaptive', 'schedule_type': 'standard', 'kl_threshold': 0.02, 'score_to_win': 100000, 'max_epochs': 20100, 'save_best_after': 100, 'save_frequency': 100, 'print_stats': True, 'grad_norm': 1.0, 'entropy_coef': 0.0, 'truncate_grads': 'Trues', 'e_clip': 0.2, 'horizon_length': 16, 'minibatch_size': 1024, 'mini_epochs': 4, 'critic_coef': 5, 'clip_value': True, 'seq_length': 4, 'bptt_len': 16, 'bounds_loss_coef': 0.005, 'bc_loss_coef': 0.01, 'weight_decay': 0.0, 'player_collect': False, 'player': {'deterministic': True, 'games_num': 2, 'games_repeat': 1, 'desired_games': 10000, 'print_stats': True}, 'central_value_config': {'minibatch_size': 1024, 'mini_epochs': 4, 'learning_rate': 0.0005, 'lr_schedule': 'adaptive', 'schedule_type': 'standard', 'kl_threshold': 0.016, 'clip_value': True, 'normalize_input': True, 'truncate_grads': True, 'network': {'name': 'actor_critic', 'central_value': True, 'mlp': {'units': [512, 512, 256, 256], 'activation': 'elu', 'd2rl': False, 'initializer': {'name': 'default'}, 'regularizer': {'name': 'None'}}}}, 'train_dir': 'runs/rapidhand', 'full_experiment_name': 'cross4_0/z-axis'}}}
+self.seed = 42
+Started to play
+Get Override {}
+CFG DICT {'name': 'RapidHandRotation', 'physics_engine': 'physx', 'env': {'numEnvs': 16, 'numAgents': 1, 'numActions': 20, 'numObservations': 245, 'numStates': 141, 'envSpacing': 0.4, 'episodeLength': 500, 'controlFrequencyInv': 6, 'frameStack': 4, 'clipObservations': 10.0, 'clipActions': 1.0, 'legacy_obs': True, 'is_distillation': False, 'ablation_mode': 'no-pc', 'asymmetric_observations': True, 'pc_category': 'rapidhand', 'observation': {'obs': None}, 'enableDebugVis': False, 'handName': 'vision_hand', 'handAssetRoot': 'assets/rapidhand', 'handAssetFile': 'urdf/vision_hand.urdf', 'selfCollision': True, 'selfCollisionIgnorePairs': [['BASE', 'TMCPS'], ['BASE', 'IMCPS'], ['BASE', 'MMCPS'], ['BASE', 'RMCPS'], ['BASE', 'LMCPS']], 'assetRoot': 'assets', 'objSet': 'cross', 'objectName': 'cross4_0', 'axis': 'z', 'handPosition': [0.0, 0.0, 0.3], 'handRotationEuler': [-1.5707963267948966, 0.0, 0.0], 'palmNormalLocal': [0.0, -1.0, 0.0], 'objectPositionLocal': [0.005, -0.055, 0.11], 'objectRotationEuler': [0.0, 0.0, 0.0], 'objectPositionNoise': 0.002, 'objectScale': 1.0, 'objectMass': 0.05, 'objectAngularDamping': 0.01, 'friction': 1.0, 'stiffness': 3.0, 'damping': 0.5, 'actionScale': 0.1, 'targetSmoothing': 0.8, 'resetDofPositionNoise': 0.03, 'defaultJointPositions': {'IF': 0.65, 'IS': 0.0, 'IP': 0.8, 'ID': 0.25, 'MF': 0.65, 'MS': 0.0, 'MP': 0.8, 'MD': 0.25, 'RF': 0.65, 'RS': 0.0, 'RP': 0.8, 'RD': 0.25, 'LF': 0.65, 'LS': 0.0, 'LP': 0.8, 'LD': 0.25, 'TF': 0.65, 'TS': 0.7, 'TP': 0.4, 'TD': 0.3}, 'contactThreshold': 0.05, 'spinRewardScale': 1.0, 'maxSpinReward': 10.0, 'contactRewardScale': 0.2, 'positionPenaltyScale': 2.0, 'fingerDistancePenaltyScale': 0.1, 'actionPenaltyScale': 0.002, 'velocityPenaltyScale': 0.0001, 'dropHeightLocal': -0.02, 'maxObjectDistance': 0.18, 'fallPenalty': -5.0, 'viewerPosition': [0.45, -0.45, 0.65], 'viewerTarget': [0.0, 0.08, 0.34]}, 'task': {'randomize': False, 'enableCameraSensors': False}, 'sim': {'dt': 0.01667, 'substeps': 2, 'up_axis': 'z', 'use_gpu_pipeline': True, 'gravity': [0.0, 0.0, -9.81], 'physx': {'num_threads': 4, 'solver_type': 1, 'use_gpu': True, 'num_position_iterations': 8, 'num_velocity_iterations': 0, 'max_gpu_contact_pairs': 8388608, 'num_subscenes': 4, 'contact_offset': 0.002, 'rest_offset': 0.0, 'bounce_threshold_velocity': 0.2, 'max_depenetration_velocity': 100.0, 'default_buffer_size_multiplier': 5.0, 'contact_collection': 2}}}
+/home/steve/miniconda3/envs/robosyn/lib/python3.8/site-packages/gym/spaces/box.py:84: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+[Warning] [carb.gym.plugin] useGpu is set, forcing single scene (0 subscenes)
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/isaacgymenvs/tasks/rapid_hand_rotation.py:222: DeprecationWarning: an integer is required (got type isaacgym._bindings.linux-x86_64.gym_38.DofDriveMode).  Implicit conversion to integers using __int__ is deprecated, and may be removed in a future version of Python.
+  options.default_dof_drive_mode = gymapi.DOF_MODE_POS
+RapidHandRotation: 20 DOFs, 15 pads, actor 245, critic 141, objects cross4_0
+{'observation_space': Box(-inf, inf, (245,), float32), 'action_space': Box(-1.0, 1.0, (20,), float32), 'agents': 1, 'value_size': 1}
+./action_seq.pkl
+build mlp: 245
+RunningMeanStd:  (1,)
+RunningMeanStd:  (245,)
+=> loading checkpoint '/media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/runs/rapidhand/cross4_0/z-axis/nn/last_cross4_0_zep10rew[1.89].pth'
+Loading checkpoint
+check odict_keys(['value_mean_std.running_mean', 'value_mean_std.running_var', 'value_mean_std.count', 'running_mean_std.running_mean', 'running_mean_std.running_var', 'running_mean_std.count', 'a2c_network.sigma', 'a2c_network.actor_mlp.0.weight', 'a2c_network.actor_mlp.0.bias', 'a2c_network.actor_mlp.2.weight', 'a2c_network.actor_mlp.2.bias', 'a2c_network.actor_mlp.4.weight', 'a2c_network.actor_mlp.4.bias', 'a2c_network.value.weight', 'a2c_network.value.bias', 'a2c_network.mu.weight', 'a2c_network.mu.bias'])
+Loaded
+500 27000 1
+10-iteration checkpoint viewer ready; press Escape to exit.
+reward: 44.875057220458984 steps: 318.0
+1 [1.]
+reward: 22.681779861450195 steps: 363.0
+2 [2.]
+reward: 612.4694213867188 steps: 455.0
+3 [3.]
+reward: -20.218759536743164 steps: 494.0
+4 [4.]
+reward: -76.986328125 steps: 500.0
+16 [16.]
+reward: 15.95750617980957 steps: 281.0
+17 [17.]
+reward: -48.853233337402344 steps: 500.0
+18 [18.]
+reward: -27.421585083007812 steps: 500.0
+19 [19.]
+reward: -16.850269317626953 steps: 412.0
+20 [20.]
+reward: -32.82573699951172 steps: 446.0
+21 [21.]
+reward: -76.25727081298828 steps: 500.0
+22 [22.]
+reward: 16.08799171447754 steps: 500.0
+23 [23.]
+reward: -21.879141913519966 steps: 500.0
+32 [32.]
+reward: -13.346303939819336 steps: 317.0
+33 [33.]
+reward: -13.160173416137695 steps: 205.0
+34 [34.]
+reward: -39.055503845214844 steps: 304.0
+35 [35.]
+reward: -79.49269104003906 steps: 500.0
+36 [36.]
+reward: -19.99134635925293 steps: 334.0
+37 [37.]
+reward: -33.168514251708984 steps: 500.0
+38 [38.]
+reward: -58.179771423339844 steps: 281.0
+39 [39.]
+reward: -172.77285766601562 steps: 406.0
+40 [40.]
+reward: -15.454167366027832 steps: 500.0
+41 [41.]
+reward: 0.612407922744751 steps: 500.0
+42 [42.]
+reward: -79.44944763183594 steps: 500.0
+43 [43.]
+reward: 4.979257583618164 steps: 500.0
+44 [44.]
+reward: -21.919190979003908 steps: 500.0
+49 [49.]
+reward: -13.024889945983887 steps: 250.0
+50 [50.]
+reward: -44.972110748291016 steps: 273.0
+51 [51.]
+reward: -60.035701751708984 steps: 330.0
+52 [52.]
+reward: -30.89913558959961 steps: 288.0
+53 [53.]
+reward: 30.01752471923828 steps: 500.0
+54 [54.]
+reward: 72.06051635742188 steps: 212.0
+55 [55.]
+reward: 18.762027740478516 steps: 291.0
+56 [56.]
+reward: -59.721282958984375 steps: 415.0
+57 [57.]
+reward: -345.4971618652344 steps: 500.0
+58 [58.]
+reward: -37.78377151489258 steps: 377.0
+59 [59.]
+reward: -16.872194290161133 steps: 500.0
+60 [60.]
+reward: 25.8389892578125 steps: 315.0
+61 [61.]
+reward: -36.955047607421875 steps: 202.0
+62 [62.]
+reward: -11.675755500793457 steps: 500.0
+63 [63.]
+reward: 18.541873931884766 steps: 234.0
+64 [64.]
+reward: -208.656005859375 steps: 500.0
+65 [65.]
+reward: 588.6096801757812 steps: 500.0
+66 [66.]
+reward: -9.711771965026855 steps: 500.0
+68 [68.]
+reward: -117.54177856445312 steps: 180.0
+69 [69.]
+reward: -7.170207500457764 steps: 500.0
+70 [70.]
+reward: 1914.426513671875 steps: 500.0
+71 [71.]
+reward: -3.6358189582824707 steps: 329.0
+72 [72.]
+reward: -3.307755947113037 steps: 500.0
+73 [73.]
+reward: 7.489990234375 steps: 406.0
+74 [74.]
+reward: 29.248458862304688 steps: 325.0
+75 [75.]
+reward: 18.71182632446289 steps: 317.0
+76 [76.]
+reward: 24.279706954956055 steps: 286.0
+77 [77.]
+reward: 19.627437591552734 steps: 500.0
+78 [78.]
+reward: -300.8330993652344 steps: 500.0
+79 [79.]
+reward: -153.7504425048828 steps: 500.0
+80 [80.]
+reward: 218.10101318359375 steps: 500.0
+81 [81.]
+reward: 35.80363845825195 steps: 227.0
+82 [82.]
+reward: -13.325488090515137 steps: 500.0
+83 [83.]
+reward: -13.878293991088867 steps: 500.0
+84 [84.]
+reward: -8.759821891784668 steps: 500.0
+85 [85.]
+reward: -13.320462226867676 steps: 335.0
+86 [86.]
+reward: 5.563460826873779 steps: 500.0
+87 [87.]
+reward: -5.0209641456604 steps: 500.0
+88 [88.]
+reward: -31.709007263183594 steps: 220.0
+89 [89.]
+reward: -3.0226244926452637 steps: 500.0
+90 [90.]
+reward: -38.743038177490234 steps: 291.0
+91 [91.]
+reward: -60.07722091674805 steps: 500.0
+92 [92.]
+reward: -21.964019775390625 steps: 277.0
+93 [93.]
+reward: -49.48781967163086 steps: 500.0
+94 [94.]
+reward: 17.978214263916016 steps: 249.0
+95 [95.]
+reward: -80.41744995117188 steps: 298.0
+96 [96.]
+reward: -14.283775329589844 steps: 500.0
+97 [97.]
+reward: -35.127376556396484 steps: 500.0
+98 [98.]
+reward: -17.478910446166992 steps: 228.0
+99 [99.]
+reward: -77.4682388305664 steps: 259.0
+100 [100.]
+reward: -72.38239288330078 steps: 288.0
+101 [101.]
+reward: -75.51024627685547 steps: 500.0
+102 [102.]
+reward: 7.010390281677246 steps: 327.0
+103 [103.]
+reward: -14.4035062789917 steps: 500.0
+104 [104.]
+reward: 26.733642578125 steps: 289.0
+105 [105.]
+reward: -32.42962646484375 steps: 500.0
+106 [106.]
+reward: -68.25714874267578 steps: 258.0
+107 [107.]
+reward: 13.349407196044922 steps: 335.0
+108 [108.]
+reward: -55.511962890625 steps: 463.0
+109 [109.]
+reward: -9.321012496948242 steps: 500.0
+110 [110.]
+reward: 681.1192016601562 steps: 500.0
+111 [111.]
+reward: -44.36941146850586 steps: 500.0
+112 [112.]
+reward: 107.42494201660156 steps: 285.0
+113 [113.]
+reward: -27.750558853149414 steps: 500.0
+114 [114.]
+reward: -179.8030242919922 steps: 500.0
+115 [115.]
+reward: -59.92469787597656 steps: 444.0
+116 [116.]
+reward: 2.81894850730896 steps: 500.0
+117 [117.]
+reward: -37.753849029541016 steps: 500.0
+118 [118.]
+reward: -240.95428466796875 steps: 500.0
+119 [119.]
+reward: -54.5703125 steps: 500.0
+120 [120.]
+reward: 114.47217559814453 steps: 500.0
+121 [121.]
