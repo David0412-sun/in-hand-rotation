@@ -1,0 +1,343 @@
+{
+  "algorithm": "Source-convex-hull vertex subset, 26-direction seed, greedy Euclidean farthest point",
+  "containment_definition": "Candidate vertices are exact float32 source hull vertices; no outward expansion beyond source convex hull",
+  "error_definition": "Maximum Euclidean distance from source hull vertices to candidate solid; bounds the whole source convex hull by convexity of distance",
+  "gpu_note": "Geometry satisfies the <=64 hull vertices and <=32 polygon vertices limits; GPU cooking/runtime and memory savings require separate measurement",
+  "hard_coplanar_polygon_vertex_limit": 32,
+  "hard_vertex_limit": 64,
+  "links": [
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.08340000361204147,
+        0.033500004559755325,
+        0.14550000429153442
+      ],
+      "bounds_min_m": [
+        -0.07099999487400055,
+        -0.03750000149011612,
+        -0.004500001203268766
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/BASE.stl",
+      "candidate_mesh_sha256": "0ea0c51796e0d05dd9c7a62634d36b90332e5e9fa7c8ddd68049c52496be0754",
+      "candidate_triangles": 124,
+      "candidate_vertices": 64,
+      "candidate_volume_m3": 0.0010881602963230172,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": "64-vertex cap reached; retain the measured error below the hard 1.0 mm bound",
+      "max_coplanar_polygon_vertices": 12,
+      "max_euclidean_inward_error_mm": 0.8659846838984682,
+      "max_outward_plane_violation_mm": 2.7755575615628914e-14,
+      "name": "BASE",
+      "preferred_0_5_mm_error_met": false,
+      "source_convex_hull_vertices": 622,
+      "source_hull_volume_m3": 0.0010956371564491455,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/BASE.STL",
+      "source_mesh_sha256": "8621bcd5cd55bd6e5c95e8b5ce16105a05cf38b31c6d3818dbc217ecfadfd4d8",
+      "source_triangles": 39238,
+      "source_unique_vertices": 19105,
+      "volume_ratio": 0.9931757880954311
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.024500001221895218,
+        0.05650000274181366
+      ],
+      "bounds_min_m": [
+        -0.014499999582767487,
+        -0.014000000432133675,
+        -0.012500002980232239
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/TPIP.stl",
+      "candidate_mesh_sha256": "0c6af2c2b250d3e0b22995c254d317d12987a55ca160cf28e6f1d1cf36f4b2fb",
+      "candidate_triangles": 116,
+      "candidate_vertices": 60,
+      "candidate_volume_m3": 5.20019904183275e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": null,
+      "max_coplanar_polygon_vertices": 3,
+      "max_euclidean_inward_error_mm": 0.4992976979175315,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "TPIP",
+      "preferred_0_5_mm_error_met": true,
+      "source_convex_hull_vertices": 355,
+      "source_hull_volume_m3": 5.280041073518583e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/TPIP.STL",
+      "source_mesh_sha256": "5ba2595745b28821dd755f1ed98af300722984ae8f35a1800cc998a14462cbe7",
+      "source_triangles": 12312,
+      "source_unique_vertices": 6262,
+      "volume_ratio": 0.9848785207209333
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.019500000402331352,
+        0.05730000138282776
+      ],
+      "bounds_min_m": [
+        -0.015799999237060547,
+        -0.014000000432133675,
+        -0.010000001639127731
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/IPIP.stl",
+      "candidate_mesh_sha256": "820f5077035db01175ead01073f322603ec0de2223b48d6e4f042f92ae3de332",
+      "candidate_triangles": 124,
+      "candidate_vertices": 64,
+      "candidate_volume_m3": 4.8516085841084526e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": "64-vertex cap reached; retain the measured error below the hard 1.0 mm bound",
+      "max_coplanar_polygon_vertices": 5,
+      "max_euclidean_inward_error_mm": 0.5383624678930652,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "IPIP",
+      "preferred_0_5_mm_error_met": false,
+      "source_convex_hull_vertices": 388,
+      "source_hull_volume_m3": 4.931509935760409e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/IPIP.STL",
+      "source_mesh_sha256": "6e15ed0a251b4ccf07d9a6b3f6c8325511fb4d07707283abf97f4c1a7ed0f40f",
+      "source_triangles": 12476,
+      "source_unique_vertices": 6312,
+      "volume_ratio": 0.9837977916109306
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.009112611413002014,
+        0.04976743087172508
+      ],
+      "bounds_min_m": [
+        -0.015799999237060547,
+        -0.013925404287874699,
+        -0.009074593894183636
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/IDIP.stl",
+      "candidate_mesh_sha256": "8f3e7a29062ef4905f7c22e5beb0c75b847f9db208d5c00ad69ca2aa999b66f8",
+      "candidate_triangles": 114,
+      "candidate_vertices": 59,
+      "candidate_volume_m3": 3.0209123563669054e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": null,
+      "max_coplanar_polygon_vertices": 5,
+      "max_euclidean_inward_error_mm": 0.4944754321840271,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "IDIP",
+      "preferred_0_5_mm_error_met": true,
+      "source_convex_hull_vertices": 612,
+      "source_hull_volume_m3": 3.091232094045404e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/IDIP.STL",
+      "source_mesh_sha256": "553e98642c3b1d7cb5df274fe3eae3a476c41e44745e2e6b4ee3f48fce103c7b",
+      "source_triangles": 5548,
+      "source_unique_vertices": 2746,
+      "volume_ratio": 0.9772518738356933
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.019500000402331352,
+        0.05730000138282776
+      ],
+      "bounds_min_m": [
+        -0.015799999237060547,
+        -0.014000000432133675,
+        -0.010000001639127731
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/MPIP.stl",
+      "candidate_mesh_sha256": "820f5077035db01175ead01073f322603ec0de2223b48d6e4f042f92ae3de332",
+      "candidate_triangles": 124,
+      "candidate_vertices": 64,
+      "candidate_volume_m3": 4.8516085841084526e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": "64-vertex cap reached; retain the measured error below the hard 1.0 mm bound",
+      "max_coplanar_polygon_vertices": 5,
+      "max_euclidean_inward_error_mm": 0.5383624678930652,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "MPIP",
+      "preferred_0_5_mm_error_met": false,
+      "source_convex_hull_vertices": 388,
+      "source_hull_volume_m3": 4.931509935760409e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/MPIP.STL",
+      "source_mesh_sha256": "6e15ed0a251b4ccf07d9a6b3f6c8325511fb4d07707283abf97f4c1a7ed0f40f",
+      "source_triangles": 12476,
+      "source_unique_vertices": 6312,
+      "volume_ratio": 0.9837977916109306
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.009112611413002014,
+        0.04976743087172508
+      ],
+      "bounds_min_m": [
+        -0.015799999237060547,
+        -0.013925404287874699,
+        -0.009074593894183636
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/MDIP.stl",
+      "candidate_mesh_sha256": "ac65045cdb628c55eb582126007ff695dc071dca7b3fc6920e83fde9b6fb95e7",
+      "candidate_triangles": 114,
+      "candidate_vertices": 59,
+      "candidate_volume_m3": 3.020912356366884e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": null,
+      "max_coplanar_polygon_vertices": 5,
+      "max_euclidean_inward_error_mm": 0.4944754321840271,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "MDIP",
+      "preferred_0_5_mm_error_met": true,
+      "source_convex_hull_vertices": 612,
+      "source_hull_volume_m3": 3.0912320940453946e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/MDIP.STL",
+      "source_mesh_sha256": "53da973dcbf78b146a618ac5738d5560deb57463a728a9043905771675734008",
+      "source_triangles": 5548,
+      "source_unique_vertices": 2746,
+      "volume_ratio": 0.9772518738356895
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.019500000402331352,
+        0.05730000138282776
+      ],
+      "bounds_min_m": [
+        -0.015799999237060547,
+        -0.014000000432133675,
+        -0.010000001639127731
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/RPIP.stl",
+      "candidate_mesh_sha256": "820f5077035db01175ead01073f322603ec0de2223b48d6e4f042f92ae3de332",
+      "candidate_triangles": 124,
+      "candidate_vertices": 64,
+      "candidate_volume_m3": 4.8516085841084526e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": "64-vertex cap reached; retain the measured error below the hard 1.0 mm bound",
+      "max_coplanar_polygon_vertices": 5,
+      "max_euclidean_inward_error_mm": 0.5383624678930652,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "RPIP",
+      "preferred_0_5_mm_error_met": false,
+      "source_convex_hull_vertices": 388,
+      "source_hull_volume_m3": 4.931509935760409e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/RPIP.STL",
+      "source_mesh_sha256": "6e15ed0a251b4ccf07d9a6b3f6c8325511fb4d07707283abf97f4c1a7ed0f40f",
+      "source_triangles": 12476,
+      "source_unique_vertices": 6312,
+      "volume_ratio": 0.9837977916109306
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.009112611413002014,
+        0.04976743087172508
+      ],
+      "bounds_min_m": [
+        -0.015799999237060547,
+        -0.013925404287874699,
+        -0.009074593894183636
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/RDIP.stl",
+      "candidate_mesh_sha256": "6afc9fa8cd81af00a9cca607232e18e8e47c0f9dd8553fcfb5e903e09700c720",
+      "candidate_triangles": 114,
+      "candidate_vertices": 59,
+      "candidate_volume_m3": 3.0209123563669054e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": null,
+      "max_coplanar_polygon_vertices": 5,
+      "max_euclidean_inward_error_mm": 0.4944754321840271,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "RDIP",
+      "preferred_0_5_mm_error_met": true,
+      "source_convex_hull_vertices": 612,
+      "source_hull_volume_m3": 3.091232094045404e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/RDIP.STL",
+      "source_mesh_sha256": "58fb67d5290f30293658545dd27b8ccc4e304091625eee57d68f77c59c01299e",
+      "source_triangles": 5548,
+      "source_unique_vertices": 2746,
+      "volume_ratio": 0.9772518738356933
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.019500000402331352,
+        0.05730000138282776
+      ],
+      "bounds_min_m": [
+        -0.015799999237060547,
+        -0.014000000432133675,
+        -0.010000001639127731
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/LPIP.stl",
+      "candidate_mesh_sha256": "820f5077035db01175ead01073f322603ec0de2223b48d6e4f042f92ae3de332",
+      "candidate_triangles": 124,
+      "candidate_vertices": 64,
+      "candidate_volume_m3": 4.8516085841084526e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": "64-vertex cap reached; retain the measured error below the hard 1.0 mm bound",
+      "max_coplanar_polygon_vertices": 5,
+      "max_euclidean_inward_error_mm": 0.5383624678930652,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "LPIP",
+      "preferred_0_5_mm_error_met": false,
+      "source_convex_hull_vertices": 388,
+      "source_hull_volume_m3": 4.931509935760409e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/LPIP.STL",
+      "source_mesh_sha256": "aa6aa4f87ec1c8dbc973dc12107781ce320081b02acc6b15ba7ede6a5baa6856",
+      "source_triangles": 12476,
+      "source_unique_vertices": 6312,
+      "volume_ratio": 0.9837977916109306
+    },
+    {
+      "axis_extrema_preserved": true,
+      "bounds_max_m": [
+        0.017500000074505806,
+        0.009112611413002014,
+        0.04976743087172508
+      ],
+      "bounds_min_m": [
+        -0.015799999237060547,
+        -0.013925404287874699,
+        -0.009074593894183636
+      ],
+      "candidate_mesh": "assets/rapidhand/meshes/collision_lowpoly/LDIP.stl",
+      "candidate_mesh_sha256": "b42ba2efc5149d2418c8ce3e6e32b3d9b18309d95646fe0847be9f50b23cdb09",
+      "candidate_triangles": 114,
+      "candidate_vertices": 59,
+      "candidate_volume_m3": 3.0209123563669054e-05,
+      "closed_outward_convex_mesh": true,
+      "error_budget_note": null,
+      "max_coplanar_polygon_vertices": 5,
+      "max_euclidean_inward_error_mm": 0.4944754321840271,
+      "max_outward_plane_violation_mm": 6.938893903907228e-15,
+      "name": "LDIP",
+      "preferred_0_5_mm_error_met": true,
+      "source_convex_hull_vertices": 612,
+      "source_hull_volume_m3": 3.0912320940454014e-05,
+      "source_mesh": "assets/rapidhand/meshes/visionhand/LDIP.STL",
+      "source_mesh_sha256": "8d523c63e82304fcb5aa8f8c35e984a61fb2127bbc8fadf60822984414ca4a55",
+      "source_triangles": 5548,
+      "source_unique_vertices": 2746,
+      "volume_ratio": 0.9772518738356942
+    }
+  ],
+  "max_inward_error_mm": 1.0,
+  "output_urdf": "assets/rapidhand/urdf/vision_hand_lowpoly_collision.urdf",
+  "preferred_inward_error_mm": 0.5,
+  "preserved": {
+    "all_visuals_inertials_joint_origins_and_mesh_scales": true,
+    "box_collisions": 11,
+    "camera_mesh_collisions": 5,
+    "joints": 40,
+    "links": 41,
+    "tactile_mesh_collisions": 15
+  },
+  "source_urdf": "assets/rapidhand/urdf/vision_hand_simple_collision.urdf",
+  "source_urdf_sha256": "6bb94133ddad715a838b9933f5104dc24d0cffe217e05989d707b69ef2834408"
+}

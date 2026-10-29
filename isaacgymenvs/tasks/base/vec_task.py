@@ -335,8 +335,9 @@ class VecTask(Env):
         # if running with a viewer, set up keyboard shortcuts and camera
         if self.headless == False:
             # subscribe to keyboard shortcuts
+            self.viewer_camera_properties = gymapi.CameraProperties()
             self.viewer = self.gym.create_viewer(
-                self.sim, gymapi.CameraProperties())
+                self.sim, self.viewer_camera_properties)
             self.gym.subscribe_viewer_keyboard_event(
                 self.viewer, gymapi.KEY_ESCAPE, "QUIT")
             self.gym.subscribe_viewer_keyboard_event(
@@ -768,6 +769,14 @@ class VecTask(Env):
 
             self.gym.end_access_image_tensors(self.sim)
     
+    def on_viewer_event(self, event):
+        """Optional task input, dispatched from the viewer's single event queue."""
+        pass
+
+    def before_viewer_draw(self):
+        """Optional task overlays; this does not advance the simulation."""
+        pass
+
     def render(self, mode="rgb_array"):
         """Draw the frame to the viewer, and check for keyboard events."""
         if self.cfg["env"]["legacy_obs"] or not self.headless:
@@ -786,6 +795,8 @@ class VecTask(Env):
                     sys.exit()
                 elif evt.action == "toggle_viewer_sync" and evt.value > 0:
                     self.enable_viewer_sync = not self.enable_viewer_sync
+                else:
+                    self.on_viewer_event(evt)
 
             # fetch results
             if self.device != 'cpu':
@@ -794,6 +805,7 @@ class VecTask(Env):
             # step graphics
             if self.enable_viewer_sync:
                 self.gym.step_graphics(self.sim)
+                self.before_viewer_draw()
                 self.gym.draw_viewer(self.viewer, self.sim, True)
 
                 # Wait for dt to elapse in real time.

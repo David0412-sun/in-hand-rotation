@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot name="sphere_75mm">
+  <!-- Ideal solid sphere: 75 mm diameter, provisional 50 g mass. -->
+  <link name="sphere">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <!-- I = 2/5 * m * r^2, with r = 0.0375 m. -->
+      <inertia ixx="0.000028125" ixy="0" ixz="0"
+               iyy="0.000028125" iyz="0" izz="0.000028125"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.0375"/>
+      </geometry>
+      <material name="sphere_gold">
+        <color rgba="0.85 0.65 0.20 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.0375"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>

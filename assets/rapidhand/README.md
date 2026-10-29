@@ -45,3 +45,57 @@ python scripts/check_rapidhand_tactile.py \
 此方案简化的是碰撞形状，刚体、关节和形状数量没有减少；不能据此保证 4096 个环境的长期训练不再发生显存或 PhysX 错误。原始导入文件的哈希仍由 `manifest.json` 记录，简化版是独立的派生资产。
 
 2026-10-23 在 RTX 4080 / Isaac Gym Preview 4 上验证通过：15 个触觉的接触、释放和环境隔离检查；55 mm 双球的 256 环境、10 轮可视化训练；保存模型后 16 环境、128 个控制步的可视化回放；4096 环境、2 轮短训。验证使用原有自碰撞设置，训练、回放数据及模型参数均为有限数值。4096 环境对照中，新旧版显存采样处于相近水平，尚无明显节省证据；短训也不代表 4000 轮稳定性已经验证。测试产物保存在 `/tmp/rapidhand_simple_collision_validation/`，没有覆盖 `runs` 下的模型。
+
+## 可选的低顶点凸包碰撞 URDF
+
+`urdf/vision_hand_lowpoly_collision.urdf` 基于上述简化版，进一步替换掌部
+`BASE`、拇指 `TPIP` 及其余四指的 `PIP/DIP`，共 10 个碰撞网格。
+专用 STL 位于 `meshes/collision_lowpoly/`。原始视觉网格、惯量、关节、
+41 个 link、15 个 tactile 碰撞面、5 个 camera 外壳及挂载坐标均保留；
+其余 11 个盒体仍沿用简化版。该版本仍是 41 个碰撞几何，不减少刚体数量。
+
+新凸包由原始凸包顶点的子集构成，控制在每个凸包最多 64 个顶点，
+并检查共面多边形不超过 32 个顶点。形状向内近似，避免在原凸包外新增
+碰撞凸起。离线几何最大内缩量控制在 1 mm 内，优先达到 0.5 mm。
+这些是导入前的几何约束，PhysX 导入时仍会进行 cooking，不能替代实际
+GPU 接触验证，也不代表显存会按网格顶点减少比例下降。
+
+| 替换部件 | 新凸包顶点数 | 最大向内误差 |
+| --- | ---: | ---: |
+| BASE | 64 | 0.866 mm |
+| TPIP | 60 | 0.499 mm |
+| 其余四指 PIP | 每个 64 | 0.538 mm |
+| 其余四指 DIP | 每个 59 | 0.495 mm |
+
+在已有训练或回放命令中增加：
+
+```bash
+task.env.handAssetFile=urdf/vision_hand_lowpoly_collision.urdf
+```
+
+新资产共用现有任务、网络和物体输出目录，无须新增任务脚本；训练和回放
+应选择同一份 URDF。可用下面的独立临时目录做 60 mm 截角方块短训：
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=block_corner_60mm \
+  task.env.handAssetFile=urdf/vision_hand_lowpoly_collision.urdf \
+  task.env.numEnvs=64 max_iterations=10 headless=False force_render=True \
+  train.params.config.minibatch_size=1024 \
+  train.params.config.central_value_config.minibatch_size=1024 \
+  train.params.config.train_dir=/tmp/rapidhand_lowpoly_smoke
+```
+
+使用 `python scripts/build_rapidhand_lowpoly_collision.py` 可重建候选资产；
+加 `--check` 只验证当前生成结果。构建需要项目环境中的 NumPy 和 SciPy，
+训练直接读取生成的 STL。详细几何测量见 `collision_lowpoly_report.json`。
+
+2026-10-27 验证：生成器 `--check` 重建一致；原资产和任务配置哈希保持
+不变，新网格封闭、朝外、凸形且位于原凸包内部。CPU PhysX 下，15 个触觉
+全部通过按压、释放及跨环境隔离检查；55 mm 双球和 65 mm 截角方块均完成
+8 环境、2 轮 PPO 训练，并恢复各自保存的模型回放 64 个控制步。
+两任务均保留自碰撞，动作、观测、奖励、状态、网络参数及 loss 均为有限值。
+方块短训结束前尚无完整 episode，文件名中的 `rew-inf` 是原训练框架的
+空统计标记；随后回放已覆盖 reset。测试产物位于
+`/tmp/rapidhand_lowpoly_validation/`，正式模型未覆盖。
+当前验证环境没有可访问的 GPU，因此尚未验证 GPU 长训显存变化、GUI 或
+相机画面。新增资产需通过对应 GPU 对照后才能判断是否缓解显存上涨。

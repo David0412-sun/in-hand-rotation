@@ -9,8 +9,8 @@ task:
     axis: z
     handAssetFile: urdf/vision_hand_simple_collision.urdf
     selfCollision: True
-    # Move 30 mm toward the four fingers along hand-local +Z; keep palm clearance.
-    objectPositionLocal: [0.005, -0.0715, 0.14]
+    # Move back 30 mm along hand-local Z, into the thumb's reachable region.
+    objectPositionLocal: [0.005, -0.0715, 0.11]
     spinRewardScale: 2.0
     # After 2 s settling, reset if the last 3 s contain less than 5 deg net spin.
     rotationStallTimeout: 3.0

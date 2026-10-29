@@ -7,6 +7,6 @@ params:
   config:
     train_dir: runs/rapidhand
     auto_prefix: ""
-    minibatch_size: 1024
+    minibatch_size: 16384
     central_value_config:
-      minibatch_size: 1024
+      minibatch_size: 16384

@@ -1,6 +1,57 @@
 name: RapidHandRotation
 physics_engine: ${..physics_engine}
 
+# Persist GPU/allocator memory at each training epoch boundary; replay skips it.
+gpuMemoryLog: True
+
+# Optional monitoring only: these images never enter the policy observations.
+camera:
+  enabled: False
+  display: False
+  # Preview does not save files; recording requires an explicit opt-in.
+  record: False
+  env_id: 0
+  # Empty: first up to 4 environments for display; only env_id for headless recording.
+  env_ids: []
+  width: 112
+  height: 112
+  horizontal_fov: 90.0
+  near_plane: 0.001
+  far_plane: 1.0
+  capture_every: 1
+  segment_steps: 300
+  # 0 records continuously; otherwise record record_steps out of each interval.
+  record_interval_steps: 0
+  record_steps: 200
+  # train.py fills this with the current task directory; can be overridden.
+  output_dir: ''
+  mode: train
+  checkpoint: ''
+  # Approximate optical mounting, not real camera calibration. The CAD lens
+  # faces link +Z. Gym camera +X is mapped to it, with image right +X/up -Y
+  # in the link frame; the optical origin is 1 mm in front of the CAD lens.
+  mounts:
+    thumb:
+      link: TDIP_CAMERA
+      position: [0.0, 0.0, 0.001]
+      rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
+    index:
+      link: IDIP_CAMERA
+      position: [0.0, 0.0, 0.001]
+      rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
+    middle:
+      link: MDIP_CAMERA
+      position: [0.0, 0.0, 0.001]
+      rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
+    ring:
+      link: RDIP_CAMERA
+      position: [0.0, 0.0, 0.001]
+      rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
+    little:
+      link: LDIP_CAMERA
+      position: [0.0, 0.0, 0.001]
+      rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
+
 env:
   numEnvs: ${resolve_default:256,${...num_envs}}
   numAgents: 1
@@ -8,6 +59,8 @@ env:
   numActions: 20
   numObservations: ${if:${eq:${.objSet},ball},258,245}
   numStates: ${if:${eq:${.objSet},ball},154,141}
+  # 1 groups each hand and its object(s); 0 disables aggregation for comparison.
+  aggregateMode: 1
   envSpacing: 0.4
   episodeLength: 500
   controlFrequencyInv: 6
@@ -95,10 +148,15 @@ env:
   contactThreshold: 0.05
   spinRewardScale: 1.0
   maxSpinReward: 10.0
+  # Legacy single-object reward; the 85 mm block opts into actual pose progress.
+  rotationRewardMode: angular_velocity
+  # Opt-in shaping for small forward steps around a fixed palm-frame centre.
+  centeredRotationReward: False
   # Single-object reset on negligible net rotation; disabled unless a preset opts in.
   rotationStallTimeout: 0.0
   rotationStallGracePeriod: 2.0
   rotationStallMinAngleDeg: 5.0
+  rotationStallForwardOnly: False
   contactRewardScale: 0.2
   positionPenaltyScale: 2.0
   fingerDistancePenaltyScale: 0.1

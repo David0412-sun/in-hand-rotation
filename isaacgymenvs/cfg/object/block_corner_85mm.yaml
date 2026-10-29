@@ -1,0 +1,14 @@
+# @package _global_
+# Select with +object=block_corner_85mm when using task=RapidHandRotation.
+defaults:
+  - block_corner_60mm
+  - _self_
+
+task:
+  env:
+    # Scale the 60 mm visual and collision geometry.
+    objectScale: 1.4166666666666667
+    # Share actual signed pose progress between reward and stall detection.
+    rotationRewardMode: pose_delta
+    rotationStallForwardOnly: True
+    rotationStallMinAngleDeg: 15.0

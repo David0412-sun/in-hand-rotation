@@ -144,6 +144,14 @@ also excluded because their housings overlap by design. Tactile bodies stay
 separate, so their signals and green indicators can now include contact with
 other parts of the hand as well as the object.
 
+Each environment groups its hand and manipulated object(s) into one PhysX
+aggregate by default (`task.env.aggregateMode=1`). Capacity uses the actual
+asset body/shape counts, including both balls for the two-object task.
+Intra-aggregate collisions remain enabled with the existing shape filters;
+tactile bodies and camera mounts remain separate. Set `task.env.aggregateMode=0`
+for a comparison with the previous behavior. GPU memory savings require a
+long-running comparison and are not guaranteed by this grouping alone.
+
 Checkpoints trained before self-collision was enabled still load, but the changed
 physics can change their behavior. Use `task.env.selfCollision=False` to replay
 with the earlier collision settings; train with the default `True` for policies
@@ -168,11 +176,17 @@ MLPs and PPO algorithm inherit the existing teacher configuration. Allegro
 checkpoints have different input/action dimensions and cannot be loaded into
 this task.
 
-Activate `robosyn`, then train from scratch (default: 256 environments):
+Activate `robosyn`, then train from scratch with 4096 environments:
 
 ```bash
-bash scripts/teacher_rapidhand.sh 0 max_iterations=2000
+bash scripts/teacher_rapidhand.sh 0 task.env.numEnvs=4096 max_iterations=2000
 ```
+
+Both policy and central-value PPO minibatches default to 16384. With the default
+16-step horizon, `numEnvs * 16` must be divisible by 16384; 1024, 2048, 4096 and
+8192 environments satisfy this requirement. The task's environment-count default
+remains 256, so small training runs must explicitly reduce both minibatches,
+as in the examples below.
 
 The single RapidHand task entry point is `task=RapidHandRotation`, selected by
 `scripts/teacher_rapidhand.sh`. Its default is `cross4_0`, Z rotation.
@@ -182,13 +196,15 @@ to select the rotation axis. Without an explicit object name, `cross` selects
 `cross4_0`; `C` selects its full set and `ball` selects its sole sphere type.
 For example:
 
-| Selection | Command |
+Append these object-selection overrides to the training command above:
+
+| Selection | Overrides |
 | --- | --- |
-| Single cross | `bash scripts/teacher_rapidhand.sh 0 task.env.objectName=cross4_1` |
-| Single C object | `bash scripts/teacher_rapidhand.sh 0 task.env.objSet=C task.env.objectName=set_obj1_regular_block` |
-| All cross shapes | `bash scripts/teacher_rapidhand.sh 0 task.env.objectName=` |
-| All C shapes | `bash scripts/teacher_rapidhand.sh 0 task.env.objSet=C task.env.objectName=` |
-| Two balls | `bash scripts/teacher_rapidhand.sh 0 task.env.objSet=ball` |
+| Single cross | `task.env.objectName=cross4_1` |
+| Single C object | `task.env.objSet=C task.env.objectName=set_obj1_regular_block` |
+| All cross shapes | `task.env.objectName=` |
+| All C shapes | `task.env.objSet=C task.env.objectName=` |
+| Two balls | `task.env.objSet=ball` |
 
 Whole-set training distributes different shapes across environments, with one
 object per environment. The default grasp is intended for `cross4_0`; other
@@ -217,7 +233,10 @@ common center about world Z (the currently supported axis), rather than either
 ball's own spin. To train for 10 iterations with a viewer:
 
 ```bash
-bash scripts/teacher_rapidhand.sh 0 task.env.objSet=ball max_iterations=10 headless=False force_render=True
+bash scripts/teacher_rapidhand.sh 0 task.env.objSet=ball \
+  max_iterations=10 headless=False force_render=True \
+  train.params.config.minibatch_size=1024 \
+  train.params.config.central_value_config.minibatch_size=1024
 ```
 
 Its models, TensorBoard logs and configuration are written under
@@ -234,6 +253,8 @@ For two 55 mm balls, select `isaacgymenvs/cfg/object/ball_55mm.yaml`:
 ```bash
 bash scripts/teacher_rapidhand.sh 0 +object=ball_55mm \
   task.env.numEnvs=256 max_iterations=10 test=False \
+  train.params.config.minibatch_size=1024 \
+  train.params.config.central_value_config.minibatch_size=1024 \
   headless=False force_render=True wandb_activate=False \
   task.sim.physx.default_buffer_size_multiplier=1.0 \
   task.sim.physx.max_gpu_contact_pairs=4194304
@@ -247,30 +268,100 @@ from the original 44 mm ball models. Use `+object=ball_55mm` during replay
 as well. Ten iterations validate the pipeline; they do not establish a
 trained rotation policy.
 
-For the source 60 mm chamfered block, select
-`isaacgymenvs/cfg/object/block_corner_60mm.yaml`:
+For the 60 mm chamfered block, select
+`isaacgymenvs/cfg/object/block_corner_60mm.yaml` (`objectScale=1`). For 85 mm,
+use `+object=block_corner_85mm`; that preset inherits the 60 mm configuration
+and uses `objectScale=85/60`, scaling visual and collision geometry together.
+The 85 mm preset also opts into the pose-progress reward described below.
+For 75 mm, use `+object=block_corner_75mm`; it inherits the 85 mm settings
+with `objectScale=75/60=1.25` and the centred small-step reward described below.
+All three use the same task output directory. Mass remains 50 g:
 
 ```bash
 bash scripts/teacher_rapidhand.sh 0 +object=block_corner_60mm \
-  max_iterations=10 headless=False force_render=True
+  max_iterations=10 headless=False force_render=True \
+  train.params.config.minibatch_size=1024 \
+  train.params.config.central_value_config.minibatch_size=1024
 ```
 
 This preset selects `set_obj6_block_corner`, the simplified-collision hand URDF
 and self-collision. It uses the previous 60 mm cube test's open-hand joint pose,
-with the object moved 30 mm toward the fingers along hand-local +Z to
-`[0.005, -0.0715, 0.14]`. Its spin reward coefficient is 2.0; other reward weights
-inherit the common defaults.
-After a 2 s settling period, each environment resets if its signed orientation
-increments about the target axis sum to less than 5 degrees in magnitude over
-the last 3 s. Back-and-forth motion cancels in this check; a short pause for
-regrasping is allowed. Stalls terminate the episode without an additional penalty.
-The same reset rule applies in training and replay. `rotationStallTimeout=0`
-disables it, which remains the default for other objects and the two-ball task.
-It sets PhysX buffers to `1.0 / 4194304` and inherits 256 environments and both
-PPO minibatches of 1024. Outputs stay in
+with the object at hand-local `[0.005, -0.0715, 0.11]`, moved back 30 mm from
+the previous forward position. The 60 mm preset keeps the legacy RapidHand reward:
+angular velocity projected onto the target world axis, with spin coefficient
+2.0 and the existing speed clamp. Contact reward inherits coefficient 0.2;
+the fall penalty remains -15. There are no separate thumb rewards.
+After a 2 s settling period and a full 3 s window, each environment resets if
+its signed orientation increments about the target axis sum to less than
+5 degrees in magnitude over the last 3 s. Back-and-forth motion cancels in
+this check; a short pause for regrasping is allowed. Stalls terminate the
+episode without an additional penalty. The same reset rule applies in
+training and replay. `rotationStallTimeout=0` disables it, which remains
+the default for other objects and the two-ball task.
+It sets PhysX buffers to `1.0 / 4194304` and inherits 256 environments. Both PPO
+minibatches default to 16384; the short-run command above overrides both to 1024.
+Outputs stay in
 `runs/rapidhand/set_obj6_block_corner/z-axis/{nn,summaries,config.yaml}`.
 Use the same object preset during replay. The short run is intended to check
 the initial grasp, tactile response and training pipeline for this combination.
+
+The 85 mm preset uses `rotationRewardMode=pose_delta`: the rotation term is
+`2 * clamp(signed_pose_increment / control_dt, -10, 10)`. The quaternion
+increment is projected onto the fixed world rotation axis, shared with the
+stall check, and cleared on reset. Reverse rotation remains negative; invalid
+or fallen terminal motion earns no rotation reward. Contact, position, action,
+joint-velocity and fall terms retain their existing coefficients. There is no
+additional stall penalty. After the same 2 s grace and full 3 s window, a net
+**forward** angle below 15 degrees ends the episode (`rotationStallForwardOnly=True`).
+Other presets retain their existing reward and termination behavior.
+
+The 75 mm preset retains pose-based progress and the same stall/reset rules,
+and enables `centeredRotationReward`. With signed speed `w` in rad/s and
+distance `e` in metres from the fixed initial palm-frame object centre, it uses:
+
+```text
+d = max(e - 0.005, 0)
+g = exp(-0.5 * (d / 0.015)^2)
+rotation_reward = 2 * (g * min(max(w, 0), 0.6) + min(w, 0))
+position_penalty = -0.2 * (d / 0.01)^2
+```
+
+Forward reward saturates at about 3.4 degrees per 0.1 s control step; reverse
+progress is penalised linearly without clipping or position attenuation.
+The 5 mm tolerance allows small translations during regrasping. The reference
+does not follow the object. The quadratic term replaces the linear position
+penalty, and `contactRewardScale=0` removes the ordinary contact bonus. Other
+reward terms and the -15 fall penalty are unchanged; fallen or invalid terminal
+steps still earn no rotation reward. `rotation/position_reward_gate` and
+`rotation/position_penalty` report the current per-environment means (the latter
+as a positive penalty magnitude). No extra overspeed or action-change penalty is
+enabled. Train with the existing network and output directory:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=block_corner_75mm \
+  task.env.numEnvs=8192 max_iterations=4000
+```
+
+This starts a new training run with the viewer and cameras disabled. The usual
+best-checkpoint filename in the shared object directory will be overwritten as
+new best models are saved. To replay a 75 mm checkpoint with its earlier reward
+settings, append `task.env.centeredRotationReward=False
+task.env.positionPenaltyScale=2.0 task.env.contactRewardScale=0.2`.
+
+For this mode TensorBoard `Episode/rotation/` logs completed-episode net angle
+(`net_angle_deg`), `mean_actual_spin`, `mean_sampled_spin`, reverse-step fraction,
+rotation/total returns, duration, and mutually exclusive termination fractions
+(stall, drop, nonfinite, timeout). Episodes are weighted equally, and these
+metrics cover every control step rather than only the last step of a rollout.
+Net angle is accumulated projected orientation change; with substantial off-axis
+motion it is not a certified count of complete fixed-axis revolutions. Reward
+scores across the old and new modes are not directly comparable.
+
+To replay an older 85 mm checkpoint under its original reward/reset settings,
+append `task.env.rotationRewardMode=angular_velocity
+task.env.rotationStallForwardOnly=False task.env.rotationStallMinAngleDeg=5`.
+The observation dimensions and PPO network are unchanged, so older weights
+remain loadable; learning the revised objective requires training.
 
 The ideal `box_50x50x50` is a 50 x 50 x 50 mm cube, with one rigid body and
 one primitive box collision shape. It belongs to the RapidHand `custom` set.
@@ -279,6 +370,8 @@ Select its object preset to use a matching initial position and open-hand pose:
 ```bash
 bash scripts/teacher_rapidhand.sh 0 +object=box_50x50x50 \
   task.env.numEnvs=256 max_iterations=10 headless=True force_render=False \
+  train.params.config.minibatch_size=1024 \
+  train.params.config.central_value_config.minibatch_size=1024 \
   task.sim.physx.default_buffer_size_multiplier=1.0 \
   task.sim.physx.max_gpu_contact_pairs=4194304
 ```
@@ -304,17 +397,85 @@ bash scripts/teacher_rapidhand.sh 0 +object=box_50x50x50 \
   'checkpoint="<path-to-the-box-checkpoint.pth>"'
 ```
 
+For a **single 75 mm-diameter sphere**, use `+object=sphere_75mm`. This preset
+inherits the 75 mm chamfered block's hand pose, fixed centre, centred rotation
+reward, stall settings and PhysX parameters. It selects `objSet=custom`, so
+the sphere rotates about its own axis using the single-object policy, with
+the same observation/action dimensions. Visual and collision geometry are
+both a primitive sphere of radius 37.5 mm, scale 1.0, with provisional mass
+50 g and friction 1.0. It adds no joints or mesh collision geometry.
+
+To try the existing block policy on the sphere with camera preview only:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=sphere_75mm \
+  test=True headless=False force_render=False task.env.numEnvs=16 \
+  train.params.config.player.deterministic=True \
+  task.camera.enabled=True task.camera.display=True task.camera.record=False \
+  checkpoint=runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth
+```
+
+These weights were trained on the block; performance on the sphere is not
+guaranteed by compatible network dimensions. The uniform sphere has no visual
+orientation marker; use the rotation-angle logs to quantify its spin.
+Future sphere training uses `runs/rapidhand/sphere_75mm/z-axis/`, with the best
+checkpoint named `nn/sphere_75mm_z.pth`. Existing object assets and policies
+remain available.
+
+For a **75 x 75 x 75 mm cube**, use `+object=cube_75mm`. This reuses the
+source `set_obj1_regular_block` asset (60 mm) at scale 1.25 for both visual
+and collision geometry, and inherits the 75 mm chamfered block's centred
+rotation reward, hand pose, mass, friction and simulation settings. To try
+the existing block policy with camera preview and no recording:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=cube_75mm \
+  test=True headless=False force_render=False task.env.numEnvs=16 \
+  train.params.config.player.deterministic=True \
+  task.camera.enabled=True task.camera.display=True task.camera.record=False \
+  checkpoint=runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth
+```
+
+This is a shape-transfer test using the chamfered-block weights. Future cube
+training outputs go to `runs/rapidhand/set_obj1_regular_block/z-axis/`, with
+the best checkpoint named `nn/set_obj1_regular_block_z.pth`.
+
 Object files and settings are stored here:
 
 | Content | Location |
 | --- | --- |
 | Box geometry, reference mass and inertia | `assets/urdf/objects/box_50x50x50.urdf` |
+| Single 75 mm sphere geometry, reference mass and inertia | `assets/urdf/objects/sphere_75mm.urdf` |
 | All object URDFs, including `ball.urdf`, `cross4_*.urdf` and `set_obj*.urdf` | `assets/urdf/objects/` |
 | Cross visual/collision meshes | `assets/urdf/objects/meshes/non-convex-param/` |
 | C-set visual/collision meshes | `assets/urdf/objects/meshes/set2/` |
 | Object lists and output-directory routing | `isaacgymenvs/utils/object_tasks.py` |
 | Common RapidHand physics, reward and control settings | `isaacgymenvs/cfg/task/RapidHandRotation.yaml` |
 | Common RapidHand PPO training settings | `isaacgymenvs/cfg/train/RapidHandRotationPPO.yaml` |
+
+RapidHand training logs GPU memory by default (`task.gpuMemoryLog=True`); replay
+does not log it. The existing task directory contains
+`summaries/gpu_memory.csv`, appended across launches with a timestamp, session ID,
+PID and epoch number. Each epoch has `epoch_start`, `rollout_end` (before PPO
+updates) and `epoch_end` records. Caught exceptions add an `error` record before
+environment cleanup. Every record is flushed and synced to disk, so completed
+records survive a CUDA crash; a hard kill can leave only the last recorded phase.
+
+Memory values are in MiB. `device_used_mib` includes PhysX, PyTorch, graphics and
+other processes on that GPU; `process_used_mib` is the driver-reported memory of
+this training PID, when available. Physical GPU indices/UUIDs come from
+`nvidia-smi`; `torch_device` separately identifies the logical CUDA device used
+by PPO. PyTorch allocated/reserved memory and their peaks since epoch start
+exclude PhysX allocations. Device/process values are snapshots at the recorded
+phases, not instantaneous peaks over an entire epoch. Unavailable readings stay
+blank; failed queries add a diagnostic in `error`. No extra package is required.
+Use `task.gpuMemoryLog=False` to disable this monitoring on a later launch.
+
+For example, follow the truncated-block memory log with:
+
+```bash
+tail -n 12 -f runs/rapidhand/set_obj6_block_corner/z-axis/summaries/gpu_memory.csv
+```
 
 The box and ball use primitive geometry and need no mesh files or pretrained
 point-cloud embeddings. Teacher training samples experience from simulation;
@@ -338,6 +499,98 @@ environment. The diagnostic uses an open hand and a finer physics timestep than
 training to access each pad independently. Its JSON report includes force
 vectors, probe motion and parent-body contacts. Use `--pads IDIP_TACTILE` for a
 single pad, or `--viewer` to display the probe. A failed check exits nonzero.
+
+#### 指尖相机预览与录像
+
+RapidHand 的训练和回放共用 `task.camera` 配置，默认全部关闭。开启后，
+五个指尖相机随对应 `TDIP_CAMERA`、`IDIP_CAMERA`、`MDIP_CAMERA`、
+`RDIP_CAMERA`、`LDIP_CAMERA` link 运动，输出 **112×112 RGB、水平视场角90°**。
+图像仅用于监视和录像，不加入策略观测，已有 checkpoint 可以直接使用。
+
+以下命令回放 75 mm 截角方块模型，打开原生 Isaac Gym Viewer 和旁边的五路相机窗口，
+默认只预览，不保存视频、帧记录或录像元数据：
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=block_corner_75mm \
+  test=True task.env.numEnvs=4 headless=False force_render=False \
+  train.params.config.player.deterministic=True \
+  task.camera.enabled=True task.camera.display=True task.camera.record=False \
+  checkpoint=runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth
+```
+
+在 Isaac Gym 窗口中按 `P`，再点击目标手的包围框，切换相机显示对象。
+黄色框表示当前选中的手，青色框表示其他可选手。也可以按 `[`、`]`，
+或使用相机窗口的环境下拉框选择。相机预览是独立的并排窗口，
+不是嵌入原生 Viewer 的面板；原生 Actors 面板的选择不会同步到相机窗口。
+选中某只手后看到的是它的实际固定相机朝向，镜头不会自动转向物体。
+
+`task.camera.display=True` 要求 `headless=False`。相机窗口的录像开关可以
+开始或停止保存；切换手时结束当前片段，再记录新选中的手。
+只有手动勾选相机窗口的 `Record`，或将命令中的 `task.camera.record=False`
+改为 `True`，才会保存录像。旧命令中的 `record=True` 会覆盖默认的不录像设置。
+
+无窗口训练录像时，在现有训练命令后添加以下参数即可；保留原来的物体、
+环境数、训练轮数及 PPO 参数：
+
+```bash
+task.camera.enabled=True task.camera.record=True \
+  task.camera.display=False headless=True force_render=False
+```
+
+默认只给 `env 0` 创建五个相机，不会给全部训练环境创建相机。
+修改 `task.camera.env_id=3` 可以固定记录 `env 3`。显示模式默认给前四个环境
+创建相机（不足四个时使用现有环境）；需要指定候选手时，可在启动命令中加入：
+
+```bash
+'task.camera.env_ids=[0,3]' task.camera.env_id=0
+```
+
+相机在启动时创建，运行中只能切换已有候选手，不能增加候选环境。
+Isaac Gym 每次会渲染所有已创建的相机：四只候选手就是20路相机，
+候选环境越多，渲染时间和显存开销越大。大规模训练建议只记录一个环境。
+
+| 参数 | 默认值 | 含义 |
+| --- | --- | --- |
+| `task.camera.enabled` | `False` | 总开关；关闭时不创建相机、预览窗口或录像资源 |
+| `task.camera.display` | `False` | 打开五路相机窗口及 Viewer 选手功能 |
+| `task.camera.record` | `False` | 启动时开始保存五路视频 |
+| `task.camera.capture_every` | `1` | 每几个控制步采集一次图像 |
+| `task.camera.segment_steps` | `300` | 每段录像最多覆盖的控制步数 |
+| `task.camera.record_interval_steps` | `0` | `0` 为连续录像；正数为间隔录制周期 |
+| `task.camera.record_steps` | `200` | 每个间隔周期开始时录制的控制步数 |
+
+五路图像在每个采样控制步结束后、环境重置前同步采集。当前控制周期约0.1秒，
+默认录像约10 FPS，300步对应约30秒仿真时间；视频时间按仿真时间计算，
+不等于训练实际耗时。周期录像可使用
+`task.camera.record_interval_steps=1000 task.camera.record_steps=200`，
+即每1000个控制步录制前200步。`record_steps` 不应大于正的录像周期。
+
+视频随当前任务保存，路径为：
+
+```text
+<当前任务保存目录>/videos/train或replay/<时间>/env_0000/segment_0001/
+├── thumb.mp4
+├── index.mp4
+├── middle.mp4
+├── ring.mp4
+├── little.mp4
+├── metadata.json
+└── frames.jsonl
+```
+
+`metadata.json` 保存分辨率、视场角、挂载变换、帧率及 checkpoint 信息；
+`frames.jsonl` 记录逐帧仿真时间和回合边界，便于区分环境重置。
+录像通过 FFmpeg 流式编码，不会把整段视频缓存到内存。正常退出或 Ctrl+C
+会关闭编码器并保存当前片段。预览使用 Tkinter 和 Pillow，录像需要 PATH 中
+可用的 `ffmpeg`；只录像时不需要桌面窗口。
+
+当前镜头挂载是基于 CAD 的近似值，尚未做实机光学标定：镜头前端朝 camera link
+的 `+Z`，仿真光心放在前端外1 mm。Isaac Gym 相机的原生视线是 `+X`
+（画面右方 `-Y`、上方 `+Z`），因此挂载旋转采用弧度
+`[π/2, -π/2, 0]`，使视线朝 link `+Z`、画面右方朝 link `+X`。
+各路位置和旋转可以在 `task.camera.mounts` 中调整。张开的手可能暂时拍到空处，
+这是固定安装方向与当前手姿共同决定的；本功能不模拟自动对焦、镜头畸变或
+滚动快门。关闭相机功能使用 `task.camera.enabled=False`。
 
 ### Student Policy Training
 We provide an implementation of behavior cloning here. You may also implement your own method of distillation with the task environment we provide. 

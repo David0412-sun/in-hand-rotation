@@ -1,0 +1,12 @@
+# @package _global_
+# Reuse the source cube and the centred rotation reward from the 75 mm block.
+defaults:
+  - block_corner_75mm
+  - _self_
+
+task:
+  env:
+    objSet: C
+    objectName: set_obj1_regular_block
+    # The source cube is 60 mm after URDF scaling: 60 * 1.25 = 75 mm.
+    objectScale: 1.25

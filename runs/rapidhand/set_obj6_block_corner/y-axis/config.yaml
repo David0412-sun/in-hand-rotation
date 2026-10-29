@@ -1,0 +1,369 @@
+task:
+  name: RapidHandRotation
+  physics_engine: ${..physics_engine}
+  gpuMemoryLog: true
+  camera:
+    enabled: false
+    display: false
+    record: false
+    env_id: 0
+    env_ids: []
+    width: 112
+    height: 112
+    horizontal_fov: 90.0
+    near_plane: 0.001
+    far_plane: 1.0
+    capture_every: 1
+    segment_steps: 300
+    record_interval_steps: 0
+    record_steps: 200
+    output_dir: ''
+    mode: train
+    checkpoint: ''
+    mounts:
+      thumb:
+        link: TDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+      index:
+        link: IDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+      middle:
+        link: MDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+      ring:
+        link: RDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+      little:
+        link: LDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+  env:
+    numEnvs: 8192
+    numAgents: 1
+    numActions: 20
+    numObservations: ${if:${eq:${.objSet},ball},258,245}
+    numStates: ${if:${eq:${.objSet},ball},154,141}
+    aggregateMode: 1
+    envSpacing: 0.4
+    episodeLength: 500
+    controlFrequencyInv: 6
+    frameStack: 4
+    clipObservations: 10.0
+    clipActions: 1.0
+    legacy_obs: true
+    is_distillation: false
+    ablation_mode: no-pc
+    asymmetric_observations: true
+    pc_category: rapidhand
+    observation:
+      obs: null
+    enableDebugVis: false
+    handName: vision_hand
+    handAssetRoot: assets/rapidhand
+    handAssetFile: urdf/vision_hand_simple_collision.urdf
+    selfCollision: true
+    selfCollisionIgnorePairs:
+    - - BASE
+      - TMCPS
+    - - BASE
+      - IMCPS
+    - - BASE
+      - MMCPS
+    - - BASE
+      - RMCPS
+    - - BASE
+      - LMCPS
+    assetRoot: assets
+    objSet: C
+    objectName: set_obj6_block_corner
+    axis: 'y'
+    handPosition:
+    - 0.0
+    - 0.0
+    - 0.3
+    handRotationEuler:
+    - -1.5707963267948966
+    - 0.0
+    - 0.0
+    palmNormalLocal:
+    - 0.0
+    - -1.0
+    - 0.0
+    objectPositionLocal:
+    - 0.005
+    - -0.0715
+    - 0.11
+    objectRotationEuler:
+    - 0.0
+    - 0.0
+    - 0.0
+    objectPositionNoise: 0.002
+    objectScale: 1.25
+    objectMass: 0.05
+    ballRadius: 0.022
+    ballPositionsLocal:
+    - - -0.02
+      - -0.055
+      - 0.11
+    - - 0.03
+      - -0.055
+      - 0.11
+    minBallSeparation: 0.04
+    maxBallSeparation: 0.1
+    minBallHeightLocal: 0.0
+    centroidVelocityPenaltyScale: 0.1
+    orbitTiltPenaltyScale: 0.1
+    objectAngularDamping: 0.01
+    friction: 1.0
+    stiffness: 3.0
+    damping: 0.5
+    actionScale: 0.1
+    targetSmoothing: 0.8
+    resetDofPositionNoise: 0.03
+    defaultJointPositions:
+      IF: 0.3
+      IS: 0.0
+      IP: 0.6
+      ID: 0.25
+      MF: 0.3
+      MS: 0.0
+      MP: 0.6
+      MD: 0.25
+      RF: 0.3
+      RS: 0.0
+      RP: 0.6
+      RD: 0.25
+      LF: 0.3
+      LS: 0.0
+      LP: 0.6
+      LD: 0.25
+      TF: 0.65
+      TS: 0.7
+      TP: 0.4
+      TD: 0.3
+    contactThreshold: 0.05
+    spinRewardScale: 2.0
+    maxSpinReward: 10.0
+    rotationRewardMode: pose_delta
+    centeredRotationReward: true
+    rotationStallTimeout: 3.0
+    rotationStallGracePeriod: 2.0
+    rotationStallMinAngleDeg: 15.0
+    rotationStallForwardOnly: true
+    contactRewardScale: 0.0
+    positionPenaltyScale: 0.2
+    fingerDistancePenaltyScale: 0.1
+    actionPenaltyScale: 0.002
+    velocityPenaltyScale: 0.0001
+    dropHeightLocal: -0.02
+    maxObjectDistance: 0.18
+    fallPenalty: -15.0
+    viewerPosition:
+    - 0.45
+    - -0.45
+    - 0.65
+    viewerTarget:
+    - 0.0
+    - 0.08
+    - 0.34
+    positiveSpinRewardLimit: 0.6
+    positionTolerance: 0.005
+    positionPenaltyDistance: 0.01
+    positionRewardFalloff: 0.015
+  task:
+    randomize: false
+    enableCameraSensors: false
+  sim:
+    dt: 0.01667
+    substeps: 2
+    up_axis: z
+    use_gpu_pipeline: ${eq:${...pipeline},"gpu"}
+    gravity:
+    - 0.0
+    - 0.0
+    - -9.81
+    physx:
+      num_threads: ${....num_threads}
+      solver_type: ${....solver_type}
+      use_gpu: ${contains:"cuda",${....sim_device}}
+      num_position_iterations: 8
+      num_velocity_iterations: 0
+      max_gpu_contact_pairs: 4194304
+      num_subscenes: ${....num_subscenes}
+      contact_offset: 0.002
+      rest_offset: 0.0
+      bounce_threshold_velocity: 0.2
+      max_depenetration_velocity: 100.0
+      default_buffer_size_multiplier: 1.0
+      contact_collection: 2
+train:
+  params:
+    seed: ${...seed}
+    algo:
+      name: a2c_continuous
+    model:
+      name: continuous_a2c_logstd
+    network:
+      name: actor_critic
+      separate: false
+      pointnet: small
+      space:
+        continuous:
+          mu_activation: None
+          sigma_activation: None
+          mu_init:
+            name: default
+          sigma_init:
+            name: const_initializer
+            val: 0
+          fixed_sigma: true
+      mlp:
+        units:
+        - 512
+        - 256
+        - 256
+        activation: elu
+        d2rl: false
+        initializer:
+          name: default
+        regularizer:
+          name: None
+    load_checkpoint: ${if:${...checkpoint},True,False}
+    load_path: ${...checkpoint}
+    config:
+      name: set_obj6_block_corner_y
+      env_name: rlgpu
+      prefix: ''
+      user_prefix: ''
+      auto_prefix: ''
+      multi_gpu: ${....multi_gpu}
+      ppo: true
+      mixed_precision: false
+      normalize_input: true
+      normalize_value: true
+      value_bootstrap: true
+      num_actors: ${....task.env.numEnvs}
+      reward_shaper:
+        scale_value: 0.01
+      normalize_advantage: true
+      gamma: 0.99
+      tau: 0.95
+      learning_rate: 0.0001
+      lr_schedule: adaptive
+      schedule_type: standard
+      kl_threshold: 0.02
+      score_to_win: 100000
+      max_epochs: ${resolve_default:20100,${....max_iterations}}
+      save_best_after: 100
+      save_frequency: 100
+      print_stats: true
+      grad_norm: 1.0
+      entropy_coef: 0.0
+      truncate_grads: Trues
+      e_clip: 0.2
+      horizon_length: 16
+      minibatch_size: 16384
+      mini_epochs: 4
+      critic_coef: 5
+      clip_value: true
+      seq_length: 4
+      bptt_len: 16
+      bounds_loss_coef: 0.005
+      bc_loss_coef: 0.01
+      weight_decay: 0.0
+      player_collect: false
+      player:
+        deterministic: true
+        games_num: 2
+        games_repeat: 1
+        desired_games: 10000
+        print_stats: true
+      central_value_config:
+        minibatch_size: 16384
+        mini_epochs: 4
+        learning_rate: 0.0005
+        lr_schedule: adaptive
+        schedule_type: standard
+        kl_threshold: 0.016
+        clip_value: true
+        normalize_input: true
+        truncate_grads: true
+        network:
+          name: actor_critic
+          central_value: true
+          mlp:
+            units:
+            - 512
+            - 512
+            - 256
+            - 256
+            activation: elu
+            d2rl: false
+            initializer:
+              name: default
+            regularizer:
+              name: None
+      train_dir: runs/rapidhand
+      full_experiment_name: set_obj6_block_corner/y-axis
+task_name: ${task.name}
+experiment: ''
+num_envs: ''
+seed: 42
+torch_deterministic: false
+max_iterations: 4000
+physics_engine: physx
+pipeline: gpu
+sim_device: cuda:0
+rl_device: cuda:0
+graphics_device_id: 0
+num_threads: 4
+solver_type: 1
+num_subscenes: 4
+test: false
+checkpoint: ''
+multi_gpu: false
+wandb_activate: false
+wandb_group: ''
+wandb_name: ${train.params.config.name}
+wandb_entity: ''
+wandb_project: isaacgymenvs
+capture_video: false
+capture_video_freq: 1464
+capture_video_len: 100
+force_render: true
+headless: true
+player_action_savepath: ./a.pth

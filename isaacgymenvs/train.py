@@ -39,6 +39,7 @@ from omegaconf import DictConfig, OmegaConf
 from hydra.utils import to_absolute_path
 import gym
 import sys
+import warnings
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -69,6 +70,13 @@ def launch_rlg_hydra(cfg: DictConfig):
     if cfg.checkpoint:
         cfg.checkpoint = to_absolute_path(cfg.checkpoint)
 
+    camera = cfg.task.get('camera')
+    if camera is not None and camera.get('enabled', False):
+        if not camera.output_dir:
+            camera.output_dir = to_absolute_path(experiment_dir)
+        camera.mode = 'replay' if cfg.test else 'train'
+        camera.checkpoint = cfg.checkpoint
+
     cfg_dict = omegaconf_to_dict(cfg)
     print_dict(cfg_dict)
 
@@ -97,6 +105,8 @@ def launch_rlg_hydra(cfg: DictConfig):
             monitor_gym=True,
         )
 
+    created_envs = []
+
     def create_env_thunk(**kwargs):
         envs = isaacgymenvs.make(
             cfg.seed,
@@ -112,7 +122,8 @@ def launch_rlg_hydra(cfg: DictConfig):
             cfg,
             **kwargs,
         )
-
+        # Keep a reference for flushing optional recordings on normal exit/Ctrl+C.
+        created_envs.append(envs)
 
         if cfg.capture_video:
             envs.is_vector_env = True
@@ -122,6 +133,7 @@ def launch_rlg_hydra(cfg: DictConfig):
                 step_trigger=lambda step: step % cfg.capture_video_freq == 0,
                 video_length=cfg.capture_video_len,
             )
+            created_envs[-1] = envs
         return envs
 
     # register the rl-games adapter to use inside the runner
@@ -146,7 +158,12 @@ def launch_rlg_hydra(cfg: DictConfig):
     print(rlg_config_dict)
     # convert CLI arguments into dictionory
     # create runner and set the settings
-    runner = build_runner(RLGPUAlgoObserver())
+    memory_logger = None
+    if not cfg.test and cfg.task.get('gpuMemoryLog', False):
+        from isaacgymenvs.utils.gpu_memory import GPUMemoryLogger
+        memory_logger = GPUMemoryLogger(experiment_dir, device=cfg.rl_device)
+    observer = RLGPUAlgoObserver(memory_logger=memory_logger)
+    runner = build_runner(observer)
     runner.load(rlg_config_dict)
     runner.reset()
 
@@ -157,15 +174,43 @@ def launch_rlg_hydra(cfg: DictConfig):
         with open(os.path.join(experiment_dir, 'config.yaml'), 'w') as f:
             f.write(OmegaConf.to_yaml(cfg))
 
-    runner.run({
-        'train': not cfg.test,
-        'play': cfg.test,
-        'checkpoint' : cfg.checkpoint,
-        'sigma' : None
-    })
-
-    if cfg.wandb_activate and rank == 0:
-        wandb.finish()
+    try:
+        if memory_logger is not None:
+            memory_logger.record(0, 'startup')
+            print('GPU memory log: {}'.format(memory_logger.path))
+        runner.run({
+            'train': not cfg.test,
+            'play': cfg.test,
+            'checkpoint' : cfg.checkpoint,
+            'sigma' : None
+        })
+        if memory_logger is not None:
+            memory_logger.record(observer.algo.epoch_num, 'train_end', observer.algo.frame)
+    except BaseException as error:
+        if memory_logger is not None:
+            algo = getattr(observer, 'algo', None)
+            # CUDA may already be unusable; query only the external driver here.
+            memory_logger.record(
+                getattr(algo, 'epoch_num', 0), 'error', getattr(algo, 'frame', 0),
+                error='{}: {}'.format(type(error).__name__, error), include_torch=False,
+            )
+        raise
+    finally:
+        if memory_logger is not None:
+            memory_logger.close()
+        cleanup_errors = []
+        for envs in created_envs:
+            close = getattr(envs, 'close', None)
+            if callable(close):
+                try:
+                    close()
+                except Exception as error:
+                    cleanup_errors.append(error)
+                    warnings.warn('Environment cleanup failed: {}'.format(error))
+        if cfg.wandb_activate and rank == 0:
+            wandb.finish()
+        if cleanup_errors and sys.exc_info()[0] is None:
+            raise cleanup_errors[0]
 
 if __name__ == "__main__":
     launch_rlg_hydra()

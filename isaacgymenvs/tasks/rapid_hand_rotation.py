@@ -9,6 +9,7 @@ objSet selects one cross/C/custom object or two Baoding balls.
 
 import json
 import math
+import warnings
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
@@ -27,6 +28,18 @@ class RapidHandRotation(VecTask):
     def __init__(self, cfg, rl_device, sim_device, graphics_device_id, headless,
                  virtual_screen_capture=False, force_render=False):
         self.cfg = cfg
+        self.hand_camera = None
+        self.camera_config = cfg.get("camera", {})
+        self.camera_env_ids = ()
+        if self.camera_config.get("enabled", False):
+            from isaacgymenvs.utils.hand_camera import resolve_env_ids
+            if self.camera_config.get("display", False) and headless:
+                raise ValueError("camera.display=True requires headless=False for selecting a hand in the Viewer")
+            if graphics_device_id < 0:
+                raise ValueError("Finger cameras require graphics_device_id >= 0, including headless recording")
+            self.camera_env_ids = resolve_env_ids(self.camera_config, int(cfg["env"]["numEnvs"]))
+            # Env reads this top-level flag before creating the graphics context.
+            cfg["enableCameraSensors"] = True
         env = cfg["env"]
         if env.get("handName", "vision_hand") != "vision_hand":
             raise ValueError("RapidHandRotation currently supports vision_hand only")
@@ -93,6 +106,29 @@ class RapidHandRotation(VecTask):
         self.target_smoothing = float(env.get("targetSmoothing", 0.8))
         if self.contact_threshold <= 0 or self.action_scale <= 0 or not 0 < self.target_smoothing <= 1:
             raise ValueError("Invalid contact threshold, action scale or target smoothing")
+        self.rotation_reward_mode = str(env.get("rotationRewardMode", "angular_velocity"))
+        if self.rotation_reward_mode not in ("angular_velocity", "pose_delta"):
+            raise ValueError("rotationRewardMode must be angular_velocity or pose_delta")
+        self.pose_rotation_reward = self.rotation_reward_mode == "pose_delta"
+        if self.pose_rotation_reward and self.num_objects != 1:
+            raise ValueError("pose_delta reward is only supported for single objects")
+        self.centered_rotation_reward = bool(env.get("centeredRotationReward", False))
+        if self.centered_rotation_reward:
+            if not self.pose_rotation_reward:
+                raise ValueError("centeredRotationReward requires rotationRewardMode=pose_delta")
+            self.positive_spin_reward_limit = float(env.get("positiveSpinRewardLimit", 0.6))
+            self.position_tolerance = float(env.get("positionTolerance", 0.005))
+            self.position_penalty_distance = float(env.get("positionPenaltyDistance", 0.01))
+            self.position_reward_falloff = float(env.get("positionRewardFalloff", 0.015))
+            positive_scales = (self.positive_spin_reward_limit, self.position_penalty_distance,
+                               self.position_reward_falloff)
+            if (not all(math.isfinite(value) and value > 0 for value in positive_scales)
+                    or not math.isfinite(self.position_tolerance) or self.position_tolerance < 0):
+                raise ValueError("Invalid centered rotation reward limits or distances")
+        self.rotation_control_dt = float(cfg["sim"]["dt"]) * int(env.get("controlFrequencyInv", 1))
+        if not math.isfinite(self.rotation_control_dt) or self.rotation_control_dt <= 0:
+            raise ValueError("Rotation control interval must be positive and finite")
+        self.rotation_stall_forward_only = bool(env.get("rotationStallForwardOnly", False))
         stall_timeout = float(env.get("rotationStallTimeout", 0.0))
         stall_grace = float(env.get("rotationStallGracePeriod", 2.0))
         stall_angle = float(env.get("rotationStallMinAngleDeg", 5.0))
@@ -103,15 +139,21 @@ class RapidHandRotation(VecTask):
         if self.rotation_stall_enabled:
             if self.num_objects != 1:
                 raise ValueError("Rotation stall detection currently supports single objects only")
-            control_dt = float(cfg["sim"]["dt"]) * int(env.get("controlFrequencyInv", 1))
-            self.rotation_stall_steps = max(1, math.ceil(stall_timeout / control_dt))
-            self.rotation_stall_grace_steps = math.ceil(stall_grace / control_dt)
+            self.rotation_stall_steps = max(1, math.ceil(stall_timeout / self.rotation_control_dt))
+            self.rotation_stall_grace_steps = math.ceil(stall_grace / self.rotation_control_dt)
             self.rotation_stall_min_angle = math.radians(stall_angle)
 
-        super().__init__(cfg, rl_device, sim_device, graphics_device_id, headless,
-                         virtual_screen_capture, force_render)
-        self._acquire_tensors()
-        self.reset()
+        try:
+            super().__init__(cfg, rl_device, sim_device, graphics_device_id, headless,
+                             virtual_screen_capture, force_render)
+            self._acquire_tensors()
+            self.reset()
+        except BaseException:
+            try:
+                self.close()
+            except Exception as error:
+                warnings.warn("Cleanup after initialization failure: {}".format(error))
+            raise
         print("{}: {} DOFs, {} pads, actor {}, critic {}, objects {}".format(
             type(self).__name__, self.num_actions, self.num_tactile_sensors, self.num_obs, self.num_states,
             ", ".join(self.used_training_objects)))
@@ -224,8 +266,14 @@ class RapidHandRotation(VecTask):
         if self.num_objects == 2:
             self.previous_ball_vector = torch.zeros((shape, 3), device=self.device)
             self.orbit_angle_accumulator = torch.zeros(shape, device=self.device)
-        if self.rotation_stall_enabled:
+        if self.rotation_stall_enabled or self.pose_rotation_reward:
             self.previous_object_quat = torch.zeros((shape, 4), device=self.device)
+        if self.pose_rotation_reward:
+            self.rotation_episode_sums = {
+                key: torch.zeros(shape, device=self.device)
+                for key in ("angle", "sampled_spin", "spin_reward", "reward", "reverse_steps")
+            }
+        if self.rotation_stall_enabled:
             self.rotation_step_angles = torch.zeros((self.rotation_stall_steps, shape), device=self.device)
             self.rotation_window_index = 0
             self.rotation_stalled = torch.zeros(shape, dtype=torch.bool, device=self.device)
@@ -241,6 +289,9 @@ class RapidHandRotation(VecTask):
         ground.normal = gymapi.Vec3(0, 0, 1)
         self.gym.add_ground(self.sim, ground)
         self._create_envs()
+        if self.camera_config.get("enabled", False):
+            from isaacgymenvs.utils.hand_camera import HandCameraMonitor
+            self.hand_camera = HandCameraMonitor(self, self.camera_config)
         return self.sim
 
     def _create_envs(self):
@@ -301,6 +352,14 @@ class RapidHandRotation(VecTask):
                 raise RuntimeError("Object must be a successfully imported rigid asset: " + name)
             self.object_asset_dict[name] = asset
 
+        aggregate_mode = int(env_cfg.get("aggregateMode", 1))
+        hand_shapes = self.gym.get_asset_rigid_shape_count(hand_asset)
+        aggregate_sizes = {
+            name: (self.num_hand_bodies + self.num_objects * self.gym.get_asset_rigid_body_count(asset),
+                   hand_shapes + self.num_objects * self.gym.get_asset_rigid_shape_count(asset))
+            for name, asset in self.object_asset_dict.items()
+        }
+
         hand_pose = gymapi.Transform()
         hand_pose.p = gymapi.Vec3(*env_cfg.get("handPosition", [0, 0, 0.30]))
         hand_pose.r = self._quat_from_euler(env_cfg.get("handRotationEuler", [-math.pi / 2, 0, 0]))
@@ -314,33 +373,40 @@ class RapidHandRotation(VecTask):
         hand_indices, object_indices, class_indices = [], [], []
         tactile_indices, fingertip_indices, initial_object_states = [], [], []
         self.tactile_body_handles = []
-        self._tactile_visual_state = (np.zeros((self.num_envs, self.num_tactile_sensors), dtype=bool)
-                                      if not self.headless else None)
+        self._visual_env_ids = tuple(range(self.num_envs)) if not self.headless else self.camera_env_ids
+        self._tactile_visual_state = (np.zeros((len(self._visual_env_ids), self.num_tactile_sensors), dtype=bool)
+                                      if self._visual_env_ids else None)
         friction = float(env_cfg.get("friction", 1.0))
         mass = float(env_cfg.get("objectMass", 0.05))
         scale = float(env_cfg.get("objectScale", 1.0))
         if mass <= 0 or scale <= 0:
             raise ValueError("objectMass and objectScale must be positive")
         for index in range(self.num_envs):
+            class_index = index % self.num_training_objects
+            name = self.used_training_objects[class_index]
             env = self.gym.create_env(self.sim, lower, upper, columns)
+            if aggregate_mode >= 1:
+                # Group the hand and all manipulated objects, as in Allegro.
+                # True keeps intra-aggregate collisions; shape filters still apply.
+                bodies, shapes = aggregate_sizes[name]
+                if not self.gym.begin_aggregate(env, bodies, shapes, True):
+                    raise RuntimeError("Failed to begin aggregate for environment {}".format(index))
             # -1 preserves our per-shape assembly filters; 1 disables all self
             # collisions for reproducing older runs. Object filter 0 contacts both.
             hand_filter = -1 if self.self_collision else 1
             hand = self.gym.create_actor(env, hand_asset, hand_pose, "hand", index, hand_filter)
             self.gym.set_actor_dof_properties(env, hand, props)
-            if not self.headless:
+            if not self.headless or index in self.camera_env_ids:
                 for link_name, color in self.hand_link_colors.items():
                     body = self.gym.find_actor_rigid_body_handle(env, hand, link_name)
                     self.gym.set_rigid_body_color(env, hand, body, gymapi.MESH_VISUAL_AND_COLLISION,
                                                   gymapi.Vec3(*color))
-            class_index = index % self.num_training_objects
-            name = self.used_training_objects[class_index]
             env_objects, env_object_indices, env_initial_states = [], [], []
             for slot, object_pose in enumerate(object_poses):
                 actor_name = "object" if self.num_objects == 1 else "object_{}".format(slot)
                 obj = self.gym.create_actor(env, self.object_asset_dict[name], object_pose, actor_name, index, 0)
                 self.gym.set_actor_scale(env, obj, scale)
-                if self.num_objects > 1 and not self.headless:
+                if self.num_objects > 1 and (not self.headless or index in self.camera_env_ids):
                     color = (0.95, 0.95, 0.95) if slot == 0 else (1.0, 0.72, 0.10)
                     for body in range(self.gym.get_actor_rigid_body_count(env, obj)):
                         self.gym.set_rigid_body_color(env, obj, body, gymapi.MESH_VISUAL_AND_COLLISION,
@@ -362,6 +428,9 @@ class RapidHandRotation(VecTask):
                 for shape_prop in shape_props:
                     shape_prop.friction = friction
                 self.gym.set_actor_rigid_shape_properties(env, actor, shape_props)
+            if aggregate_mode >= 1:
+                if not self.gym.end_aggregate(env):
+                    raise RuntimeError("Failed to end aggregate for environment {}".format(index))
             hand_indices.append(self.gym.get_actor_index(env, hand, gymapi.DOMAIN_SIM))
             object_indices.append(env_object_indices[0] if self.num_objects == 1 else env_object_indices)
             class_indices.append([class_index])
@@ -439,6 +508,17 @@ class RapidHandRotation(VecTask):
                 self.viewer, self.envs[0],
                 gymapi.Vec3(*env.get("viewerPosition", [0.45, -0.45, 0.65])),
                 gymapi.Vec3(*env.get("viewerTarget", [0.0, 0.08, 0.34])))
+        if self.hand_camera is not None:
+            self.hand_camera.bind_viewer(self.viewer)
+
+    def on_viewer_event(self, event):
+        if self.hand_camera is not None:
+            self.hand_camera.handle_event(event)
+
+    def before_viewer_draw(self):
+        if self.hand_camera is not None:
+            self.hand_camera.poll()
+            self.hand_camera.draw_selection()
 
     def _acquire_tensors(self):
         self.root_state_tensor = gymtorch.wrap_tensor(self.gym.acquire_actor_root_state_tensor(self.sim))
@@ -475,11 +555,12 @@ class RapidHandRotation(VecTask):
         self.tactile_contacts.copy_((self.tactile_force_norm >= self.contact_threshold).float())
 
     def _update_tactile_colors(self):
-        if self.viewer is None or self._tactile_visual_state is None:
+        if self._tactile_visual_state is None:
             return
-        contacts = self.tactile_contacts.to(device="cpu", dtype=torch.bool).numpy()
-        for env_id, pad_id in np.argwhere(contacts != self._tactile_visual_state):
-            color = gymapi.Vec3(0, 1, 0) if contacts[env_id, pad_id] else gymapi.Vec3(1, 0, 0)
+        contacts = self.tactile_contacts[list(self._visual_env_ids)].to(device="cpu", dtype=torch.bool).numpy()
+        for row_id, pad_id in np.argwhere(contacts != self._tactile_visual_state):
+            env_id = self._visual_env_ids[row_id]
+            color = gymapi.Vec3(0, 1, 0) if contacts[row_id, pad_id] else gymapi.Vec3(1, 0, 0)
             self.gym.set_rigid_body_color(
                 self.envs[env_id], self.hands[env_id], self.tactile_body_handles[env_id][pad_id],
                 gymapi.MESH_VISUAL_AND_COLLISION, color)
@@ -515,6 +596,11 @@ class RapidHandRotation(VecTask):
 
     def step(self, actions):
         observations, rewards, dones, infos = super().step(actions)
+        if self.hand_camera is not None:
+            # Capture completed physics, including terminal frames, before reset.
+            if self.camera_config.get("display", False) and not self.force_render:
+                self.render()
+            self.hand_camera.capture()
         if self.rotation_stall_enabled:
             # A stalled episode is a task termination, even near the time limit.
             infos["time_outs"] = infos["time_outs"] & ~self.rotation_stalled.to(self.rl_device)
@@ -574,16 +660,39 @@ class RapidHandRotation(VecTask):
     def compute_reward(self):
         if self.num_objects == 2:
             return self._compute_baoding_reward()
+        # Episode dictionaries must describe only newly finished episodes.
+        self.extras.pop("episode", None)
         env = self.cfg["env"]
-        spin = torch.sum(self.object_angvel * self.spin_axis, dim=-1)
+        sampled_spin = torch.sum(self.object_angvel * self.spin_axis, dim=-1)
+        pose_angle = None
+        spin = sampled_spin
+        if self.pose_rotation_reward:
+            pose_angle = self.projected_rotation_delta(
+                self.previous_object_quat, self.object_rot, self.spin_axis)
+            # Update once, sharing this exact increment with reward and stall checks.
+            self.previous_object_quat.copy_(self.object_rot)
+            spin = pose_angle / self.rotation_control_dt
         spin_clipped = torch.clamp(spin, -float(env.get("maxSpinReward", 10)), float(env.get("maxSpinReward", 10)))
         position_error = torch.linalg.vector_norm(self.object_pos_local - self.object_reference_local, dim=-1)
         fingertip_positions = self.rigid_body_state_tensor[self.fingertip_body_indices, :3]
         fingertip_distance = torch.linalg.vector_norm(fingertip_positions - self.object_pos[:, None, :], dim=-1).mean(-1)
         contact_fraction = self.tactile_contacts.mean(-1)
-        reward = (float(env.get("spinRewardScale", 1)) * spin_clipped
+        spin_reward = float(env.get("spinRewardScale", 1)) * spin_clipped
+        position_penalty = float(env.get("positionPenaltyScale", 2)) * position_error
+        if self.centered_rotation_reward:
+            excess_distance = (position_error - self.position_tolerance).clamp_min(0)
+            position_gate = torch.exp(-0.5 * (excess_distance / self.position_reward_falloff).square())
+            # Only forward progress saturates and fades away from the palm target.
+            # Reverse progress stays linear, so large backtracking cannot be hidden
+            # by the positive speed limit or reduced by moving away from the palm.
+            spin_reward = float(env.get("spinRewardScale", 1)) * (
+                position_gate * spin.clamp(min=0, max=self.positive_spin_reward_limit)
+                + spin.clamp(max=0))
+            position_penalty = float(env.get("positionPenaltyScale", 2)) * (
+                excess_distance / self.position_penalty_distance).square()
+        reward = (spin_reward
                   + float(env.get("contactRewardScale", 0.2)) * contact_fraction
-                  - float(env.get("positionPenaltyScale", 2)) * position_error
+                  - position_penalty
                   - float(env.get("fingerDistancePenaltyScale", 0.1)) * fingertip_distance
                   - float(env.get("actionPenaltyScale", 0.002)) * self.actions.square().mean(-1)
                   - float(env.get("velocityPenaltyScale", 0.0001)) * self.dof_vel.square().mean(-1))
@@ -594,11 +703,16 @@ class RapidHandRotation(VecTask):
                   & torch.isfinite(fingertip_positions).all(-1).all(-1))
         dropped = ((local_height < float(env.get("dropHeightLocal", -0.02)))
                    | (position_error > float(env.get("maxObjectDistance", 0.18))))
+        if self.pose_rotation_reward:
+            # A terminal fall must not earn a positive rotation impulse.
+            held_spin_reward = torch.where(finite & ~dropped, spin_reward, torch.zeros_like(spin_reward))
+            reward = reward - spin_reward + held_spin_reward
+            spin_reward = held_spin_reward
         reward = reward + float(env.get("fallPenalty", -15.0)) * dropped.float()
         self.rew_buf.copy_(torch.where(finite, torch.nan_to_num(reward), torch.zeros_like(reward)))
         self.reset_buf.copy_((dropped | ~finite | (self.progress_buf >= self.max_episode_length)).long())
         if self.rotation_stall_enabled:
-            self._update_rotation_stall()
+            self._update_rotation_stall(pose_angle)
             self.rotation_stalled.logical_and_(finite & ~dropped)
             self.reset_buf.logical_or_(self.rotation_stalled)
             self.extras["rotation/stall_rate"] = self.rotation_stalled.float().mean()
@@ -609,29 +723,83 @@ class RapidHandRotation(VecTask):
         self.extras["rotation/position_error"] = torch.nan_to_num(position_error).mean()
         self.extras["rotation/drop_rate"] = dropped.float().mean()
         self.extras["rotation/nonfinite_rate"] = (~finite).float().mean()
+        if self.centered_rotation_reward:
+            self.extras["rotation/position_reward_gate"] = torch.nan_to_num(position_gate).mean()
+            self.extras["rotation/position_penalty"] = torch.nan_to_num(position_penalty).mean()
+        if self.pose_rotation_reward:
+            self.extras["rotation/sampled_spin"] = torch.nan_to_num(sampled_spin).mean()
+            self._log_rotation_episodes(pose_angle, sampled_spin, spin_reward, finite, dropped)
 
-    def _update_rotation_stall(self):
-        """Detect negligible net rotation over a full window, after reset grace.
-
-        Use actual orientation increments rather than sampled angular velocity.
-        Signed increments cancel back-and-forth jitter; either rotation direction
-        counts as motion here, while the reward still prefers the target direction.
-        """
-        delta = quat_mul(self.object_rot, quat_conjugate(self.previous_object_quat))
+    @staticmethod
+    def projected_rotation_delta(previous, current, axis):
+        """Shortest signed quaternion increment projected onto a fixed world axis."""
+        delta = quat_mul(current, quat_conjugate(previous))
         delta = delta / torch.clamp(torch.linalg.vector_norm(delta, dim=-1, keepdim=True), min=1e-8)
-        # q and -q describe the same pose. Select the shortest incremental turn.
+        # q and -q describe the same pose; use the shortest incremental turn.
         delta = torch.where(delta[:, 3:4] < 0, -delta, delta)
         vector_norm = torch.linalg.vector_norm(delta[:, :3], dim=-1)
         angle = 2 * torch.atan2(vector_norm, delta[:, 3])
-        projected_angle = angle * (delta[:, :3] * self.spin_axis).sum(-1) / vector_norm.clamp_min(1e-8)
-        self.rotation_step_angles[self.rotation_window_index].copy_(
-            torch.nan_to_num(projected_angle, nan=0.0, posinf=0.0, neginf=0.0))
+        projected = angle * (delta[:, :3] * axis).sum(-1) / vector_norm.clamp_min(1e-8)
+        return torch.nan_to_num(projected, nan=0.0, posinf=0.0, neginf=0.0)
+
+    def _update_rotation_stall(self, projected_angle=None):
+        """Detect negligible net rotation over a full window, after reset grace.
+
+        Use actual orientation increments rather than sampled angular velocity.
+        Signed increments cancel back-and-forth jitter. Legacy presets accept
+        either direction; forward-only presets require positive net progress.
+        """
+        if projected_angle is None:
+            projected_angle = self.projected_rotation_delta(
+                self.previous_object_quat, self.object_rot, self.spin_axis)
+            self.previous_object_quat.copy_(self.object_rot)
+        self.rotation_step_angles[self.rotation_window_index].copy_(projected_angle)
         self.rotation_window_index = (self.rotation_window_index + 1) % self.rotation_stall_steps
-        self.previous_object_quat.copy_(self.object_rot)
         net_angle = self.rotation_step_angles.sum(0)
         ready = self.progress_buf >= self.rotation_stall_grace_steps + self.rotation_stall_steps
-        self.rotation_stalled.copy_(ready & (net_angle.abs() < self.rotation_stall_min_angle))
+        progress = net_angle if self.rotation_stall_forward_only else net_angle.abs()
+        self.rotation_stalled.copy_(ready & (progress < self.rotation_stall_min_angle))
         self.extras["rotation/window_angle_deg"] = net_angle.abs().mean() * (180.0 / math.pi)
+        if self.rotation_stall_forward_only:
+            self.extras["rotation/window_signed_angle_deg"] = net_angle.mean() * (180.0 / math.pi)
+
+    def _log_rotation_episodes(self, angle, sampled_spin, spin_reward, finite, dropped):
+        """Log whole completed episodes, independently of last-step direct metrics.
+
+        Angles are unclipped projected pose increments, not certified full
+        fixed-axis revolutions. Invalid/fallen terminal motion is excluded.
+        """
+        valid = finite & ~dropped
+        sums = self.rotation_episode_sums
+        sums["angle"].add_(torch.where(valid, angle, torch.zeros_like(angle)))
+        sums["sampled_spin"].add_(torch.where(valid, sampled_spin, torch.zeros_like(sampled_spin)))
+        sums["spin_reward"].add_(spin_reward)
+        sums["reward"].add_(self.rew_buf)
+        sums["reverse_steps"].add_((valid & (angle < -1e-6)).float())
+        done_ids = self.reset_buf.nonzero(as_tuple=False).flatten()
+        if done_ids.numel() == 0:
+            return
+        steps = self.progress_buf[done_ids].clamp_min(1).float()
+        duration = steps * self.rotation_control_dt
+        stalled = (self.rotation_stalled[done_ids] if self.rotation_stall_enabled
+                   else torch.zeros_like(done_ids, dtype=torch.bool))
+        fell = finite[done_ids] & dropped[done_ids]
+        invalid = ~finite[done_ids]
+        timed_out = ~invalid & ~fell & ~stalled
+        # Advanced indexing creates snapshots that survive reset_idx in step().
+        self.extras["episode"] = {
+            "rotation/net_angle_deg": sums["angle"][done_ids] * (180.0 / math.pi),
+            "rotation/mean_actual_spin": sums["angle"][done_ids] / duration,
+            "rotation/mean_sampled_spin": sums["sampled_spin"][done_ids] / steps,
+            "rotation/reverse_step_fraction": sums["reverse_steps"][done_ids] / steps,
+            "rotation/spin_return": sums["spin_reward"][done_ids],
+            "rotation/return": sums["reward"][done_ids],
+            "rotation/duration_seconds": duration,
+            "rotation/stall_termination_rate": stalled.float(),
+            "rotation/drop_termination_rate": fell.float(),
+            "rotation/nonfinite_termination_rate": invalid.float(),
+            "rotation/timeout_termination_rate": timed_out.float(),
+        }
 
     @staticmethod
     def orbit_delta(previous, current, axis):
@@ -756,8 +924,12 @@ class RapidHandRotation(VecTask):
         if self.num_objects == 2:
             self.previous_ball_vector[env_ids] = object_states[:, 1, :3] - object_states[:, 0, :3]
             self.orbit_angle_accumulator[env_ids] = 0
-        if self.rotation_stall_enabled:
+        if self.rotation_stall_enabled or self.pose_rotation_reward:
             self.previous_object_quat[env_ids] = object_states[:, 3:7]
+        if self.pose_rotation_reward:
+            for total in self.rotation_episode_sums.values():
+                total[env_ids] = 0
+        if self.rotation_stall_enabled:
             self.rotation_step_angles[:, env_ids] = 0
             self.rotation_stalled[env_ids] = False
         object_ids = self.object_indices[env_ids].to(dtype=torch.int32).flatten()
@@ -812,12 +984,22 @@ class RapidHandRotation(VecTask):
         return self.object_rot.clone()
 
     def close(self):
-        if getattr(self, "viewer", None) is not None:
-            self.gym.destroy_viewer(self.viewer)
-            self.viewer = None
-        if getattr(self, "sim", None) is not None:
-            self.gym.destroy_sim(self.sim)
-            self.sim = None
-        if getattr(self, "virtual_display", None) is not None:
-            self.virtual_display.stop()
-            self.virtual_display = None
+        monitor = getattr(self, "hand_camera", None)
+        try:
+            if monitor is not None:
+                monitor.close()
+        finally:
+            self.hand_camera = None
+            try:
+                if getattr(self, "viewer", None) is not None:
+                    self.gym.destroy_viewer(self.viewer)
+                    self.viewer = None
+            finally:
+                try:
+                    if getattr(self, "sim", None) is not None:
+                        self.gym.destroy_sim(self.sim)
+                        self.sim = None
+                finally:
+                    if getattr(self, "virtual_display", None) is not None:
+                        self.virtual_display.stop()
+                        self.virtual_display = None

@@ -1,0 +1,18 @@
+# @package _global_
+# Select with +object=block_corner_75mm when using task=RapidHandRotation.
+defaults:
+  - block_corner_85mm
+  - _self_
+
+task:
+  env:
+    # Scale the original 60 mm geometry to 75 mm; retain the pose-progress reward.
+    objectScale: 1.25
+    # Reward frequent small forward turns near the fixed palm-frame reference.
+    centeredRotationReward: True
+    positiveSpinRewardLimit: 0.6  # rad/s; about 3.4 degrees per control step
+    positionTolerance: 0.005  # m; no position penalty inside this radius
+    positionPenaltyDistance: 0.01  # m; normalisation for the quadratic penalty
+    positionPenaltyScale: 0.2
+    positionRewardFalloff: 0.015  # m; Gaussian falloff outside the tolerance
+    contactRewardScale: 0.0

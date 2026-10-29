@@ -1,12 +1,83 @@
 task:
   name: RapidHandRotation
   physics_engine: ${..physics_engine}
+  gpuMemoryLog: true
+  camera:
+    enabled: false
+    display: false
+    record: false
+    env_id: 0
+    env_ids: []
+    width: 112
+    height: 112
+    horizontal_fov: 90.0
+    near_plane: 0.001
+    far_plane: 1.0
+    capture_every: 1
+    segment_steps: 300
+    record_interval_steps: 0
+    record_steps: 200
+    output_dir: ''
+    mode: train
+    checkpoint: ''
+    mounts:
+      thumb:
+        link: TDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+      index:
+        link: IDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+      middle:
+        link: MDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+      ring:
+        link: RDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
+      little:
+        link: LDIP_CAMERA
+        position:
+        - 0.0
+        - 0.0
+        - 0.001
+        rotation:
+        - 1.5707963267948966
+        - -1.5707963267948966
+        - 0.0
   env:
-    numEnvs: 2048
+    numEnvs: 8192
     numAgents: 1
     numActions: 20
     numObservations: ${if:${eq:${.objSet},ball},258,245}
     numStates: ${if:${eq:${.objSet},ball},154,141}
+    aggregateMode: 1
     envSpacing: 0.4
     episodeLength: 500
     controlFrequencyInv: 6
@@ -55,13 +126,13 @@ task:
     objectPositionLocal:
     - 0.005
     - -0.0715
-    - 0.14
+    - 0.11
     objectRotationEuler:
     - 0.0
     - 0.0
     - 0.0
     objectPositionNoise: 0.002
-    objectScale: 1.0
+    objectScale: 1.25
     objectMass: 0.05
     ballRadius: 0.022
     ballPositionsLocal:
@@ -107,11 +178,14 @@ task:
     contactThreshold: 0.05
     spinRewardScale: 2.0
     maxSpinReward: 10.0
+    rotationRewardMode: pose_delta
+    centeredRotationReward: true
     rotationStallTimeout: 3.0
     rotationStallGracePeriod: 2.0
-    rotationStallMinAngleDeg: 5.0
-    contactRewardScale: 0.2
-    positionPenaltyScale: 2.0
+    rotationStallMinAngleDeg: 15.0
+    rotationStallForwardOnly: true
+    contactRewardScale: 0.0
+    positionPenaltyScale: 0.2
     fingerDistancePenaltyScale: 0.1
     actionPenaltyScale: 0.002
     velocityPenaltyScale: 0.0001
@@ -126,6 +200,10 @@ task:
     - 0.0
     - 0.08
     - 0.34
+    positiveSpinRewardLimit: 0.6
+    positionTolerance: 0.005
+    positionPenaltyDistance: 0.01
+    positionRewardFalloff: 0.015
   task:
     randomize: false
     enableCameraSensors: false
@@ -218,7 +296,7 @@ train:
       truncate_grads: Trues
       e_clip: 0.2
       horizon_length: 16
-      minibatch_size: 1024
+      minibatch_size: 16384
       mini_epochs: 4
       critic_coef: 5
       clip_value: true
@@ -235,7 +313,7 @@ train:
         desired_games: 10000
         print_stats: true
       central_value_config:
-        minibatch_size: 1024
+        minibatch_size: 16384
         mini_epochs: 4
         learning_rate: 0.0005
         lr_schedule: adaptive
@@ -266,7 +344,7 @@ experiment: ''
 num_envs: ''
 seed: 42
 torch_deterministic: false
-max_iterations: 1000
+max_iterations: 4000
 physics_engine: physx
 pipeline: gpu
 sim_device: cuda:0
@@ -286,6 +364,6 @@ wandb_project: isaacgymenvs
 capture_video: false
 capture_video_freq: 1464
 capture_video_len: 100
-force_render: false
+force_render: true
 headless: true
 player_action_savepath: ./a.pth

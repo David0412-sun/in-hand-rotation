@@ -1,0 +1,192 @@
+{
+  "created_at": "2026-10-27T17:03:08.999926+08:00",
+  "tasks": [
+    {
+      "directory": "runs/rapidhand/set_obj6_block_corner/z-axis",
+      "files_before": [
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/best_before_resume_ep342.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_200_rew_36.090706.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_200_rew_86.42332.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_300_rew_117.50793.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_400_rew_135.59618.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_500_rew_104.43291.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_600_rew_110.06039.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_700_rew_118.646576.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_800_rew_105.93129.pth",
+        "runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth"
+      ]
+    },
+    {
+      "directory": "runs/rapidhand/set_obj8_short_block/z-axis",
+      "files_before": [
+        "runs/rapidhand/set_obj8_short_block/z-axis/nn/set_obj8_short_block_z.pth"
+      ]
+    },
+    {
+      "directory": "runs/set_obj8_short_block/z-axis",
+      "files_before": [
+        "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_200_rew_93.1899.pth",
+        "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_300_rew_149.28368.pth",
+        "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_400_rew_203.7953.pth",
+        "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_500_rew_244.06313.pth",
+        "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_600_rew_367.10022.pth",
+        "runs/set_obj8_short_block/z-axis/nn/set_obj8_short_block_z.pth"
+      ]
+    }
+  ],
+  "deleted": [
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/best_before_resume_ep342.pth",
+      "epoch": 342,
+      "saved_reward": 143.47239685058594,
+      "size": 6101936,
+      "mtime_ns": 1793089865334587887,
+      "sha256": "bbf7ae9da2a64594f4d15963fda4b9955e15c0be6b6dc8ed0c12671f0a67bcda"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_200_rew_36.090706.pth",
+      "epoch": 200,
+      "saved_reward": 36.090706,
+      "size": 6104076,
+      "mtime_ns": 1793088797634801404,
+      "sha256": "bdbec57d52f9d2ff4cdd7d55e9426005a25167124bf5bc81a4742646e53cd9bd"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_200_rew_86.42332.pth",
+      "epoch": 200,
+      "saved_reward": 86.42332,
+      "size": 6104006,
+      "mtime_ns": 1793089126216538375,
+      "sha256": "3ae66be1c5bb845f8f4fc665857432a06d14c53f3204069e3762011327211976"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_300_rew_117.50793.pth",
+      "epoch": 300,
+      "saved_reward": 117.50793,
+      "size": 6104076,
+      "mtime_ns": 1793089425943130963,
+      "sha256": "c63539d784c50d94fe27797b560cd62499ecbe93f932caf9bf5fb37c9d6b7bc2"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_400_rew_135.59618.pth",
+      "epoch": 400,
+      "saved_reward": 135.59618,
+      "size": 6104076,
+      "mtime_ns": 1793089725703744284,
+      "sha256": "78e2e59483bf81dafdd4c739cdcc4a2ebb03f7c8debf39d088bfe6c9e12565af"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_500_rew_104.43291.pth",
+      "epoch": 500,
+      "saved_reward": 104.43291,
+      "size": 6104076,
+      "mtime_ns": 1793090098289041028,
+      "sha256": "200cbcc0dccb209419cad104b6c706b06576921cd8deea373e2827e9586dff14"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_600_rew_110.06039.pth",
+      "epoch": 600,
+      "saved_reward": 110.06039,
+      "size": 6104076,
+      "mtime_ns": 1793090566682791444,
+      "sha256": "e3a9e6ab571b7e44b91ec3a48d516016ab56e01b473a673ced716ae11130547d"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_700_rew_118.646576.pth",
+      "epoch": 700,
+      "saved_reward": 118.646576,
+      "size": 6104146,
+      "mtime_ns": 1793090924901466131,
+      "sha256": "46e0c5c6352a2e1787799d1bbe3a9659e994e30bac39d0f5fdbf72ed82be6ad4"
+    },
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/last_set_obj6_block_corner_z_ep_800_rew_105.93129.pth",
+      "epoch": 800,
+      "saved_reward": 105.93129,
+      "size": 6104076,
+      "mtime_ns": 1793091292287096945,
+      "sha256": "c3a702a53d229881b6f769649e89175c45e9fb63190b98f3b61a54f6b1e0cd45"
+    },
+    {
+      "path": "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_200_rew_93.1899.pth",
+      "epoch": 200,
+      "saved_reward": 93.1899,
+      "size": 7137466,
+      "mtime_ns": 1793079129053544180,
+      "sha256": "fbfb621318c07d4e11cb6fc5de1e12016a10b83b3ba5d44be85767ea35b14a73"
+    },
+    {
+      "path": "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_300_rew_149.28368.pth",
+      "epoch": 300,
+      "saved_reward": 149.28368,
+      "size": 7137990,
+      "mtime_ns": 1793079726094482750,
+      "sha256": "6503c35dca9b79050dfef33dda89a78ccd3ccadb17cabf9f2ce1b77f82686db3"
+    },
+    {
+      "path": "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_400_rew_203.7953.pth",
+      "epoch": 400,
+      "saved_reward": 203.7953,
+      "size": 7137792,
+      "mtime_ns": 1793080304253552063,
+      "sha256": "17b8cf724cbae75a9579c1cf57f2bf783285e9ed8710d1bdd3259dfe742eb3b4"
+    },
+    {
+      "path": "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_500_rew_244.06313.pth",
+      "epoch": 500,
+      "saved_reward": 244.06313,
+      "size": 7137990,
+      "mtime_ns": 1793080895532825067,
+      "sha256": "fcb27e644502d36fded7263a6bd3b3f32cfaf9eec8ff400e9bad48af7a347d1c"
+    },
+    {
+      "path": "runs/set_obj8_short_block/z-axis/nn/last_set_obj8_short_block_z_ep_600_rew_367.10022.pth",
+      "epoch": 600,
+      "saved_reward": 367.10022,
+      "size": 7137990,
+      "mtime_ns": 1793081490803935433,
+      "sha256": "2c090bed5ecb0c43a8727673743687a2525714fadd403de2bf81fbd15bf9afcc"
+    }
+  ],
+  "preserved": [
+    {
+      "path": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth",
+      "epoch": 460,
+      "saved_reward": 175.0996856689453,
+      "size": 6101936,
+      "mtime_ns": 1793089978385786895,
+      "sha256": "5c0b8e4dbe5ac15ae918abb222d713471b3e39b2d4844886e81e52ae8aba1b50",
+      "destination": "runs/rapidhand/set_obj6_block_corner/z-axis/nn/best_65mm_ep460_rew175.09969.pth"
+    },
+    {
+      "path": "runs/rapidhand/set_obj8_short_block/z-axis/nn/set_obj8_short_block_z.pth",
+      "epoch": 100,
+      "saved_reward": 14.426008224487305,
+      "size": 6101866,
+      "mtime_ns": 1793090707922242616,
+      "sha256": "4b8613a86700c897a88ff0bd887ba15eb1ccd81747c1849916372081475bc887",
+      "destination": "runs/rapidhand/set_obj8_short_block/z-axis/nn/set_obj8_short_block_z.pth"
+    },
+    {
+      "path": "runs/set_obj8_short_block/z-axis/nn/set_obj8_short_block_z.pth",
+      "epoch": 628,
+      "saved_reward": 435.5669860839844,
+      "size": 7135594,
+      "mtime_ns": 1793081678525539762,
+      "sha256": "bd5e5ff3d7992d9a8c18977b46d0b1d408c13fe6fd21e4af3e306cb12d6680f5",
+      "destination": "runs/set_obj8_short_block/z-axis/nn/set_obj8_short_block_z.pth"
+    }
+  ],
+  "config_snapshots": {
+    "runs/rapidhand/set_obj6_block_corner/z-axis": "task:\n  name: RapidHandRotation\n  physics_engine: ${..physics_engine}\n  gpuMemoryLog: true\n  camera:\n    enabled: false\n    display: false\n    record: false\n    env_id: 0\n    env_ids: []\n    width: 112\n    height: 112\n    horizontal_fov: 90.0\n    near_plane: 0.001\n    far_plane: 1.0\n    capture_every: 1\n    segment_steps: 300\n    record_interval_steps: 0\n    record_steps: 200\n    output_dir: ''\n    mode: train\n    checkpoint: ''\n    mounts:\n      thumb:\n        link: TDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n      index:\n        link: IDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n      middle:\n        link: MDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n      ring:\n        link: RDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n      little:\n        link: LDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n  env:\n    numEnvs: 4096\n    numAgents: 1\n    numActions: 20\n    numObservations: ${if:${eq:${.objSet},ball},258,245}\n    numStates: ${if:${eq:${.objSet},ball},154,141}\n    aggregateMode: 1\n    envSpacing: 0.4\n    episodeLength: 500\n    controlFrequencyInv: 6\n    frameStack: 4\n    clipObservations: 10.0\n    clipActions: 1.0\n    legacy_obs: true\n    is_distillation: false\n    ablation_mode: no-pc\n    asymmetric_observations: true\n    pc_category: rapidhand\n    observation:\n      obs: null\n    enableDebugVis: false\n    handName: vision_hand\n    handAssetRoot: assets/rapidhand\n    handAssetFile: urdf/vision_hand_simple_collision.urdf\n    selfCollision: true\n    selfCollisionIgnorePairs:\n    - - BASE\n      - TMCPS\n    - - BASE\n      - IMCPS\n    - - BASE\n      - MMCPS\n    - - BASE\n      - RMCPS\n    - - BASE\n      - LMCPS\n    assetRoot: assets\n    objSet: C\n    objectName: set_obj6_block_corner\n    axis: z\n    handPosition:\n    - 0.0\n    - 0.0\n    - 0.3\n    handRotationEuler:\n    - -1.5707963267948966\n    - 0.0\n    - 0.0\n    palmNormalLocal:\n    - 0.0\n    - -1.0\n    - 0.0\n    objectPositionLocal:\n    - 0.005\n    - -0.0715\n    - 0.11\n    objectRotationEuler:\n    - 0.0\n    - 0.0\n    - 0.0\n    objectPositionNoise: 0.002\n    objectScale: 1.0833333333333333\n    objectMass: 0.05\n    ballRadius: 0.022\n    ballPositionsLocal:\n    - - -0.02\n      - -0.055\n      - 0.11\n    - - 0.03\n      - -0.055\n      - 0.11\n    minBallSeparation: 0.04\n    maxBallSeparation: 0.1\n    minBallHeightLocal: 0.0\n    centroidVelocityPenaltyScale: 0.1\n    orbitTiltPenaltyScale: 0.1\n    objectAngularDamping: 0.01\n    friction: 1.0\n    stiffness: 3.0\n    damping: 0.5\n    actionScale: 0.1\n    targetSmoothing: 0.8\n    resetDofPositionNoise: 0.03\n    defaultJointPositions:\n      IF: 0.3\n      IS: 0.0\n      IP: 0.6\n      ID: 0.25\n      MF: 0.3\n      MS: 0.0\n      MP: 0.6\n      MD: 0.25\n      RF: 0.3\n      RS: 0.0\n      RP: 0.6\n      RD: 0.25\n      LF: 0.3\n      LS: 0.0\n      LP: 0.6\n      LD: 0.25\n      TF: 0.65\n      TS: 0.7\n      TP: 0.4\n      TD: 0.3\n    contactThreshold: 0.05\n    spinRewardScale: 2.0\n    maxSpinReward: 10.0\n    rotationStallTimeout: 3.0\n    rotationStallGracePeriod: 2.0\n    rotationStallMinAngleDeg: 5.0\n    contactRewardScale: 0.2\n    positionPenaltyScale: 2.0\n    fingerDistancePenaltyScale: 0.1\n    actionPenaltyScale: 0.002\n    velocityPenaltyScale: 0.0001\n    dropHeightLocal: -0.02\n    maxObjectDistance: 0.18\n    fallPenalty: -15.0\n    viewerPosition:\n    - 0.45\n    - -0.45\n    - 0.65\n    viewerTarget:\n    - 0.0\n    - 0.08\n    - 0.34\n  task:\n    randomize: false\n    enableCameraSensors: false\n  sim:\n    dt: 0.01667\n    substeps: 2\n    up_axis: z\n    use_gpu_pipeline: ${eq:${...pipeline},\"gpu\"}\n    gravity:\n    - 0.0\n    - 0.0\n    - -9.81\n    physx:\n      num_threads: ${....num_threads}\n      solver_type: ${....solver_type}\n      use_gpu: ${contains:\"cuda\",${....sim_device}}\n      num_position_iterations: 8\n      num_velocity_iterations: 0\n      max_gpu_contact_pairs: 4194304\n      num_subscenes: ${....num_subscenes}\n      contact_offset: 0.002\n      rest_offset: 0.0\n      bounce_threshold_velocity: 0.2\n      max_depenetration_velocity: 100.0\n      default_buffer_size_multiplier: 1.0\n      contact_collection: 2\ntrain:\n  params:\n    seed: ${...seed}\n    algo:\n      name: a2c_continuous\n    model:\n      name: continuous_a2c_logstd\n    network:\n      name: actor_critic\n      separate: false\n      pointnet: small\n      space:\n        continuous:\n          mu_activation: None\n          sigma_activation: None\n          mu_init:\n            name: default\n          sigma_init:\n            name: const_initializer\n            val: 0\n          fixed_sigma: true\n      mlp:\n        units:\n        - 512\n        - 256\n        - 256\n        activation: elu\n        d2rl: false\n        initializer:\n          name: default\n        regularizer:\n          name: None\n    load_checkpoint: ${if:${...checkpoint},True,False}\n    load_path: ${...checkpoint}\n    config:\n      name: set_obj6_block_corner_z\n      env_name: rlgpu\n      prefix: ''\n      user_prefix: ''\n      auto_prefix: ''\n      multi_gpu: ${....multi_gpu}\n      ppo: true\n      mixed_precision: false\n      normalize_input: true\n      normalize_value: true\n      value_bootstrap: true\n      num_actors: ${....task.env.numEnvs}\n      reward_shaper:\n        scale_value: 0.01\n      normalize_advantage: true\n      gamma: 0.99\n      tau: 0.95\n      learning_rate: 0.0001\n      lr_schedule: adaptive\n      schedule_type: standard\n      kl_threshold: 0.02\n      score_to_win: 100000\n      max_epochs: ${resolve_default:20100,${....max_iterations}}\n      save_best_after: 100\n      save_frequency: 100\n      print_stats: true\n      grad_norm: 1.0\n      entropy_coef: 0.0\n      truncate_grads: Trues\n      e_clip: 0.2\n      horizon_length: 16\n      minibatch_size: 16384\n      mini_epochs: 4\n      critic_coef: 5\n      clip_value: true\n      seq_length: 4\n      bptt_len: 16\n      bounds_loss_coef: 0.005\n      bc_loss_coef: 0.01\n      weight_decay: 0.0\n      player_collect: false\n      player:\n        deterministic: true\n        games_num: 2\n        games_repeat: 1\n        desired_games: 10000\n        print_stats: true\n      central_value_config:\n        minibatch_size: 16384\n        mini_epochs: 4\n        learning_rate: 0.0005\n        lr_schedule: adaptive\n        schedule_type: standard\n        kl_threshold: 0.016\n        clip_value: true\n        normalize_input: true\n        truncate_grads: true\n        network:\n          name: actor_critic\n          central_value: true\n          mlp:\n            units:\n            - 512\n            - 512\n            - 256\n            - 256\n            activation: elu\n            d2rl: false\n            initializer:\n              name: default\n            regularizer:\n              name: None\n      train_dir: runs/rapidhand\n      full_experiment_name: set_obj6_block_corner/z-axis\ntask_name: ${task.name}\nexperiment: ''\nnum_envs: ''\nseed: 42\ntorch_deterministic: false\nmax_iterations: 4000\nphysics_engine: physx\npipeline: gpu\nsim_device: cuda:0\nrl_device: cuda:0\ngraphics_device_id: 0\nnum_threads: 4\nsolver_type: 1\nnum_subscenes: 4\ntest: false\ncheckpoint: /media/steve/45f88f22-d078-4670-b930-26e47355b5ff/code/in-hand-rotation/runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth\nmulti_gpu: false\nwandb_activate: false\nwandb_group: ''\nwandb_name: ${train.params.config.name}\nwandb_entity: ''\nwandb_project: isaacgymenvs\ncapture_video: false\ncapture_video_freq: 1464\ncapture_video_len: 100\nforce_render: false\nheadless: true\nplayer_action_savepath: ./a.pth\n",
+    "runs/rapidhand/set_obj8_short_block/z-axis": "task:\n  name: RapidHandRotation\n  physics_engine: ${..physics_engine}\n  gpuMemoryLog: true\n  camera:\n    enabled: false\n    display: false\n    record: false\n    env_id: 0\n    env_ids: []\n    width: 112\n    height: 112\n    horizontal_fov: 90.0\n    near_plane: 0.001\n    far_plane: 1.0\n    capture_every: 1\n    segment_steps: 300\n    record_interval_steps: 0\n    record_steps: 200\n    output_dir: ''\n    mode: train\n    checkpoint: ''\n    mounts:\n      thumb:\n        link: TDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n      index:\n        link: IDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n      middle:\n        link: MDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n      ring:\n        link: RDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n      little:\n        link: LDIP_CAMERA\n        position:\n        - 0.0\n        - 0.0\n        - 0.001\n        rotation:\n        - 1.5707963267948966\n        - -1.5707963267948966\n        - 0.0\n  env:\n    numEnvs: 4096\n    numAgents: 1\n    numActions: 20\n    numObservations: ${if:${eq:${.objSet},ball},258,245}\n    numStates: ${if:${eq:${.objSet},ball},154,141}\n    aggregateMode: 1\n    envSpacing: 0.4\n    episodeLength: 500\n    controlFrequencyInv: 6\n    frameStack: 4\n    clipObservations: 10.0\n    clipActions: 1.0\n    legacy_obs: true\n    is_distillation: false\n    ablation_mode: no-pc\n    asymmetric_observations: true\n    pc_category: rapidhand\n    observation:\n      obs: null\n    enableDebugVis: false\n    handName: vision_hand\n    handAssetRoot: assets/rapidhand\n    handAssetFile: urdf/vision_hand_lowpoly_collision.urdf\n    selfCollision: true\n    selfCollisionIgnorePairs:\n    - - BASE\n      - TMCPS\n    - - BASE\n      - IMCPS\n    - - BASE\n      - MMCPS\n    - - BASE\n      - RMCPS\n    - - BASE\n      - LMCPS\n    assetRoot: assets\n    objSet: C\n    objectName: set_obj8_short_block\n    axis: z\n    handPosition:\n    - 0.0\n    - 0.0\n    - 0.3\n    handRotationEuler:\n    - -1.5707963267948966\n    - 0.0\n    - 0.0\n    palmNormalLocal:\n    - 0.0\n    - -1.0\n    - 0.0\n    objectPositionLocal:\n    - 0.005\n    - -0.055\n    - 0.11\n    objectRotationEuler:\n    - 0.0\n    - 0.0\n    - 0.0\n    objectPositionNoise: 0.002\n    objectScale: 1.0\n    objectMass: 0.05\n    ballRadius: 0.022\n    ballPositionsLocal:\n    - - -0.02\n      - -0.055\n      - 0.11\n    - - 0.03\n      - -0.055\n      - 0.11\n    minBallSeparation: 0.04\n    maxBallSeparation: 0.1\n    minBallHeightLocal: 0.0\n    centroidVelocityPenaltyScale: 0.1\n    orbitTiltPenaltyScale: 0.1\n    objectAngularDamping: 0.01\n    friction: 1.0\n    stiffness: 3.0\n    damping: 0.5\n    actionScale: 0.1\n    targetSmoothing: 0.8\n    resetDofPositionNoise: 0.03\n    defaultJointPositions:\n      IF: 0.65\n      IS: 0.0\n      IP: 0.8\n      ID: 0.25\n      MF: 0.65\n      MS: 0.0\n      MP: 0.8\n      MD: 0.25\n      RF: 0.65\n      RS: 0.0\n      RP: 0.8\n      RD: 0.25\n      LF: 0.65\n      LS: 0.0\n      LP: 0.8\n      LD: 0.25\n      TF: 0.65\n      TS: 0.7\n      TP: 0.4\n      TD: 0.3\n    contactThreshold: 0.05\n    spinRewardScale: 1.0\n    maxSpinReward: 10.0\n    rotationStallTimeout: 0.0\n    rotationStallGracePeriod: 2.0\n    rotationStallMinAngleDeg: 5.0\n    contactRewardScale: 0.2\n    positionPenaltyScale: 2.0\n    fingerDistancePenaltyScale: 0.1\n    actionPenaltyScale: 0.002\n    velocityPenaltyScale: 0.0001\n    dropHeightLocal: -0.02\n    maxObjectDistance: 0.18\n    fallPenalty: -15.0\n    viewerPosition:\n    - 0.45\n    - -0.45\n    - 0.65\n    viewerTarget:\n    - 0.0\n    - 0.08\n    - 0.34\n  task:\n    randomize: false\n    enableCameraSensors: false\n  sim:\n    dt: 0.01667\n    substeps: 2\n    up_axis: z\n    use_gpu_pipeline: ${eq:${...pipeline},\"gpu\"}\n    gravity:\n    - 0.0\n    - 0.0\n    - -9.81\n    physx:\n      num_threads: ${....num_threads}\n      solver_type: ${....solver_type}\n      use_gpu: ${contains:\"cuda\",${....sim_device}}\n      num_position_iterations: 8\n      num_velocity_iterations: 0\n      max_gpu_contact_pairs: 4194304\n      num_subscenes: ${....num_subscenes}\n      contact_offset: 0.002\n      rest_offset: 0.0\n      bounce_threshold_velocity: 0.2\n      max_depenetration_velocity: 100.0\n      default_buffer_size_multiplier: 1.0\n      contact_collection: 2\ntrain:\n  params:\n    seed: ${...seed}\n    algo:\n      name: a2c_continuous\n    model:\n      name: continuous_a2c_logstd\n    network:\n      name: actor_critic\n      separate: false\n      pointnet: small\n      space:\n        continuous:\n          mu_activation: None\n          sigma_activation: None\n          mu_init:\n            name: default\n          sigma_init:\n            name: const_initializer\n            val: 0\n          fixed_sigma: true\n      mlp:\n        units:\n        - 512\n        - 256\n        - 256\n        activation: elu\n        d2rl: false\n        initializer:\n          name: default\n        regularizer:\n          name: None\n    load_checkpoint: ${if:${...checkpoint},True,False}\n    load_path: ${...checkpoint}\n    config:\n      name: set_obj8_short_block_z\n      env_name: rlgpu\n      prefix: ''\n      user_prefix: ''\n      auto_prefix: ''\n      multi_gpu: ${....multi_gpu}\n      ppo: true\n      mixed_precision: false\n      normalize_input: true\n      normalize_value: true\n      value_bootstrap: true\n      num_actors: ${....task.env.numEnvs}\n      reward_shaper:\n        scale_value: 0.01\n      normalize_advantage: true\n      gamma: 0.99\n      tau: 0.95\n      learning_rate: 0.0001\n      lr_schedule: adaptive\n      schedule_type: standard\n      kl_threshold: 0.02\n      score_to_win: 100000\n      max_epochs: ${resolve_default:20100,${....max_iterations}}\n      save_best_after: 100\n      save_frequency: 100\n      print_stats: true\n      grad_norm: 1.0\n      entropy_coef: 0.0\n      truncate_grads: Trues\n      e_clip: 0.2\n      horizon_length: 16\n      minibatch_size: 16384\n      mini_epochs: 4\n      critic_coef: 5\n      clip_value: true\n      seq_length: 4\n      bptt_len: 16\n      bounds_loss_coef: 0.005\n      bc_loss_coef: 0.01\n      weight_decay: 0.0\n      player_collect: false\n      player:\n        deterministic: true\n        games_num: 2\n        games_repeat: 1\n        desired_games: 10000\n        print_stats: true\n      central_value_config:\n        minibatch_size: 16384\n        mini_epochs: 4\n        learning_rate: 0.0005\n        lr_schedule: adaptive\n        schedule_type: standard\n        kl_threshold: 0.016\n        clip_value: true\n        normalize_input: true\n        truncate_grads: true\n        network:\n          name: actor_critic\n          central_value: true\n          mlp:\n            units:\n            - 512\n            - 512\n            - 256\n            - 256\n            activation: elu\n            d2rl: false\n            initializer:\n              name: default\n            regularizer:\n              name: None\n      train_dir: runs/rapidhand\n      full_experiment_name: set_obj8_short_block/z-axis\ntask_name: ${task.name}\nexperiment: ''\nnum_envs: ''\nseed: 42\ntorch_deterministic: false\nmax_iterations: 4000\nphysics_engine: physx\npipeline: gpu\nsim_device: cuda:0\nrl_device: cuda:0\ngraphics_device_id: 0\nnum_threads: 4\nsolver_type: 1\nnum_subscenes: 4\ntest: false\ncheckpoint: ''\nmulti_gpu: false\nwandb_activate: false\nwandb_group: ''\nwandb_name: ${train.params.config.name}\nwandb_entity: ''\nwandb_project: isaacgymenvs\ncapture_video: false\ncapture_video_freq: 1464\ncapture_video_len: 100\nforce_render: false\nheadless: true\nplayer_action_savepath: ./a.pth\n",
+    "runs/set_obj8_short_block/z-axis": "task:\n  name: AllegroArmMOAR\n  physics_engine: ${..physics_engine}\n  env:\n    objectSize: large\n    pc_ablation: false\n    legacy_obs: true\n    pc_mode: label\n    ablation_mode: no-pc\n    is_distillation: false\n    observation:\n      obs: null\n      pointcloud:\n        bound:\n        - 0.5\n        - 10\n        - -1\n        - 1\n        - 0.12\n        - 0.8\n        numSample: 808\n    camera:\n      pos:\n      - 0.45252319\n      - 0.33285737\n      - 0.5127288\n      rot:\n      - -0.6354564\n      - 44.3181397\n      - -70.6868244\n      width: 96\n      height: 72\n      fov: 69.4\n    rewardType: finger\n    sensor: thick\n    objInit: new\n    objSet: C\n    objectName: set_obj8_short_block\n    pc_category: mug\n    skill_step: 500\n    spin_coef: 1.0\n    main_coef: 0.0\n    aux_coef: 0.0\n    vel_coef: -0.1\n    contact_coef: 0.0\n    torque_coef: -0.0003\n    work_coef: -0.0003\n    finger_coef: 0.1\n    handInit: default\n    numEnvs: 8192\n    envSpacing: 0.75\n    episodeLength: 500\n    enableDebugVis: false\n    aggregateMode: 1\n    sensorThresh: 1.0\n    sensorNoise: 0.1\n    obs_stack: 4\n    latency: 0.2\n    m_low: 0.2\n    m_up: 0.6\n    useInitRandomRotation: false\n    force_debug: false\n    numTestEnvs: 16\n    test:\n      test_m_low: 0.1\n      test_m_up: 1.4\n    robotStiffness: 3.0\n    clipObservations: 5.0\n    clipActions: 1.0\n    stiffnessScale: 1.0\n    forceLimitScale: 1.0\n    relScale: 0.2\n    useRelativeControl: true\n    usePrevTarget: false\n    dofSpeedScale: 20.0\n    actionsMovingAverage: 0.8\n    controlFrequencyInv: 6\n    startPositionNoise: 0.01\n    startRotationNoise: 0.0\n    resetPositionNoise: 0.01\n    resetRotationNoise: 0.0\n    resetDofPosRandomInterval: 0.2\n    resetDofVelRandomInterval: 0.0\n    forceScale: 2.0\n    forceProbRange:\n    - 0.2\n    - 0.25\n    forceProbScalar: 0.25\n    forceDecay: 0.99\n    forceDecayInterval: 0.1\n    disableSet: 0\n    axis: z\n    distRewardScale: -3.0\n    rotRewardScale: 1.0\n    rotEps: 0.1\n    actionPenaltyScale: 0.0\n    controlPenaltyScale: 0.0\n    reachGoalBonus: 250\n    fallDistance: 0.1\n    fallPenalty: -50.0\n    objectType: block\n    observationType: full_stack_pointcloud\n    asymmetric_observations: true\n    successTolerance: 0.1\n    printNumSuccesses: false\n    maxConsecutiveSuccesses: 0\n    asset:\n      assetFileName: urdf/xarm6/xarm6_allegro_left_fsr.urdf\n      assetFileNameBlock: urdf/objects/cube_multicolor_allegro.urdf\n      assetFileNameEgg: mjcf/open_ai_assets/hand/egg.xml\n      assetFileNamePen: mjcf/open_ai_assets/hand/pen.xml\n  task:\n    randomize: true\n    randomization_params:\n      frequency: 1000\n      observations:\n        range:\n        - 0\n        - 0.05\n        range_correlated:\n        - 0\n        - 0.001\n        operation: additive\n        distribution: gaussian\n      actions:\n        range:\n        - 0.0\n        - 0.04\n        range_correlated:\n        - 0\n        - 0.015\n        operation: additive\n        distribution: gaussian\n      sim_params:\n        gravity:\n          range:\n          - 0\n          - 0.3\n          operation: additive\n          distribution: gaussian\n      actor_params:\n        hand:\n          color: false\n          dof_properties:\n            stiffness:\n              range:\n              - 0.75\n              - 1.5\n              operation: scaling\n              distribution: loguniform\n            lower:\n              range:\n              - 0\n              - 1.0e-05\n              operation: additive\n              distribution: gaussian\n            upper:\n              range:\n              - 0\n              - 1.0e-05\n              operation: additive\n              distribution: gaussian\n    enableCameraSensors: false\n  sim:\n    dt: 0.01667\n    substeps: 2\n    up_axis: z\n    use_gpu_pipeline: ${eq:${...pipeline},\"gpu\"}\n    gravity:\n    - 0.0\n    - 0.0\n    - -9.81\n    physx:\n      num_threads: ${....num_threads}\n      solver_type: ${....solver_type}\n      use_gpu: ${contains:\"cuda\",${....sim_device}}\n      num_position_iterations: 8\n      num_velocity_iterations: 0\n      max_gpu_contact_pairs: 8388608\n      num_subscenes: ${....num_subscenes}\n      contact_offset: 0.002\n      rest_offset: 0.0\n      bounce_threshold_velocity: 0.2\n      max_depenetration_velocity: 100.0\n      default_buffer_size_multiplier: 5.0\n      contact_collection: 2\ntrain:\n  params:\n    seed: ${...seed}\n    algo:\n      name: a2c_continuous\n    model:\n      name: continuous_a2c_logstd\n    network:\n      name: actor_critic\n      separate: false\n      pointnet: small\n      space:\n        continuous:\n          mu_activation: None\n          sigma_activation: None\n          mu_init:\n            name: default\n          sigma_init:\n            name: const_initializer\n            val: 0\n          fixed_sigma: true\n      mlp:\n        units:\n        - 512\n        - 256\n        - 256\n        activation: elu\n        d2rl: false\n        initializer:\n          name: default\n        regularizer:\n          name: None\n    load_checkpoint: ${if:${...checkpoint},True,False}\n    load_path: ${...checkpoint}\n    config:\n      name: set_obj8_short_block_z\n      env_name: rlgpu\n      prefix: ''\n      user_prefix: x-axis\n      auto_prefix: S${....task.env.spin_coef}_C${....task.env.contact_coef}_M${....task.env.main_coef}\n      multi_gpu: ${....multi_gpu}\n      ppo: true\n      mixed_precision: false\n      normalize_input: true\n      normalize_value: true\n      value_bootstrap: true\n      num_actors: ${....task.env.numEnvs}\n      reward_shaper:\n        scale_value: 0.01\n      normalize_advantage: true\n      gamma: 0.99\n      tau: 0.95\n      learning_rate: 0.0001\n      lr_schedule: adaptive\n      schedule_type: standard\n      kl_threshold: 0.02\n      score_to_win: 100000\n      max_epochs: ${resolve_default:20100,${....max_iterations}}\n      save_best_after: 100\n      save_frequency: 100\n      print_stats: true\n      grad_norm: 1.0\n      entropy_coef: 0.0\n      truncate_grads: Trues\n      e_clip: 0.2\n      horizon_length: 16\n      minibatch_size: 16384\n      mini_epochs: 4\n      critic_coef: 5\n      clip_value: true\n      seq_length: 4\n      bptt_len: 16\n      bounds_loss_coef: 0.005\n      bc_loss_coef: 0.01\n      weight_decay: 0.0\n      player_collect: false\n      player:\n        deterministic: true\n        games_num: 2\n        games_repeat: 1\n        desired_games: 10000\n        print_stats: true\n      central_value_config:\n        minibatch_size: 16384\n        mini_epochs: 4\n        learning_rate: 0.0005\n        lr_schedule: adaptive\n        schedule_type: standard\n        kl_threshold: 0.016\n        clip_value: true\n        normalize_input: true\n        truncate_grads: true\n        network:\n          name: actor_critic\n          central_value: true\n          mlp:\n            units:\n            - 512\n            - 512\n            - 256\n            - 256\n            activation: elu\n            d2rl: false\n            initializer:\n              name: default\n            regularizer:\n              name: None\n      full_experiment_name: set_obj8_short_block/z-axis\ntask_name: ${task.name}\nexperiment: x-axis\nnum_envs: ''\nseed: 42\ntorch_deterministic: false\nmax_iterations: 2000\nphysics_engine: physx\npipeline: gpu\nsim_device: cuda:0\nrl_device: cuda:0\ngraphics_device_id: 0\nnum_threads: 4\nsolver_type: 1\nnum_subscenes: 4\ntest: false\ncheckpoint: ''\nmulti_gpu: false\nwandb_activate: false\nwandb_group: ''\nwandb_name: ${train.params.config.name}\nwandb_entity: ''\nwandb_project: isaacgymenvs\ncapture_video: false\ncapture_video_freq: 1464\ncapture_video_len: 100\nforce_render: false\nheadless: true\nplayer_action_savepath: ./a.pth\n"
+  },
+  "notes": [
+    "Rapid short block retains the best existing checkpoint; older logged maxima have no surviving checkpoint.",
+    "Block corner checkpoint is renamed to retain the 65 mm policy when a new 85 mm run writes the canonical checkpoint filename.",
+    "Periodic checkpoint rewards were read from filenames, not last_mean_rewards (historical maximum)."
+  ],
+  "status": "completed",
+  "completed_at": "2026-10-27T17:03:15.171676+08:00"
+}

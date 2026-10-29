@@ -1,0 +1,12 @@
+# @package _global_
+# A single 75 mm sphere; retain the centred rotation reward and hand setup.
+defaults:
+  - block_corner_75mm
+  - _self_
+
+task:
+  env:
+    objSet: custom
+    objectName: sphere_75mm
+    # The URDF already has a 75 mm diameter; do not inherit the block's scale.
+    objectScale: 1.0

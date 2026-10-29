@@ -95,8 +95,8 @@ def get_rlgames_env_creator(
 class RLGPUAlgoObserver(AlgoObserver):
     """Allows us to log stats from the env along with the algorithm running stats. """
 
-    def __init__(self):
-        pass
+    def __init__(self, memory_logger=None):
+        self.memory_logger = memory_logger
 
     def after_init(self, algo):
         self.algo = algo
@@ -121,7 +121,19 @@ class RLGPUAlgoObserver(AlgoObserver):
     def after_clear_stats(self):
         self.mean_scores.clear()
 
+    def before_epoch(self, epoch_num, frame):
+        if self.memory_logger is not None:
+            self.memory_logger.begin_epoch(epoch_num, frame)
+
+    def after_steps(self):
+        if self.memory_logger is not None:
+            self.memory_logger.record(self.algo.epoch_num, 'rollout_end', self.algo.frame)
+
     def after_print_stats(self, frame, epoch_num, total_time):
+        # Persist before the existing stats code touches CUDA tensors: an earlier
+        # asynchronous simulation failure may surface during those operations.
+        if self.memory_logger is not None:
+            self.memory_logger.record(epoch_num, 'epoch_end', self.algo.frame)
         if self.ep_infos:
             for key in self.ep_infos[0]:
                     infotensor = torch.tensor([], device=self.algo.device)
@@ -160,6 +172,12 @@ class RLGPUEnv(vecenv.IVecEnv):
     
     def reset_done(self):
         return self.env.reset_done()
+
+    def set_train_info(self, env_frames, algo):
+        # rl-games already calls this at the start of each training epoch.
+        before_epoch = getattr(algo.algo_observer, 'before_epoch', None)
+        if before_epoch is not None:
+            before_epoch(algo.epoch_num, env_frames)
 
     def get_number_of_agents(self):
         return self.env.get_number_of_agents()
