@@ -29,15 +29,50 @@ class RapidHandRotation(VecTask):
                  virtual_screen_capture=False, force_render=False):
         self.cfg = cfg
         self.hand_camera = None
+        self.object_texture = None
+        self.object_texture_metadata = None
+        self.dataset_collector = None
+        self.six_face_task = None
+        self.six_face_result = None
+        self.dataset_config = cfg.get("dataset", {})
+        self.dataset_env_ids = ()
+        if self.dataset_config.get("enabled", False):
+            from isaacgymenvs.utils.dataset_collector import resolve_dataset_env_ids
+            self.dataset_env_ids = resolve_dataset_env_ids(self.dataset_config, int(cfg["env"]["numEnvs"]))
+        self.viewer_axes_config = cfg.get("viewer_axes", {})
+        self.viewer_axes_enabled = bool(self.viewer_axes_config.get("enabled", False)) and not headless
+        if self.viewer_axes_enabled:
+            axis_length = float(self.viewer_axes_config.get("axis_length", 0.1))
+            axes_env_id = int(self.viewer_axes_config.get("env_id", -1))
+            world_mode = self.viewer_axes_config.get("world_origin_mode", "env")
+            world_position = self.viewer_axes_config.get("world_position", [0.16, 0.0, 0.30])
+            if (not math.isfinite(axis_length) or axis_length <= 0
+                    or not -1 <= axes_env_id < int(cfg["env"]["numEnvs"])
+                    or world_mode not in ("env", "global")
+                    or len(world_position) != 3
+                    or not all(math.isfinite(float(value)) for value in world_position)):
+                raise ValueError("Invalid Viewer coordinate-axis configuration")
+            print("Viewer axes: red=X, green=Y, blue=Z; solid=object, dashed=world. "
+                  + ("World directions are translated beside the selected hand."
+                     if world_mode == "env" else "World axes start at simulation global (0,0,0)."))
         self.camera_config = cfg.get("camera", {})
         self.camera_env_ids = ()
+        if self.dataset_env_ids:
+            # Allocate sensors only for the requested dataset/preview environments.
+            from isaacgymenvs.utils.hand_camera import resolve_env_ids
+            preview_ids = (resolve_env_ids(self.camera_config, int(cfg["env"]["numEnvs"]))
+                           if self.camera_config.get("enabled", False) else ())
+            self.camera_env_ids = tuple(dict.fromkeys(preview_ids + self.dataset_env_ids))
+            self.camera_config["enabled"] = True
+            cfg["camera"] = self.camera_config
         if self.camera_config.get("enabled", False):
             from isaacgymenvs.utils.hand_camera import resolve_env_ids
             if self.camera_config.get("display", False) and headless:
                 raise ValueError("camera.display=True requires headless=False for selecting a hand in the Viewer")
             if graphics_device_id < 0:
                 raise ValueError("Finger cameras require graphics_device_id >= 0, including headless recording")
-            self.camera_env_ids = resolve_env_ids(self.camera_config, int(cfg["env"]["numEnvs"]))
+            if not self.camera_env_ids:
+                self.camera_env_ids = resolve_env_ids(self.camera_config, int(cfg["env"]["numEnvs"]))
             # Env reads this top-level flag before creating the graphics context.
             cfg["enableCameraSensors"] = True
         env = cfg["env"]
@@ -64,6 +99,11 @@ class RapidHandRotation(VecTask):
         self.tactile_link_names = [link.get("name") for link in hand_xml.findall("link")
                                    if "tactile" in link.get("name", "").lower()]
         self.hand_link_colors = self._link_visual_colors(hand_xml)
+        self.dataset_static_tactile_colors = bool(
+            self.dataset_env_ids and self.dataset_config.get("static_tactile_colors", True))
+        if self.dataset_static_tactile_colors:
+            for name in self.tactile_link_names:
+                self.hand_link_colors[name] = (0.35, 0.35, 0.35)
         self.self_collision = bool(env.get("selfCollision", True))
         self.hand_collision_filters = self._self_collision_filters(
             hand_xml, env.get("selfCollisionIgnorePairs", []))
@@ -76,6 +116,10 @@ class RapidHandRotation(VecTask):
                 raise ValueError("Tactile link has no collision geometry: " + link.get("name"))
 
         self._configure_objects(env)
+        self.six_face_enabled = env.get("rotationRewardMode") == "six_faces"
+        if self.six_face_enabled and (self.num_objects != 1 or
+                self.used_training_objects != ["set_obj6_block_corner"]):
+            raise ValueError("six_faces requires the single set_obj6_block_corner object")
         self.axis = str(env.get("axis", "z"))
         if self.axis not in ("x", "y", "z"):
             raise ValueError("axis must be x, y or z")
@@ -98,6 +142,13 @@ class RapidHandRotation(VecTask):
         env["numActions"] = self.num_hand_dofs
         env["numObservations"] = history_dim + self.object_state_dim
         env["numStates"] = 4 * self.num_hand_dofs + self.object_state_dim + 3 + 3 * self.num_tactile_sensors
+        if self.six_face_enabled:
+            from isaacgymenvs.utils.six_face_task import SixFaceTask
+            goal_dim = SixFaceTask.OBSERVATION_DIM
+            self.obs_slices["six_face_goal"] = slice(env["numObservations"], env["numObservations"] + goal_dim)
+            self.state_slices["six_face_goal"] = slice(env["numStates"], env["numStates"] + goal_dim)
+            env["numObservations"] += goal_dim
+            env["numStates"] += goal_dim
         self.is_distillation = False
         self.ablation_mode = "no-pc"
         self.debug_viz = bool(env.get("enableDebugVis", False))
@@ -107,8 +158,8 @@ class RapidHandRotation(VecTask):
         if self.contact_threshold <= 0 or self.action_scale <= 0 or not 0 < self.target_smoothing <= 1:
             raise ValueError("Invalid contact threshold, action scale or target smoothing")
         self.rotation_reward_mode = str(env.get("rotationRewardMode", "angular_velocity"))
-        if self.rotation_reward_mode not in ("angular_velocity", "pose_delta"):
-            raise ValueError("rotationRewardMode must be angular_velocity or pose_delta")
+        if self.rotation_reward_mode not in ("angular_velocity", "pose_delta", "six_faces"):
+            raise ValueError("rotationRewardMode must be angular_velocity, pose_delta or six_faces")
         self.pose_rotation_reward = self.rotation_reward_mode == "pose_delta"
         if self.pose_rotation_reward and self.num_objects != 1:
             raise ValueError("pose_delta reward is only supported for single objects")
@@ -147,7 +198,12 @@ class RapidHandRotation(VecTask):
             super().__init__(cfg, rl_device, sim_device, graphics_device_id, headless,
                              virtual_screen_capture, force_render)
             self._acquire_tensors()
+            if self.six_face_enabled:
+                self._init_six_face_task()
             self.reset()
+            if self.dataset_env_ids:
+                from isaacgymenvs.utils.dataset_collector import SensorDatasetCollector
+                self.dataset_collector = SensorDatasetCollector(self, self.dataset_config)
         except BaseException:
             try:
                 self.close()
@@ -169,6 +225,30 @@ class RapidHandRotation(VecTask):
         self.object_sets = OBJECT_SETS
         self.num_objects = 2 if self.object_set_id == "ball" else 1
         self.object_state_dim = 13 * self.num_objects
+
+    def _init_six_face_task(self):
+        from isaacgymenvs.utils.hand_camera import top_camera_mount, _pose_array
+        from isaacgymenvs.utils.six_face_task import SixFaceTask
+        env = self.cfg["env"]
+        mount, camera = top_camera_mount(self.dataset_config.get("top_camera", {}), env)
+        if camera["base_link"] != "BASE":
+            raise ValueError("six_faces requires the top camera to be fixed to BASE")
+        # Same mount and optical convention as collected camera poses, without
+        # creating thousands of rendering sensors during training.
+        mount.r = mount.r * gymapi.Quat(-0.5, 0.5, -0.5, 0.5)
+        self.six_face_camera_pose = torch.tensor(_pose_array(mount), device=self.device).expand(self.num_envs, -1)
+        config = dict(env.get("sixFace", {}))
+        config.update(object_half_extent=0.03 * float(env.get("objectScale", 1.0)),
+            position_tolerance=float(env.get("positionTolerance", 0.015)),
+            camera_width=camera["width"], camera_height=camera["height"],
+            camera_horizontal_fov=camera["horizontal_fov"], camera_near=camera["near_plane"],
+            camera_far=camera["far_plane"])
+        self.six_face_config = config
+        self.six_face_task = SixFaceTask(config, self.num_envs, self.device, self.rotation_control_dt)
+        self.six_face_terminal = torch.zeros(self.num_envs, device=self.device, dtype=torch.bool)
+        self.six_face_position_distance = float(env.get("positionPenaltyDistance", 0.01))
+        if not math.isfinite(self.six_face_position_distance) or self.six_face_position_distance <= 0:
+            raise ValueError("positionPenaltyDistance must be positive for six_faces")
 
     def _asset_path(self, value):
         path = Path(value).expanduser()
@@ -352,6 +432,15 @@ class RapidHandRotation(VecTask):
                 raise RuntimeError("Object must be a successfully imported rigid asset: " + name)
             self.object_asset_dict[name] = asset
 
+        texture_config = self.cfg.get("object_texture", {})
+        if (texture_config.get("enabled", False)
+                and texture_config.get("object_name", "set_obj6_block_corner") in self.used_training_objects
+                and self.graphics_device_id >= 0):
+            from isaacgymenvs.utils.object_texture import FixedObjectTexture
+            self.object_texture = FixedObjectTexture(
+                self.gym, self.sim, self.object_asset_root, texture_config)
+            self.object_texture_metadata = self.object_texture.metadata
+
         aggregate_mode = int(env_cfg.get("aggregateMode", 1))
         hand_shapes = self.gym.get_asset_rigid_shape_count(hand_asset)
         aggregate_sizes = {
@@ -375,7 +464,7 @@ class RapidHandRotation(VecTask):
         self.tactile_body_handles = []
         self._visual_env_ids = tuple(range(self.num_envs)) if not self.headless else self.camera_env_ids
         self._tactile_visual_state = (np.zeros((len(self._visual_env_ids), self.num_tactile_sensors), dtype=bool)
-                                      if self._visual_env_ids else None)
+                                      if self._visual_env_ids and not self.dataset_static_tactile_colors else None)
         friction = float(env_cfg.get("friction", 1.0))
         mass = float(env_cfg.get("objectMass", 0.05))
         scale = float(env_cfg.get("objectScale", 1.0))
@@ -406,6 +495,8 @@ class RapidHandRotation(VecTask):
                 actor_name = "object" if self.num_objects == 1 else "object_{}".format(slot)
                 obj = self.gym.create_actor(env, self.object_asset_dict[name], object_pose, actor_name, index, 0)
                 self.gym.set_actor_scale(env, obj, scale)
+                if self.object_texture is not None:
+                    self.object_texture.apply(env, obj, name)
                 if self.num_objects > 1 and (not self.headless or index in self.camera_env_ids):
                     color = (0.95, 0.95, 0.95) if slot == 0 else (1.0, 0.72, 0.10)
                     for body in range(self.gym.get_actor_rigid_body_count(env, obj)):
@@ -516,9 +607,71 @@ class RapidHandRotation(VecTask):
             self.hand_camera.handle_event(event)
 
     def before_viewer_draw(self):
+        self.clear_viewer_overlays()
         if self.hand_camera is not None:
             self.hand_camera.poll()
             self.hand_camera.draw_selection()
+        self._draw_coordinate_axes()
+
+    def clear_viewer_overlays(self):
+        """Own the single Viewer line buffer shared by selection and axes."""
+        if self.viewer is not None:
+            self.gym.clear_lines(self.viewer)
+        if self.hand_camera is not None:
+            self.hand_camera._lines_drawn = False
+
+    @staticmethod
+    def _coordinate_axis_lines(position, quaternion, length, dashed=False):
+        """Arrow vertices in the supplied frame, with RGB denoting +X/+Y/+Z."""
+        position = np.asarray(position, dtype=np.float32)
+        quaternion = np.asarray(quaternion, dtype=np.float32)
+        quaternion = quaternion / np.linalg.norm(quaternion)
+        xyz, w = quaternion[:3], quaternion[3]
+        cross = np.asarray([[0., -xyz[2], xyz[1]], [xyz[2], 0., -xyz[0]],
+                            [-xyz[1], xyz[0], 0.]], dtype=np.float32)
+        rotation = np.eye(3, dtype=np.float32) + 2 * (w * cross + cross @ cross)
+        vertices, colors = [], []
+        for axis in range(3):
+            direction = rotation[:, axis] * length
+            side = rotation[:, (axis + 1) % 3] * length * 0.08
+            tip = position + direction
+            shafts = [(start, start + 0.16) for start in (0., 0.24, 0.48, 0.72)] if dashed else [(0., 1.)]
+            segments = [(position + start * direction, position + end * direction) for start, end in shafts]
+            segments.extend(((tip, tip - 0.18 * direction + side),
+                             (tip, tip - 0.18 * direction - side)))
+            vertices.extend(segments)
+            colors.extend([np.eye(3, dtype=np.float32)[axis]] * len(segments))
+        return np.asarray(vertices, dtype=np.float32), np.asarray(colors, dtype=np.float32)
+
+    def _draw_coordinate_axes(self):
+        if not self.viewer_axes_enabled or self.viewer is None or not hasattr(self, "root_state_tensor"):
+            return
+        config = self.viewer_axes_config
+        env_id = int(config.get("env_id", -1))
+        if env_id == -1:
+            env_id = self.hand_camera.selected_id if self.hand_camera is not None else 0
+        env = self.envs[env_id]
+        length = float(config.get("axis_length", 0.1))
+        if config.get("object", True):
+            # Rendering can run between physics substeps, before observations
+            # refresh the tensors. Fetch the current completed root poses here.
+            self.gym.refresh_actor_root_state_tensor(self.sim)
+            states = self.root_state_tensor[self.object_indices[env_id]].reshape(-1, 13).detach().cpu().numpy()
+            # Root tensors may include the environment's grid offset. The fixed
+            # hand anchor converts their positions to add_lines' env-local frame.
+            root_to_env = (self.hand_base_position[env_id].detach().cpu().numpy()
+                           - np.asarray(self.cfg["env"].get("handPosition", [0, 0, 0.30])))
+            for state in states:
+                vertices, colors = self._coordinate_axis_lines(state[:3] - root_to_env, state[3:7], length)
+                self.gym.add_lines(self.viewer, env, len(vertices), vertices, colors)
+        if config.get("world", True):
+            if config.get("world_origin_mode", "env") == "global":
+                origin = self.gym.get_env_origin(env)
+                position = [-origin.x, -origin.y, -origin.z]
+            else:
+                position = config.get("world_position", [0.16, 0.0, 0.30])
+            vertices, colors = self._coordinate_axis_lines(position, [0, 0, 0, 1], length, dashed=True)
+            self.gym.add_lines(self.viewer, env, len(vertices), vertices, colors)
 
     def _acquire_tensors(self):
         self.root_state_tensor = gymtorch.wrap_tensor(self.gym.acquire_actor_root_state_tensor(self.sim))
@@ -595,12 +748,22 @@ class RapidHandRotation(VecTask):
         self.compute_reward()
 
     def step(self, actions):
+        if self.dataset_collector is not None:
+            self.dataset_collector.before_step()
         observations, rewards, dones, infos = super().step(actions)
+        if self.six_face_enabled:
+            # Task success/failure is terminal, including on the episode limit.
+            self.timeout_buf.logical_and_(~self.six_face_terminal)
+            infos["time_outs"] = self.timeout_buf.to(self.rl_device)
         if self.hand_camera is not None:
             # Capture completed physics, including terminal frames, before reset.
             if self.camera_config.get("display", False) and not self.force_render:
                 self.render()
-            self.hand_camera.capture()
+            dataset_ids = (self.dataset_collector.requested_env_ids()
+                           if self.dataset_collector is not None else ())
+            frames = self.hand_camera.capture(dataset_env_ids=dataset_ids)
+            if self.dataset_collector is not None:
+                self.dataset_collector.record(frames)
         if self.rotation_stall_enabled:
             # A stalled episode is a task termination, even near the time limit.
             infos["time_outs"] = infos["time_outs"] & ~self.rotation_stalled.to(self.rl_device)
@@ -643,7 +806,10 @@ class RapidHandRotation(VecTask):
         if new_ids.numel() > 0:
             self.obs_history[new_ids] = frame[new_ids].unsqueeze(1).expand(-1, self.frame_stack, -1)
             self._history_needs_reset[new_ids] = False
-        self.obs_buf.copy_(torch.nan_to_num(torch.cat((self.obs_history.flatten(1), local_object), dim=-1)))
+        observation = torch.cat((self.obs_history.flatten(1), local_object), dim=-1)
+        if self.six_face_enabled:
+            observation = torch.cat((observation, self.six_face_task.observation()), dim=-1)
+        self.obs_buf.copy_(torch.nan_to_num(observation))
         # Forces are peak-per-pad vectors in the hand frame, with pad order fixed
         # by tactile_link_names.  The actor uses binary contact only.
         raw_tactile_local = quat_apply(
@@ -651,6 +817,8 @@ class RapidHandRotation(VecTask):
             self.tactile_forces.reshape(-1, 3)).reshape(self.num_envs, -1)
         state = torch.cat((q, self.dof_vel, targets, self.actions, local_object,
                            self.axis_local, raw_tactile_local), dim=-1)
+        if self.six_face_enabled:
+            state = torch.cat((state, self.six_face_task.observation()), dim=-1)
         self.states_buf.copy_(torch.nan_to_num(state))
         # Display the same completed control-step contact flags as the actor.
         # Do not update on pre_physics_step's temporary accumulator clear.
@@ -658,6 +826,8 @@ class RapidHandRotation(VecTask):
         return self.obs_buf
 
     def compute_reward(self):
+        if self.six_face_enabled:
+            return self._compute_six_face_reward()
         if self.num_objects == 2:
             return self._compute_baoding_reward()
         # Episode dictionaries must describe only newly finished episodes.
@@ -729,6 +899,61 @@ class RapidHandRotation(VecTask):
         if self.pose_rotation_reward:
             self.extras["rotation/sampled_spin"] = torch.nan_to_num(sampled_spin).mean()
             self._log_rotation_episodes(pose_angle, sampled_spin, spin_reward, finite, dropped)
+
+    def _compute_six_face_reward(self):
+        """Goal-conditioned face changes; old spin rewards are not added."""
+        self.extras.pop("episode", None)
+        env = self.cfg["env"]
+        local = self._object_states_in_hand_frame(self.object_state)
+        position_error = torch.linalg.vector_norm(local[:, :3] - self.object_reference_local, dim=-1)
+        tips = self.rigid_body_state_tensor[self.fingertip_body_indices, :3]
+        finite = (torch.isfinite(self.object_state).all(-1) & torch.isfinite(self.dof_state).all(-1).all(-1)
+                  & torch.isfinite(self.tactile_forces).all(-1).all(-1)
+                  & torch.isfinite(self.tactile_force_norm).all(-1) & torch.isfinite(tips).all(-1).all(-1))
+        local_height = (local[:, :3] * self.palm_normal_local).sum(-1)
+        dropped = ((local_height < float(env.get("dropHeightLocal", -0.02)))
+                   | (position_error > float(env.get("maxObjectDistance", 0.18))))
+        result = self.six_face_task.update(local[:, :7], local[:, 7:10], local[:, 10:13],
+            self.six_face_camera_pose, position_error, finite & ~dropped)
+        self.six_face_result = result
+        excess = (position_error - self.six_face_config["position_tolerance"]).clamp_min(0)
+        position_penalty = float(env.get("positionPenaltyScale", 0.2)) * (
+            excess / self.six_face_position_distance).square()
+        tip_distance = torch.linalg.vector_norm(tips - self.object_pos[:, None, :], dim=-1).mean(-1)
+        reward = (result["reward"] - position_penalty
+                  - float(env.get("fingerDistancePenaltyScale", 0.1)) * tip_distance
+                  - float(env.get("actionPenaltyScale", 0.002)) * self.actions.square().mean(-1)
+                  - float(env.get("velocityPenaltyScale", 0.0001)) * self.dof_vel.square().mean(-1)
+                  + float(env.get("fallPenalty", -15.0)) * dropped.float())
+        self.rew_buf.copy_(torch.where(finite, torch.nan_to_num(reward), torch.zeros_like(reward)))
+        self.six_face_terminal.copy_(dropped | ~finite | result["stalled"] |
+                                     result["goal_timeout"] | result["terminal_success"])
+        self.reset_buf.copy_((self.six_face_terminal | (self.progress_buf >= self.max_episode_length)).long())
+        # compute_observations ran before reward; publish any newly selected goal
+        # now, without shifting the physical observation history a second time.
+        goal = self.six_face_task.observation()
+        self.obs_buf[:, self.obs_slices["six_face_goal"]] = goal
+        self.states_buf[:, self.state_slices["six_face_goal"]] = goal
+        self.extras.update(result["metrics"])
+        for name in ("progress_reward", "hold_reward", "face_bonus", "completion_bonus", "timeout_penalty"):
+            self.extras["six_face/" + name] = result[name].mean()
+        self.extras["six_face/position_error_m"] = torch.nan_to_num(position_error).mean()
+        self.extras["six_face/position_penalty"] = torch.nan_to_num(position_penalty).mean()
+        self.extras["six_face/drop_rate"] = dropped.float().mean()
+        self.extras["six_face/nonfinite_rate"] = (~finite).float().mean()
+        self.extras["tactile/contact_fraction"] = self.tactile_contacts.mean()
+        done = self.reset_buf.bool()
+        if done.any():
+            cycles = self.six_face_task.cycles_completed[done].float()
+            faces = self.six_face_task.covered[done].float().sum(-1)
+            if self.six_face_task.repeat_cycles:
+                faces = faces + 6 * cycles
+            self.extras["episode"] = {
+                "six_face/completed_faces": faces.mean(),
+                "six_face/completed_cycles": cycles.mean(),
+                "six_face/success_rate": (cycles > 0).float().mean(),
+                "six_face/drop_rate": dropped[done].float().mean(),
+            }
 
     @staticmethod
     def projected_rotation_delta(previous, current, axis):
@@ -921,6 +1146,10 @@ class RapidHandRotation(VecTask):
             offset_world = offset_world[:, None, :]
         object_states[..., :3] += offset_world
         self.root_state_tensor[self.object_indices[env_ids]] = object_states
+        if self.six_face_task is not None:
+            local = self._object_states_in_hand_frame(self.root_state_tensor[self.object_indices])
+            self.six_face_task.reset(env_ids, local[:, :7], self.six_face_camera_pose)
+            self.six_face_terminal[env_ids] = False
         if self.num_objects == 2:
             self.previous_ball_vector[env_ids] = object_states[:, 1, :3] - object_states[:, 0, :3]
             self.orbit_angle_accumulator[env_ids] = 0
@@ -949,6 +1178,8 @@ class RapidHandRotation(VecTask):
         self.randomize_buf[env_ids] = 0
         self.reset_buf[env_ids] = 0
         self.timeout_buf[env_ids] = 0
+        if self.dataset_collector is not None:
+            self.dataset_collector.on_reset(env_ids)
 
     def _pack_observations(self):
         self.obs_dict["obs"] = torch.clamp(self.obs_buf, -self.clip_obs, self.clip_obs).to(self.rl_device)
@@ -983,11 +1214,50 @@ class RapidHandRotation(VecTask):
         # Match the original teacher's object-orientation inspection interface.
         return self.object_rot.clone()
 
+    def get_object_visual_state(self, env_id):
+        """Describe a textured object's current pose without changing the policy.
+
+        The fixed face/UV definition is in object_texture_metadata. Pose labels
+        use metres and xyzw quaternions; objectScale scales the manifest's mesh.
+        Call before auto-reset when associating a terminal camera frame.
+        """
+        if self.object_texture_metadata is None or self.num_objects != 1:
+            return None
+        env_id = int(env_id)
+        if not 0 <= env_id < self.num_envs:
+            raise ValueError("env_id must refer to an existing environment")
+        name = self.used_training_objects[int(self.object_class_indices[env_id, 0].item())]
+        if name != self.object_texture_metadata["object_name"]:
+            return None
+        state = self.root_state_tensor[self.object_indices[env_id]]
+        inverse = self.hand_base_inverse_quat[env_id:env_id + 1]
+        local_position = quat_apply(
+            inverse, (state[:3] - self.hand_base_position[env_id]).unsqueeze(0))[0]
+        local_rotation = quat_mul(inverse, state[3:7].unsqueeze(0))[0]
+        origin = self.gym.get_env_origin(self.envs[env_id])
+        return dict(
+            object_name=name,
+            object_scale=float(self.cfg["env"].get("objectScale", 1.0)),
+            texture_id=self.object_texture_metadata["texture_id"],
+            pose_sim=state[:7].detach().cpu().tolist(),
+            pose_hand=torch.cat((local_position, local_rotation)).detach().cpu().tolist(),
+            hand_pose_sim=torch.cat((self.hand_base_position[env_id],
+                                     self.hand_base_quat[env_id])).detach().cpu().tolist(),
+            env_origin_world=[float(origin.x), float(origin.y), float(origin.z)],
+            pose_layout="position_xyz_m,quaternion_xyzw",
+            pose_sim_frame="Isaac Gym actor root-state tensor coordinates",
+            pose_hand_frame="hand base")
+
     def close(self):
         monitor = getattr(self, "hand_camera", None)
         try:
-            if monitor is not None:
-                monitor.close()
+            try:
+                collector = getattr(self, "dataset_collector", None)
+                if collector is not None:
+                    collector.close()
+            finally:
+                if monitor is not None:
+                    monitor.close()
         finally:
             self.hand_camera = None
             try:
@@ -999,6 +1269,7 @@ class RapidHandRotation(VecTask):
                     if getattr(self, "sim", None) is not None:
                         self.gym.destroy_sim(self.sim)
                         self.sim = None
+                        self.object_texture = None
                 finally:
                     if getattr(self, "virtual_display", None) is not None:
                         self.virtual_display.stop()

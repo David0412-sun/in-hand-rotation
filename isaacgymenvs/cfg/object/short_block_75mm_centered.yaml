@@ -1,0 +1,16 @@
+# @package _global_
+# Keep the historical centred Z-axis reward for a 75 mm-long short block.
+defaults:
+  - block_corner_75mm_centered
+  - _self_
+
+task:
+  env:
+    objectName: set_obj8_short_block
+    # Source visual size 48 x 60 x 60 mm becomes 60 x 75 x 75 mm.
+    objectScale: 1.25
+
+train:
+  params:
+    config:
+      train_dir: runs/rapidhand/short_block_75mm_centered

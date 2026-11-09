@@ -8,6 +8,7 @@ from torch import nn
 import numpy as np
 import pickle
 import pickle_utils
+import time
 
 def rescale_actions(low, high, action):
     d = (high - low) / 2.0

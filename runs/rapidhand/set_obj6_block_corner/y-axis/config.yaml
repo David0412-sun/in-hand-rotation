@@ -201,7 +201,7 @@ task:
     - 0.08
     - 0.34
     positiveSpinRewardLimit: 0.6
-    positionTolerance: 0.005
+    positionTolerance: ${if:${eq:${.axis},y},${if:${eq:${.objectName},set_obj6_block_corner},0.01,0.005},0.005}
     positionPenaltyDistance: 0.01
     positionRewardFalloff: 0.015
   task:

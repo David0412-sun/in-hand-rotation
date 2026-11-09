@@ -320,7 +320,7 @@ and enables `centeredRotationReward`. With signed speed `w` in rad/s and
 distance `e` in metres from the fixed initial palm-frame object centre, it uses:
 
 ```text
-d = max(e - 0.005, 0)
+d = max(e - positionTolerance, 0)
 g = exp(-0.5 * (d / 0.015)^2)
 rotation_reward = 2 * (g * min(max(w, 0), 0.6) + min(w, 0))
 position_penalty = -0.2 * (d / 0.01)^2
@@ -328,8 +328,12 @@ position_penalty = -0.2 * (d / 0.01)^2
 
 Forward reward saturates at about 3.4 degrees per 0.1 s control step; reverse
 progress is penalised linearly without clipping or position attenuation.
-The 5 mm tolerance allows small translations during regrasping. The reference
-does not follow the object. The quadratic term replaces the linear position
+The tolerance is 10 mm only for `axis=y` with `objectName=set_obj6_block_corner`
+in this preset, allowing more translation during regrasping. Other axes and the
+inherited cube/sphere presets retain 5 mm. The 3 s stall window is unchanged.
+To evaluate an existing Y-axis checkpoint with its original reward, override
+`task.env.positionTolerance=0.005`. The reference does not follow the object.
+The quadratic term replaces the linear position
 penalty, and `contactRewardScale=0` removes the ordinary contact bonus. Other
 reward terms and the -15 fall penalty are unchanged; fallen or invalid terminal
 steps still earn no rotation reward. `rotation/position_reward_gate` and
@@ -348,6 +352,58 @@ new best models are saved. To replay a 75 mm checkpoint with its earlier reward
 settings, append `task.env.centeredRotationReward=False
 task.env.positionPenaltyScale=2.0 task.env.contactRewardScale=0.2`.
 
+For a separate 60 mm Z-axis task with the same centred reward as the 75 mm
+run whose best checkpoint was epoch 3544 (reward 538.45), select
+`+object=block_corner_60mm_centered`. It retains the 5 mm tolerance and
+all reward, stall, PPO and simulation settings, changing only the object scale
+and the output base directory:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=block_corner_60mm_centered \
+  task.env.numEnvs=8192 max_iterations=4000
+```
+
+Its outputs are saved under
+`runs/rapidhand/block_corner_60mm_centered/set_obj6_block_corner/z-axis/`,
+with the best model at `nn/set_obj6_block_corner_z.pth`. It uses a separate
+directory from the existing 60/75/85 mm runs. Reuse this preset during replay.
+
+The independent `block_corner_65mm_centered`, `block_corner_75mm_centered` and
+`block_corner_85mm_centered` presets retain the same historical Z-axis reward
+and 5 mm tolerance. Their output roots are separate from each other and from
+the 60 mm task:
+
+| Preset | Output root |
+| --- | --- |
+| `block_corner_65mm_centered` | `runs/rapidhand/block_corner_65mm_centered/` |
+| `block_corner_75mm_centered` | `runs/rapidhand/block_corner_75mm_centered/` |
+| `block_corner_85mm_centered` | `runs/rapidhand/block_corner_85mm_centered/` |
+
+Each root contains `set_obj6_block_corner/z-axis/`, with the best model at
+`nn/set_obj6_block_corner_z.pth`. Start a new 75 mm run with:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=block_corner_75mm_centered \
+  task.env.numEnvs=8192 max_iterations=4000
+```
+
+For 65 mm, use `+object=block_corner_65mm_centered` in the same command.
+Its model, training configuration and logs use the independent 65 mm root.
+
+For `set_obj8_short_block` with 75 mm long edges, use
+`+object=short_block_75mm_centered`. The visual size is 60 x 75 x 75 mm;
+the centred Z-axis reward, 5 mm tolerance, hand pose, PPO and simulation
+settings match `block_corner_75mm_centered`:
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=short_block_75mm_centered \
+  task.env.numEnvs=8192 max_iterations=4000
+```
+
+Its independent output directory is
+`runs/rapidhand/short_block_75mm_centered/set_obj8_short_block/z-axis/`, with
+the best model at `nn/set_obj8_short_block_z.pth`. Reuse the preset for replay.
+
 For this mode TensorBoard `Episode/rotation/` logs completed-episode net angle
 (`net_angle_deg`), `mean_actual_spin`, `mean_sampled_spin`, reverse-step fraction,
 rotation/total returns, duration, and mutually exclusive termination fractions
@@ -356,6 +412,76 @@ metrics cover every control step rather than only the last step of a rollout.
 Net angle is accumulated projected orientation change; with substantial off-axis
 motion it is not a certified count of complete fixed-axis revolutions. Reward
 scores across the old and new modes are not directly comparable.
+
+#### Fixed per-face chamfered-block texture
+
+Chamfered-block presets enable one fixed visual texture profile for
+`set_obj6_block_corner`. Its 26 faces (6 main faces, 12 edge bevels and 8 corner
+triangles) each have a single solid colour in the existing UV atlas, with no
+labels, arrows, dots or common dark border. Colours are assigned using actual
+shared mesh edges to give neighbouring faces strong colour contrast. Shared
+UV-edge texels have a deterministic owner; texture filtering can
+blend colours at edges. The seed is fixed at `20261102`; environment number,
+episode, policy seed and pose do not select a new texture. The atlas is shared
+by all instances and is not re-created during reset. Other objects keep their
+existing appearance.
+
+The profile consists of
+`assets/textures/chamfered_block_solid_v3/atlas.png` and `manifest.json`.
+The manifest records PNG/OBJ SHA256 values, texture ID, face IDs, source vertices,
+UV polygons, object-frame normals and coordinate conventions. Runtime loading
+rejects mismatched assets. Reproduce the profile with:
+
+```bash
+python scripts/build_chamfered_texture.py
+```
+
+The generator accepts `--seed`, `--resolution` and `--output-dir`, but refuses to
+overwrite an existing profile with different pixels or metadata. Use another
+directory for a new profile and point `task.object_texture.atlas_file` and
+`task.object_texture.manifest_file` to it (paths are relative to `assets`).
+The earlier detailed texture remains in `chamfered_block_fixed_v1`; reproduce it
+with `python scripts/build_chamfered_texture.py --profile fixed_v1`. The two-colour
+profile remains in `chamfered_block_simple_v2`, reproducible with `--profile simple_v2`.
+To replay data collected with an older profile, set both texture paths to its
+directory. Each profile retains a distinct texture ID in pose/image metadata.
+
+Texture is attached to the object's local surface coordinates and moves rigidly
+with its 6D pose. The same pose has the same surface pattern; images can still
+change with camera pose, lighting and hand occlusion. No UV, collision geometry,
+mass, friction, reward or policy input is changed. Plain headless training with
+no cameras skips GPU texture allocation.
+
+Replay existing chamfered-block checkpoints using their usual preset. Add
+`task.object_texture.enabled=False` to recover the untextured appearance.
+The runtime exposes `task.object_texture_metadata` and
+`task.get_object_visual_state(env_id)` for pose/image provenance.
+When finger-camera recording is explicitly enabled, clip `metadata.json`
+includes the fixed texture manifest, and every `frames.jsonl` row includes
+`object_visual_state`: texture ID, object scale, seven-value `pose_sim` and
+`pose_hand` labels (position in metres, quaternion `xyzw`), hand transform and
+environment origin. These labels are captured before auto-reset, matching the
+recorded image. `pose_sim` uses the actor root-state tensor's coordinate frame;
+`pose_hand` uses the hand base. The manifest's source mesh scale and the per-frame
+object scale specify how the original face vertices transform with these poses.
+Preview still defaults to `task.camera.record=False`; synchronized top-view
+datasets use the separate `task.dataset` switch described below.
+
+Replay also enables `task.viewer_axes` in the Viewer. Red, green and blue mean
++X, +Y and +Z. Solid arrows follow the object's root pose; dashed arrows retain
+the world directions and are displayed at a fixed point beside the hand
+(`world_position: [0.16, 0.0, 0.30]`, in environment coordinates). This default
+translates the world-frame reference for visibility; it does not claim that the
+displayed reference point is the global origin. To place it at the actual global
+origin, use `task.viewer_axes.world_origin_mode=global`.
+The arrows are 0.10 m long and follow the selected camera environment, or
+environment 0 when there is no camera selection. Set `task.viewer_axes.env_id`
+to select another environment, `task.viewer_axes.axis_length` to change length,
+or `task.viewer_axes.enabled=False` to hide them. Axes are Viewer overlays,
+excluded from camera images and recordings, and skipped during headless training.
+RapidHand defaults to `task.viewerRenderCollision=False` so the Viewer displays
+visual meshes and their texture. Setting it to `True` displays collision geometry
+for inspection; this flag only changes drawing, not collision simulation.
 
 To replay an older 85 mm checkpoint under its original reward/reset settings,
 append `task.env.rotationRewardMode=angular_velocity
@@ -439,6 +565,33 @@ bash scripts/teacher_rapidhand.sh 0 +object=cube_75mm \
 This is a shape-transfer test using the chamfered-block weights. Future cube
 training outputs go to `runs/rapidhand/set_obj1_regular_block/z-axis/`, with
 the best checkpoint named `nn/set_obj1_regular_block_z.pth`.
+
+For a **53 x 53 x 53 mm cube**, select `+object=cube_53mm`. The source cube's
+visual and collision meshes both use scale `53/60`, and all six faces have one
+fixed, distinct colour with strong adjacent-face contrast. The texture profile
+is `assets/textures/cube_solid_v1/{atlas.png,manifest.json}`; reproduce it with
+`python scripts/build_chamfered_texture.py --profile cube_solid_v1`. Its manifest
+records the source mesh, UVs, face colours and texture ID for the same pose/image
+metadata interface as the chamfered block. Viewer axes remain enabled on replay.
+The preset retains the existing cube reward, initial hand pose and physics.
+
+```bash
+bash scripts/teacher_rapidhand.sh 0 +object=cube_53mm \
+  test=True headless=False force_render=False task.env.numEnvs=16 \
+  train.params.config.player.deterministic=True \
+  task.camera.enabled=True task.camera.display=True task.camera.record=False \
+  checkpoint=runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth
+```
+
+This replays the existing chamfered-block policy with the new cube; it does not
+retrain the policy. Future 53 mm cube training saves separately under
+`runs/rapidhand/cube_53mm/set_obj1_regular_block/z-axis/`.
+
+For a **65 x 65 x 65 mm cube**, replace `+object=cube_53mm` with
+`+object=cube_65mm` in the same command. This changes the source-mesh scale to
+`65/60`, retaining the fixed six-face colours, pose metadata, Viewer axes and
+rotation settings. Future training saves separately under
+`runs/rapidhand/cube_65mm/set_obj1_regular_block/z-axis/`.
 
 Object files and settings are stored here:
 
@@ -585,12 +738,224 @@ Isaac Gym 每次会渲染所有已创建的相机：四只候选手就是20路�
 可用的 `ffmpeg`；只录像时不需要桌面窗口。
 
 当前镜头挂载是基于 CAD 的近似值，尚未做实机光学标定：镜头前端朝 camera link
-的 `+Z`，仿真光心放在前端外1 mm。Isaac Gym 相机的原生视线是 `+X`
+的 `+Z`，仿真光心放在前端外 0.1 mm，近裁剪距离为 0.1 mm。Isaac Gym 相机的原生视线是 `+X`
 （画面右方 `-Y`、上方 `+Z`），因此挂载旋转采用弧度
 `[π/2, -π/2, 0]`，使视线朝 link `+Z`、画面右方朝 link `+X`。
 各路位置和旋转可以在 `task.camera.mounts` 中调整。张开的手可能暂时拍到空处，
 这是固定安装方向与当前手姿共同决定的；本功能不模拟自动对焦、镜头畸变或
 滚动快门。关闭相机功能使用 `task.camera.enabled=False`。
+
+近距离接触时，原来的 1 mm 光心偏移可能让光心进入物体的视觉网格，
+原来的 1 mm 近裁剪距离也会切掉贴近镜头的表面。现在五路
+`task.camera.mounts.<finger>.position` 均为 `[0,0,0.0001]`，
+`task.camera.near_plane=0.0001`，避免上述已验证轨迹中的异常消失。
+这不保证物体始终在视野内：真实遮挡、转出画面仍然可能发生；极近的表面可能铺满整个画面。
+已有 HDF5/RGB 是固定记录，修改成像参数后需要重新采集；当前状态输入教师无需为此重新训练。
+
+#### 同步传感器数据集：五指 RGB、top-view、触觉和状态
+
+`task.dataset.enabled` 默认关闭。开启后，每个被选中的环境创建五个指尖相机和
+一个固定在手部 `BASE` 的 top-view 相机；相机数据不进入现有教师策略的输入。
+默认仅采集 `env 0`，不会给所有并行训练环境创建相机。
+
+用现有教师模型采集当前 **65 mm 立方体**，无需启动训练：
+
+```bash
+conda activate robosyn
+bash scripts/collect_rapidhand.sh 0 +object=cube_65mm \
+  checkpoint=runs/rapidhand/set_obj6_block_corner/z-axis/nn/set_obj6_block_corner_z.pth \
+  task.dataset.output_dir=datasets/rapidhand/cube_65mm \
+  task.dataset.max_samples=10000
+```
+
+默认一个仿真环境，确定性动作，不显示窗口、不录制 MP4。采满 10000 条同步样本后
+自动关闭文件并退出；Ctrl+C 会保存已经完成的样本。该入口直接复用教师网络，不受
+旧 player 中 16 环境假设限制。它是在新物体上运行已有策略，采集本身不会训练策略。
+安装环境需要 `h5py==3.10.0`；本机 `robosyn` 已安装，未更新原 NumPy/PyTorch。
+
+需要边看边采时，在上述命令后添加：
+
+```bash
+headless=False task.camera.display=True
+```
+
+沿用 `teacher_rapidhand.sh` 训练时也可添加 `task.dataset.enabled=True`。
+训练过程中采到 `max_samples` 后停止写数据，训练继续；独立采集入口则自动退出。
+增加采集环境可使用 `task.env.numEnvs=4 'task.dataset.env_ids=[0,1,2,3]'`。
+`max_samples` 是所有采集环境合计的行数。
+
+每次运行在 output_dir 下创建独立时间目录，包含 `metadata.json`、`manifest.json`
+及 `shard_00000.h5` 等分片。默认每片 1000 条，LZF 无损压缩，异步 CPU 队列上限为
+8 条；写入跟不上时等待，不丢帧，也不累积 GPU 图像。每片 `_committed_rows`
+标记完整写入的安全行数，读取时忽略其后的未提交部分。正常关闭会写出剩余样本。
+
+| HDF5 字段 | 单条样本形状 / 类型 | 内容 |
+| --- | --- | --- |
+| `rgb/finger` | `[5,112,112,3] uint8` | thumb、index、middle、ring、little，RGB/HWC |
+| `rgb/top` | `[256,256,3] uint8` | 固定顶视 RGB |
+| `state/joint_position`, `state/joint_velocity` | `[20] float32` | 关节角 rad、速度 rad/s；顺序在 metadata |
+| `tactile/contact` | `[15] uint8` | 各触觉 link 在本控制步是否超过接触阈值 |
+| `tactile/peak_force_env`, `tactile/peak_force_hand` | `[15,3] float32` | 环境坐标系 / 手 base 坐标系下的峰值净接触力 N |
+| `object/pose_env`, `object/pose_world`, `object/pose_hand` | `[K,7] float32` | 物体位姿：位置 xyz 米 + 四元数 xyzw；单物体 K=1，双球 K=2 |
+| `object/pose_top_camera` | `[K,7] float32` | 顶视相机光学坐标系下的物体位姿 |
+| `camera/pose_env`, `camera/pose_world`, `camera/pose_hand` | `[6,7] float32` | 六路相机外参，顺序为五指 + top |
+| `index/*`, `time/*`, `transition/done` | 标量 | 样本、环境、episode、控制步、仿真时刻和终止标记 |
+| `transition/action`, `transition/*_before` | 动作 / 状态数组 | 刚执行的动作，以及执行前的关节、位姿和教师输入 |
+
+另外保存关节目标、物体速度、触觉 link 的位姿、原始相机 view 矩阵、reward、
+timeout/stall 和有限数值标记。metadata 含相机内参 K、光学坐标轴约定、关节/触觉名称、
+物体尺寸缩放和固定纹理 ID/manifest、URDF/模型哈希及完整配置。
+相机 pose 表示 `T_parent_camera`；光学轴为 **X 右、Y 下、Z 前**。
+`pose_world` 在 `pose_env` 位置上加对应环境原点。
+原始 Gym view 矩阵使用 world 点和行向量乘法，具体约定亦存入 metadata。
+
+top-view 默认分辨率 256²、水平视场角 60°，观察目标固定为手部 **BASE** 坐标下的
+`target_local=[0.005,-0.0715,0.11]` m，与物体初始位置/姿态无关。
+本手的掌面法线为 BASE 局部 **-Y**（当前安装后对应 world +Z），相机沿该法线
+偏移 `distance=0.25` m，因此安装位置为 BASE 下 `[0.005,-0.3215,0.11]` m，
+朝向固定目标。相机随 BASE 整体运动，修改 `objectPositionLocal`、物体尺寸或
+初始姿态不会改变相机位置和朝向；旧配置中 null/缺失的 target 也使用这一固定
+BASE 参考点。已有采集数据中的相机位姿和图像保持原样。
+可修改 `task.dataset.top_camera.distance`、`horizontal_fov`、`target_local` 和
+`up_local`；修改 target_local 会同时平移相机与观察目标。默认视角覆盖原先
+65 mm 立方体的旋转包络，移动物体后应重新检查画幅覆盖；手指造成的遮挡会保留。
+
+所有 RGB 在完成物理步后一次渲染，和同一行的 q/qdot/物体 pose 对应，终止帧在
+环境重置前保存。触觉保存的是刚完成控制区间内各 pad 的峰值；不同 pad 的峰值
+可能来自不同物理子步，且净接触力包含与其他手部 link/地面接触，不是压力图。
+采集默认关闭触觉红绿变色，并在渲染前清掉坐标轴与选框，避免标签泄漏到 RGB。
+五指相机沿用原 CAD 近似挂载方向，不会自动追踪物体；当前 65 mm 方块初始抓姿下，
+多个指尖视角只看到背景或手部，物体不在画幅内。用于正式感知训练前，应查看六路
+预览并标定 `task.camera.mounts` 或调整抓姿；采集器会如实保存这些遮挡/不可见样本。
+
+同一行 RGB 是动作后的状态 **s[t+1]**；`transition/action` 是把 s[t] 推到
+s[t+1] 的 a[t]。感知训练可直接使用同一行 RGB 和 pose。视觉行为克隆在
+`capture_every=1` 时，应按 `(env_id, episode_id, episode_step)` 分组，将当前
+行 RGB 配到下一连续行的 action，跳过 terminal 和不连续样本；不能把同一行的
+前序 action 当作该 RGB 的下一步动作标签。末次采集限制也可能在 episode 中间结束。
+
+查看数据与导出六路预览（directory 换成终端打印的实际时间目录）：
+
+```bash
+python scripts/inspect_sensor_dataset.py "datasets/rapidhand/cube_65mm/实际时间目录" \
+  --sample 0 --preview /tmp/sensor_preview.png
+```
+
+按时间顺序回放已经采集的六路图像和传感器数据：
+
+```bash
+conda activate robosyn
+python scripts/replay_sensor_dataset.py "datasets/rapidhand/block_corner_75mm/实际时间目录"
+```
+
+窗口显示 top-view、五指 RGB，以及同一条样本的触觉状态、关节角/速度和物体在
+世界坐标系、手部 BASE 坐标系下的位置/四元数。top-view 默认叠加真实世界原点
+`W0=(0,0,0)` 的 XYZ 虚线轴，每根轴长 10 cm；同时在每个物体自身原点绘制
+长 5 cm 的 XYZ 实线轴，标记为 `O0`、`O1` 等，随记录的物体位姿平移、旋转。
+两组轴均以红/绿/蓝表示 +X/+Y/+Z，轴端分别标为 `WX`、`O0X` 等。
+叠加使用该帧保存的相机世界位姿和内参投影，不进行遮挡判断；俯视时 Z 轴投影
+可能很短。世界原点不在画面内时会明确提示，不会平移原点。叠加仅用于回放显示
+及手动导出的视频，原始 HDF5/RGB 保持不变。`w` 切换世界轴，`o` 切换物体轴；
+启动参数 `--no-world-axes`、`--no-object-axes` 可分别默认隐藏，数值位姿始终显示。
+空格暂停/继续，左右方向键逐帧查看，`r` 从头播放，`q` 或 Esc 退出。
+默认按记录的仿真时间播放，`--speed 0.5` 为半速。
+多环境数据默认只播放最小编号的环境，可用 `--env-id 1` 切换；
+`--episode-id 2` 只播放该 episode。读取范围以各分片 `_committed_rows` 为准。
+
+在回放窗口按 **S**，后台保存当前所选环境/episode 的**完整回放**为 MP4，包含
+六路图像、传感器数值，以及按键时的世界/物体坐标轴显示设置，速度沿用 `--speed`。
+输出位于当前采集目录的 `videos/replay_env<编号>_<时间>_<唯一后缀>.mp4`，
+不会覆盖已有文件。窗口标题显示保存中/完成状态，终端打印完整路径；保存期间可
+继续播放、暂停或逐帧查看，重复按 S 不会同时启动第二次导出。关闭窗口时会等待
+正在保存的视频完成。不按 S、也不传 `--export` 时不生成视频。
+
+仅导出视频而不打开窗口（默认不会保存视频，已有输出文件不会覆盖）：
+
+```bash
+python scripts/replay_sensor_dataset.py "datasets/rapidhand/block_corner_75mm/实际时间目录" \
+  --export /tmp/sensor_replay.mp4 --no-display
+```
+
+交互回放使用现有 Matplotlib/Tk，导出使用 robosyn 环境中的 FFmpeg；不需要启动
+Isaac Gym 或加载教师模型。这里播放的是采集时保存的图像，因此相机当时拍到的
+背景或遮挡也会原样显示，回放不会产生新的视角或修改原始 HDF5 数据。
+
+HDF5 可直接用于 PyTorch 感知模型，无需解码视频：
+
+```python
+import h5py
+import torch
+
+with h5py.File("<时间目录>/shard_00000.h5", "r", swmr=True) as f:
+    n = int(f["_committed_rows"][()])
+    finger = torch.from_numpy(f["rgb/finger"][0]).permute(0, 3, 1, 2).float() / 255
+    top = torch.from_numpy(f["rgb/top"][0]).permute(2, 0, 1).float() / 255
+    q = torch.from_numpy(f["state/joint_position"][0])
+    pose = torch.from_numpy(f["object/pose_hand"][0])
+```
+
+训练/验证集应按完整 episode 或采集运行划分，避免将相邻帧随机拆分到不同集合。
+
+### 新手截角方块：六个主面连续循环展示
+
+75 mm 版本使用 `+object=block_corner_75mm_six_faces`，完整继承下面的六面循环奖励，
+仅将原 60 mm 几何缩放为 `1.25`。训练和数据分别保存至
+`runs/rapidhand/block_corner_75mm_six_faces_cycle/` 和
+`datasets/rapidhand/block_corner_75mm_six_faces_cycle/`，保留 85 mm 版本的配置与模型：
+
+```bash
+conda activate robosyn
+bash scripts/teacher_rapidhand.sh 0 +object=block_corner_75mm_six_faces \
+  task.env.numEnvs=8192 max_iterations=4000
+```
+
+独立配置 `block_corner_85mm_six_faces` 复用 85 mm 截角方块、手模型和 PPO 参数，
+通过当前目标面与本圈已完成面状态学习换面。对准目标主面即可登记，
+不要求停留或低速度；六面完成后继续下一圈，不重置手和物体。启动训练：
+
+```bash
+conda activate robosyn
+bash scripts/teacher_rapidhand.sh 0 +object=block_corner_85mm_six_faces \
+  task.env.numEnvs=8192 max_iterations=4000
+```
+
+模型独立保存至
+`runs/rapidhand/block_corner_85mm_six_faces_cycle/set_obj6_block_corner/six-faces/nn/`，
+最佳模型名为 `set_obj6_block_corner_six_faces.pth`。之前要求停留的六面任务保留在
+`runs/rapidhand/block_corner_85mm_six_faces/`；固定轴模型目录也保持不变。
+本任务保留 261/157 维策略/价值输入，旧六面模型权重可加载；奖励和第 13 个目标附加
+特征的含义改变，旧收益不可直接比较。旧固定轴 checkpoint 输入维度不同，不能直接加载。
+`axis=z` 只保留配置兼容性，不定义此任务的旋转轴。已运行的进程不会自动加载修改。
+
+每个 episode 从最接近顶视相机的主面开始，完成后选择尚未完成且角度最近的主面；
+六个面的编号依次为物体坐标系 `+X,-X,+Y,-Y,+Z,-Z`，并非固定执行顺序。
+完成一圈后清空本圈覆盖记录，下一目标排除刚完成的面；每一圈仍需六个不同主面。
+奖励默认如下：
+
+| 项目 | 默认规则 |
+| --- | --- |
+| 接近目标面 | `2 × (上一步角误差 − 当前角误差)`，弧度；退远相应扣分，切换目标不制造角度差奖励 |
+| 展示主面 | 目标面朝向相机误差不超过 15°，满足几何可见性并且物体未掉落，一个控制步即可登记；不要求低速度或 15 mm 内的位置门槛 |
+| 停留奖励 | 已删除，始终为 0；`hold_seconds=0`、`hold_reward=0` |
+| 完成主面 | 真实 reset 后的初始面仅登记、不给 `+5`；其余每个新主面 `+5`，包括之后每圈的首面 |
+| 完成一圈 | 六面全部完成额外 `+10`，继续下一圈，不重置物理状态；本圈同一面不重复计分 |
+| 无进展 / 超时 | 每个目标先有 2 秒缓冲；达到 3 秒无至少 5° 的最佳误差改善且未展示成功，或单目标达到 12 秒，扣 `2` 并重置 |
+| 掌心位置与掉落 | 超出 15 mm 后，位置惩罚为 `0.2 × ((偏移 − 0.015)/0.01)²`；掉落扣 `15` 并重置。保留手指距离、动作与关节速度惩罚 |
+
+“主面可见”还要求物体包围盒在固定顶视相机画幅内、主面投影面积至少 64 像素。
+这是不检测手指遮挡的几何可见性指标；完成六面不保证 26 个面均有无遮挡图像，
+正式数据应结合实际 RGB 检查覆盖情况。训练时无需为每个环境创建相机。
+物理回合仍受 500 控制步上限、掉落与停滞规则约束。训练日志新增完成圈数；
+episode 成功率表示结束前是否完成过至少一圈。`stable` 只作为低速稳定性诊断，
+不决定是否登记主面。旧配置 `hold_seconds>0`、`repeat_cycles=False` 仍支持原来的停留任务。
+
+沿用 `task.dataset.enabled=True` 开启六路 RGB/触觉/状态采集，输出至
+`datasets/rapidhand/block_corner_85mm_six_faces_cycle/` 下的独立时间目录。
+仅此任务新增 HDF5 `six_face/*`：目标面、已完成面、停留与目标计时的动作前后快照，
+以及本步实际评估的目标、展示/稳定/几何可见标记、完成圈数、整圈完成事件、
+停滞/超时和分项奖励。无停留模式下，16 维附加目标特征中的原停留进度槽改为
+`initial_face_pending`（仅真实 reset 后尚未登记首面时为 1）。
+目标切换前后的状态分别保存，终止帧在自动重置前保存；其他任务的数据格式保持不变。
 
 ### Student Policy Training
 We provide an implementation of behavior cloning here. You may also implement your own method of distillation with the task environment we provide. 

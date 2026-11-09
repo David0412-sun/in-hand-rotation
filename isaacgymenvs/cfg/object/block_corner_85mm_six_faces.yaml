@@ -1,0 +1,46 @@
+# @package _global_
+# Continuous six principal-face cycles, isolated from earlier hold-task checkpoints.
+# Select with +object=block_corner_85mm_six_faces and task=RapidHandRotation.
+defaults:
+  - block_corner_85mm_centered
+  - _self_
+
+task:
+  dataset:
+    output_dir: datasets/rapidhand/block_corner_85mm_six_faces_cycle
+  env:
+    # axis remains a compatibility field; six_faces does not reward Z-axis spin.
+    axis: z
+    numObservations: 261
+    numStates: 157
+    rotationRewardMode: six_faces
+    centeredRotationReward: False
+    rotationStallTimeout: 0.0
+    positionTolerance: 0.015
+    positionPenaltyDistance: 0.01
+    positionPenaltyScale: 0.2
+    fallPenalty: -15.0
+    sixFace:
+      alignment_tolerance_deg: 15.0
+      # One geometrically visible control-step sample counts; no dwell/speed gate.
+      hold_seconds: 0.0
+      repeat_cycles: True
+      # Retained for the stable diagnostic only; these do not gate face completion.
+      max_angular_speed: 0.4
+      max_linear_speed: 0.03
+      progress_scale: 2.0
+      hold_reward: 0.0
+      initial_face_bonus: 0.0
+      face_bonus: 5.0
+      completion_bonus: 10.0
+      stall_seconds: 3.0
+      stall_grace_seconds: 2.0
+      stall_progress_deg: 5.0
+      target_timeout_seconds: 12.0
+      timeout_penalty: -2.0
+      min_projected_area_pixels: 64.0
+
+train:
+  params:
+    config:
+      train_dir: runs/rapidhand/block_corner_85mm_six_faces_cycle

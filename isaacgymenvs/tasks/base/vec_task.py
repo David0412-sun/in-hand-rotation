@@ -806,7 +806,8 @@ class VecTask(Env):
             if self.enable_viewer_sync:
                 self.gym.step_graphics(self.sim)
                 self.before_viewer_draw()
-                self.gym.draw_viewer(self.viewer, self.sim, True)
+                self.gym.draw_viewer(
+                    self.viewer, self.sim, bool(self.cfg.get("viewerRenderCollision", True)))
 
                 # Wait for dt to elapse in real time.
                 # This synchronizes the physics simulation with the rendering rate.

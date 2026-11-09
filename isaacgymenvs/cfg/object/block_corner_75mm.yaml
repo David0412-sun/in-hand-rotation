@@ -11,7 +11,8 @@ task:
     # Reward frequent small forward turns near the fixed palm-frame reference.
     centeredRotationReward: True
     positiveSpinRewardLimit: 0.6  # rad/s; about 3.4 degrees per control step
-    positionTolerance: 0.005  # m; no position penalty inside this radius
+    # Allow 10 mm for Y-axis block regrasping; other axes and inherited objects keep 5 mm.
+    positionTolerance: ${if:${eq:${.axis},y},${if:${eq:${.objectName},set_obj6_block_corner},0.01,0.005},0.005}
     positionPenaltyDistance: 0.01  # m; normalisation for the quadratic penalty
     positionPenaltyScale: 0.2
     positionRewardFalloff: 0.015  # m; Gaussian falloff outside the tolerance

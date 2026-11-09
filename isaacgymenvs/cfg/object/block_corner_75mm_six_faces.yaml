@@ -1,0 +1,17 @@
+# @package _global_
+# Same continuous six-face objective, with 75 mm geometry and separate outputs.
+defaults:
+  - block_corner_85mm_six_faces
+  - _self_
+
+task:
+  env:
+    # The source chamfered block is 60 mm across: 60 * 1.25 = 75 mm.
+    objectScale: 1.25
+  dataset:
+    output_dir: datasets/rapidhand/block_corner_75mm_six_faces_cycle
+
+train:
+  params:
+    config:
+      train_dir: runs/rapidhand/block_corner_75mm_six_faces_cycle

@@ -1,0 +1,19 @@
+# @package _global_
+# Reuse the centred reward of the 75 mm Z-axis run (best epoch 3544).
+defaults:
+  - block_corner_75mm
+  - _self_
+
+task:
+  env:
+    axis: z
+    # The source visual and collision geometry is already 60 mm.
+    objectScale: 1.0
+    # Retain the historical tolerance independently of Y-axis tuning.
+    positionTolerance: 0.005
+
+train:
+  params:
+    config:
+      # The router appends the object and axis beneath this task directory.
+      train_dir: runs/rapidhand/block_corner_60mm_centered

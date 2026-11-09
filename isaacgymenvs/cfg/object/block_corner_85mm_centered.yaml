@@ -1,0 +1,16 @@
+# @package _global_
+# Use the centred reward with 85 mm geometry and an independent task directory.
+defaults:
+  - block_corner_75mm
+  - _self_
+
+task:
+  env:
+    axis: z
+    objectScale: 1.4166666666666667
+    positionTolerance: 0.005
+
+train:
+  params:
+    config:
+      train_dir: runs/rapidhand/block_corner_85mm_centered

@@ -1,0 +1,15 @@
+# @package _global_
+# Reuse the historical centred Z-axis reward with independent 65 mm outputs.
+defaults:
+  - block_corner_75mm_centered
+  - _self_
+
+task:
+  env:
+    # The source visual and collision geometry is 60 mm: 65 / 60.
+    objectScale: 1.0833333333333333
+
+train:
+  params:
+    config:
+      train_dir: runs/rapidhand/block_corner_65mm_centered

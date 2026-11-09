@@ -1,0 +1,635 @@
+{
+  "coordinate_frame": {
+    "image_note": "Matching object pose does not fix camera pose, lighting or hand occlusion.",
+    "mapping": "One fixed object-local surface appearance, independent of pose, environment, episode and time.",
+    "pose_storage": "position_m_and_quaternion_xyzw",
+    "texture_attachment": "object_local_mesh_UV"
+  },
+  "faces": [
+    {
+      "adjacent_face_ids": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "face_id": 0,
+      "face_seed": 2318879008,
+      "normal_object": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "pattern": {
+        "atlas_bbox_pixels": [
+          639,
+          256,
+          896,
+          513
+        ],
+        "colour_rgb": [
+          13,
+          134,
+          255
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 66049,
+        "palette_rgb": [
+          [
+            13,
+            134,
+            255
+          ]
+        ],
+        "style": "single_solid_colour"
+      },
+      "uv_indices0": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "uv_polygon": [
+        [
+          0.625,
+          0.5
+        ],
+        [
+          0.875,
+          0.5
+        ],
+        [
+          0.875,
+          0.75
+        ],
+        [
+          0.625,
+          0.75
+        ]
+      ],
+      "vertex_indices0": [
+        0,
+        4,
+        6,
+        2
+      ],
+      "vertices_mesh": [
+        [
+          1.0,
+          1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "adjacent_face_ids": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "face_id": 1,
+      "face_seed": 3912705308,
+      "normal_object": [
+        0.0,
+        -0.0,
+        1.0
+      ],
+      "pattern": {
+        "atlas_bbox_pixels": [
+          384,
+          0,
+          640,
+          257
+        ],
+        "colour_rgb": [
+          13,
+          13,
+          255
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 65791,
+        "palette_rgb": [
+          [
+            13,
+            13,
+            255
+          ]
+        ],
+        "style": "single_solid_colour"
+      },
+      "uv_indices0": [
+        4,
+        3,
+        5,
+        6
+      ],
+      "uv_polygon": [
+        [
+          0.375,
+          0.75
+        ],
+        [
+          0.625,
+          0.75
+        ],
+        [
+          0.625,
+          1.0
+        ],
+        [
+          0.375,
+          1.0
+        ]
+      ],
+      "vertex_indices0": [
+        3,
+        2,
+        6,
+        7
+      ],
+      "vertices_mesh": [
+        [
+          1.0,
+          -1.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "adjacent_face_ids": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "face_id": 2,
+      "face_seed": 1278494583,
+      "normal_object": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "pattern": {
+        "atlas_bbox_pixels": [
+          384,
+          767,
+          640,
+          1024
+        ],
+        "colour_rgb": [
+          115,
+          255,
+          255
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 65792,
+        "palette_rgb": [
+          [
+            115,
+            255,
+            255
+          ]
+        ],
+        "style": "single_solid_colour"
+      },
+      "uv_indices0": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "uv_polygon": [
+        [
+          0.375,
+          0.0
+        ],
+        [
+          0.625,
+          0.0
+        ],
+        [
+          0.625,
+          0.25
+        ],
+        [
+          0.375,
+          0.25
+        ]
+      ],
+      "vertex_indices0": [
+        7,
+        6,
+        4,
+        5
+      ],
+      "vertices_mesh": [
+        [
+          -1.0,
+          -1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          -1.0
+        ]
+      ]
+    },
+    {
+      "adjacent_face_ids": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "face_id": 3,
+      "face_seed": 2012689641,
+      "normal_object": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "pattern": {
+        "atlas_bbox_pixels": [
+          128,
+          256,
+          385,
+          513
+        ],
+        "colour_rgb": [
+          166,
+          41,
+          104
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 66048,
+        "palette_rgb": [
+          [
+            166,
+            41,
+            104
+          ]
+        ],
+        "style": "single_solid_colour"
+      },
+      "uv_indices0": [
+        11,
+        12,
+        4,
+        13
+      ],
+      "uv_polygon": [
+        [
+          0.125,
+          0.5
+        ],
+        [
+          0.375,
+          0.5
+        ],
+        [
+          0.375,
+          0.75
+        ],
+        [
+          0.125,
+          0.75
+        ]
+      ],
+      "vertex_indices0": [
+        5,
+        1,
+        3,
+        7
+      ],
+      "vertices_mesh": [
+        [
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          1.0
+        ],
+        [
+          -1.0,
+          -1.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "adjacent_face_ids": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "face_id": 4,
+      "face_seed": 2363508950,
+      "normal_object": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "pattern": {
+        "atlas_bbox_pixels": [
+          385,
+          257,
+          639,
+          513
+        ],
+        "colour_rgb": [
+          13,
+          255,
+          13
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 65024,
+        "palette_rgb": [
+          [
+            13,
+            255,
+            13
+          ]
+        ],
+        "style": "single_solid_colour"
+      },
+      "uv_indices0": [
+        12,
+        0,
+        3,
+        4
+      ],
+      "uv_polygon": [
+        [
+          0.375,
+          0.5
+        ],
+        [
+          0.625,
+          0.5
+        ],
+        [
+          0.625,
+          0.75
+        ],
+        [
+          0.375,
+          0.75
+        ]
+      ],
+      "vertex_indices0": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "vertices_mesh": [
+        [
+          1.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "adjacent_face_ids": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "face_id": 5,
+      "face_seed": 1432673340,
+      "normal_object": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "pattern": {
+        "atlas_bbox_pixels": [
+          384,
+          513,
+          640,
+          767
+        ],
+        "colour_rgb": [
+          255,
+          174,
+          13
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 65024,
+        "palette_rgb": [
+          [
+            255,
+            174,
+            13
+          ]
+        ],
+        "style": "single_solid_colour"
+      },
+      "uv_indices0": [
+        10,
+        9,
+        0,
+        12
+      ],
+      "uv_polygon": [
+        [
+          0.375,
+          0.25
+        ],
+        [
+          0.625,
+          0.25
+        ],
+        [
+          0.625,
+          0.5
+        ],
+        [
+          0.375,
+          0.5
+        ]
+      ],
+      "vertex_indices0": [
+        5,
+        4,
+        0,
+        1
+      ],
+      "vertices_mesh": [
+        [
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          -1.0,
+          1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0,
+          -1.0
+        ]
+      ]
+    }
+  ],
+  "generator_version": "cube_uv_atlas_solid_v1",
+  "mesh_file": "urdf/objects/meshes/set2/set_obj1_regular_block.obj",
+  "mesh_sha256": "a2d7b41f0e90e89b38c2f04d1a140eed4e7484547a1a8f29557d57918c41b190",
+  "object_name": "set_obj1_regular_block",
+  "palette_contract": {
+    "adjacency": "source OBJ faces sharing a mesh edge",
+    "adjacent_face_pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "colours_per_face": 1,
+    "colours_total": 6,
+    "common_edge_colour": false,
+    "contrast_metric": "CIE76 Euclidean distance in CIELAB (sRGB D65)",
+    "face_palettes_disjoint": true,
+    "minimum_adjacent_delta_e76": 76.48645622027874,
+    "sampling_note": "Texture filtering and lighting can interpolate edge/display colours."
+  },
+  "resolution": [
+    1024,
+    1024
+  ],
+  "schema_version": 1,
+  "seed": 20261102,
+  "source_mesh_scale": [
+    0.03,
+    0.03,
+    0.03
+  ],
+  "texture_file": "atlas.png",
+  "texture_id": "set_obj1_regular_block_solid_v1_s20261102_r1024_d9808c3f39b9",
+  "texture_sha256": "d9808c3f39b969671f56152c40fd674824f2370fa08c8600c883e553aa38f7d9",
+  "uv_convention": {
+    "mesh_uv_origin": "bottom_left",
+    "outside_face_padding_pixels": 2,
+    "png_origin": "top_left",
+    "rasterization": "x=round(u*(width-1)); y=round((1-v)*(height-1))",
+    "shared_edge_pixel_ownership": "lowest face_id first; no common border"
+  }
+}

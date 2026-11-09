@@ -1,0 +1,20 @@
+# @package _global_
+# A 53 mm cube with a fixed, high-contrast solid colour on each of its six faces.
+defaults:
+  - cube_75mm
+  - _self_
+
+task:
+  object_texture:
+    enabled: True
+    object_name: set_obj1_regular_block
+    atlas_file: textures/cube_solid_v1/atlas.png
+    manifest_file: textures/cube_solid_v1/manifest.json
+  env:
+    # Source visual and collision geometry: 60 mm * (53 / 60) = 53 mm.
+    objectScale: 0.8833333333333333
+
+train:
+  params:
+    config:
+      train_dir: runs/rapidhand/cube_53mm

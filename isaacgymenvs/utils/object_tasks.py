@@ -36,7 +36,7 @@ def select_objects(object_set, object_name=""):
 
 
 def configure_output_directory(cfg, distillation=False):
-    """Route by object and task axis, independently of experiment parameters."""
+    """Route by object and task objective, independently of experiment parameters."""
     env = cfg.task.env
     objects = select_objects(env.objSet, env.get("objectName", ""))
     axis = str(env.axis)
@@ -50,10 +50,13 @@ def configure_output_directory(cfg, distillation=False):
         # A policy trained on a set does not belong to any one object.
         object_dir = os.path.join("_object_sets", str(env.objSet))
         model_name = str(env.objSet)
-    task_dir = os.path.join(object_dir, axis + "-axis")
+    six_faces = env.get("rotationRewardMode", "") == "six_faces"
+    if six_faces and objects != ["set_obj6_block_corner"]:
+        raise ValueError("six_faces requires the single set_obj6_block_corner object")
+    task_dir = os.path.join(object_dir, "six-faces" if six_faces else axis + "-axis")
 
     config = cfg.train.params.config
-    config.name = model_name + "_" + axis
+    config.name = model_name + ("_six_faces" if six_faces else "_" + axis)
     config.prefix = ""
     OmegaConf.update(config, "full_experiment_name", task_dir, force_add=True)
     output_dir = os.path.join(config.get("train_dir", "runs"), task_dir)

@@ -1,0 +1,15 @@
+# @package _global_
+# A 65 mm cube using the same fixed six-face colours and rotation settings.
+defaults:
+  - cube_53mm
+  - _self_
+
+task:
+  env:
+    # Scale both 60 mm source visual and collision meshes to 65 mm.
+    objectScale: 1.0833333333333333
+
+train:
+  params:
+    config:
+      train_dir: runs/rapidhand/cube_65mm

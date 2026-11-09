@@ -70,6 +70,12 @@ def launch_rlg_hydra(cfg: DictConfig):
     if cfg.checkpoint:
         cfg.checkpoint = to_absolute_path(cfg.checkpoint)
 
+    dataset = cfg.task.get('dataset')
+    if dataset is not None and dataset.get('enabled', False):
+        dataset.output_dir = to_absolute_path(dataset.output_dir)
+        dataset.mode = 'replay' if cfg.test else 'train'
+        dataset.checkpoint = cfg.checkpoint
+
     camera = cfg.task.get('camera')
     if camera is not None and camera.get('enabled', False):
         if not camera.output_dir:

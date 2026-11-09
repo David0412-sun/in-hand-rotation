@@ -4,6 +4,54 @@ physics_engine: ${..physics_engine}
 # Persist GPU/allocator memory at each training epoch boundary; replay skips it.
 gpuMemoryLog: True
 
+# Draw visual meshes/materials in the Viewer, including the fixed object texture.
+viewerRenderCollision: False
+
+# Optional synchronized RGB/state dataset; disabled for normal training/replay.
+dataset:
+  enabled: False
+  env_ids: [0]
+  output_dir: datasets/rapidhand
+  capture_every: 1
+  # Total rows over all selected environments; terminal frames are also saved.
+  max_samples: 10000
+  shard_size: 1000
+  queue_size: 8
+  flush_every: 16
+  compression: lzf
+  # Avoid leaking tactile contact labels into the RGB appearance.
+  static_tactile_colors: True
+  seed: ${seed}
+  checkpoint: ''
+  mode: replay
+  top_camera:
+    width: 256
+    height: 256
+    horizontal_fov: 60.0
+    near_plane: 0.01
+    far_plane: 2.0
+    # Fixed point in hand BASE coordinates, independent of object initialization.
+    # Camera position = target_local + distance * palmNormalLocal.
+    # With the defaults this is [0.005, -0.3215, 0.11] m in BASE.
+    target_local: [0.005, -0.0715, 0.11]
+    # Offset along hand-local palmNormalLocal (default -Y, simulation world +Z).
+    distance: 0.25
+    up_local: [0.0, 0.0, 1.0]
+
+# Viewer-only overlays, enabled for replay; headless training skips them.
+# Solid arrows follow the object; dashed arrows retain world XYZ directions.
+viewer_axes:
+  enabled: ${test}
+  object: True
+  world: True
+  # -1 follows the selected finger-camera environment, otherwise environment 0.
+  env_id: -1
+  axis_length: 0.10
+  # env translates world directions beside the selected hand; global uses the
+  # actual simulation world origin (0,0,0), which can be outside a close-up view.
+  world_origin_mode: env
+  world_position: [0.16, 0.0, 0.30]
+
 # Optional monitoring only: these images never enter the policy observations.
 camera:
   enabled: False
@@ -16,7 +64,8 @@ camera:
   width: 112
   height: 112
   horizontal_fov: 90.0
-  near_plane: 0.001
+  # Close-contact views need a sub-millimetre near plane and optical offset.
+  near_plane: 0.0001
   far_plane: 1.0
   capture_every: 1
   segment_steps: 300
@@ -29,28 +78,37 @@ camera:
   checkpoint: ''
   # Approximate optical mounting, not real camera calibration. The CAD lens
   # faces link +Z. Gym camera +X is mapped to it, with image right +X/up -Y
-  # in the link frame; the optical origin is 1 mm in front of the CAD lens.
+  # in the link frame; the optical origin is 0.1 mm in front of the CAD lens.
+  # A 1 mm offset can put the optical origin inside the grasped visual mesh.
   mounts:
     thumb:
       link: TDIP_CAMERA
-      position: [0.0, 0.0, 0.001]
+      position: [0.0, 0.0, 0.0001]
       rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
     index:
       link: IDIP_CAMERA
-      position: [0.0, 0.0, 0.001]
+      position: [0.0, 0.0, 0.0001]
       rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
     middle:
       link: MDIP_CAMERA
-      position: [0.0, 0.0, 0.001]
+      position: [0.0, 0.0, 0.0001]
       rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
     ring:
       link: RDIP_CAMERA
-      position: [0.0, 0.0, 0.001]
+      position: [0.0, 0.0, 0.0001]
       rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
     little:
       link: LDIP_CAMERA
-      position: [0.0, 0.0, 0.001]
+      position: [0.0, 0.0, 0.0001]
       rotation: [1.5707963267948966, -1.5707963267948966, 0.0]
+
+# Fixed visual texture; the chamfered-block presets enable this profile only
+# for set_obj6_block_corner. Headless runs without cameras allocate no texture.
+object_texture:
+  enabled: False
+  object_name: set_obj6_block_corner
+  atlas_file: textures/chamfered_block_solid_v3/atlas.png
+  manifest_file: textures/chamfered_block_solid_v3/manifest.json
 
 env:
   numEnvs: ${resolve_default:256,${...num_envs}}

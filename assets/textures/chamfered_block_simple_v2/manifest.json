@@ -1,0 +1,2320 @@
+{
+  "coordinate_frame": {
+    "image_note": "Matching object pose does not fix camera pose, lighting or hand occlusion.",
+    "mapping": "One fixed object-local surface appearance, independent of pose, environment, episode and time.",
+    "pose_storage": "position_m_and_quaternion_xyzw",
+    "texture_attachment": "object_local_mesh_UV"
+  },
+  "faces": [
+    {
+      "face_id": 0,
+      "face_seed": 1647895233,
+      "normal_object": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.30791581431070836,
+        "atlas_bbox_pixels": [
+          182,
+          309,
+          331,
+          459
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 22350,
+        "palette_rgb": [
+          [
+            168,
+            248,
+            128
+          ],
+          [
+            128,
+            48,
+            168
+          ]
+        ],
+        "pattern_sha256": "3b6662ef03ecb5274aa01c60bf65e8df8d9ef009dfd4c513c0ca75f3bbc835b5",
+        "split_direction_pixels": [
+          -0.02270617173107276,
+          -0.999742181647508
+        ],
+        "split_threshold_local_pixels": -104.99496461923911,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "uv_polygon": [
+        [
+          0.1775,
+          0.5525
+        ],
+        [
+          0.3225,
+          0.5525
+        ],
+        [
+          0.3225,
+          0.6975
+        ],
+        [
+          0.1775,
+          0.6975
+        ]
+      ],
+      "vertex_indices0": [
+        17,
+        3,
+        11,
+        21
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          -1.0,
+          -0.58
+        ],
+        [
+          0.58,
+          -1.0,
+          -0.58
+        ],
+        [
+          0.58,
+          -1.0,
+          0.58
+        ],
+        [
+          -0.58,
+          -1.0,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 1,
+      "face_seed": 520519410,
+      "normal_object": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3835241441352885,
+        "atlas_bbox_pixels": [
+          437,
+          821,
+          587,
+          970
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 22350,
+        "palette_rgb": [
+          [
+            248,
+            48,
+            48
+          ],
+          [
+            48,
+            248,
+            248
+          ]
+        ],
+        "pattern_sha256": "1761bd6ec4eddbda78a06145242758fde5e4071e3066408bb5ecdd60988b5e89",
+        "split_direction_pixels": [
+          0.06113744866460473,
+          0.998129356531899
+        ],
+        "split_threshold_local_pixels": 61.090580187307815,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "uv_polygon": [
+        [
+          0.4275,
+          0.0525
+        ],
+        [
+          0.5725,
+          0.0525
+        ],
+        [
+          0.5725,
+          0.1975
+        ],
+        [
+          0.4275,
+          0.1975
+        ]
+      ],
+      "vertex_indices0": [
+        23,
+        18,
+        13,
+        15
+      ],
+      "vertices_mesh": [
+        [
+          -1.0,
+          -0.58,
+          0.58
+        ],
+        [
+          -1.0,
+          0.58,
+          0.58
+        ],
+        [
+          -1.0,
+          0.58,
+          -0.58
+        ],
+        [
+          -1.0,
+          -0.58,
+          -0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 2,
+      "face_seed": 3201256045,
+      "normal_object": [
+        0.0,
+        -0.0,
+        1.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.37056276583651737,
+        "atlas_bbox_pixels": [
+          437,
+          54,
+          587,
+          203
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 22350,
+        "palette_rgb": [
+          [
+            48,
+            128,
+            48
+          ],
+          [
+            248,
+            168,
+            248
+          ]
+        ],
+        "pattern_sha256": "0446d277dea449f8af79f7bcf359a350dfe38334e631b7ac6078dd0654ae2a9f",
+        "split_direction_pixels": [
+          -0.8585005433731391,
+          -0.5128126529523476
+        ],
+        "split_threshold_local_pixels": -118.57855720340271,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "uv_polygon": [
+        [
+          0.4275,
+          0.8025
+        ],
+        [
+          0.5725,
+          0.8025
+        ],
+        [
+          0.5725,
+          0.9475
+        ],
+        [
+          0.4275,
+          0.9475
+        ]
+      ],
+      "vertex_indices0": [
+        10,
+        8,
+        19,
+        22
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          -0.58,
+          1.0
+        ],
+        [
+          0.58,
+          0.58,
+          1.0
+        ],
+        [
+          -0.58,
+          0.58,
+          1.0
+        ],
+        [
+          -0.58,
+          -0.58,
+          1.0
+        ]
+      ]
+    },
+    {
+      "face_id": 3,
+      "face_seed": 78481368,
+      "normal_object": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3296051621616845,
+        "atlas_bbox_pixels": [
+          693,
+          309,
+          842,
+          459
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 22350,
+        "palette_rgb": [
+          [
+            208,
+            168,
+            48
+          ],
+          [
+            88,
+            128,
+            248
+          ]
+        ],
+        "pattern_sha256": "d83fd3264b491455198572bea07a2cc4226f4c33d2536327db40d6cb552496d9",
+        "split_direction_pixels": [
+          -0.9077238852785051,
+          0.41956804942094345
+        ],
+        "split_threshold_local_pixels": -58.96988721989789,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "uv_polygon": [
+        [
+          0.6775,
+          0.5525
+        ],
+        [
+          0.8225,
+          0.5525
+        ],
+        [
+          0.8225,
+          0.6975
+        ],
+        [
+          0.6775,
+          0.6975
+        ]
+      ],
+      "vertex_indices0": [
+        1,
+        14,
+        20,
+        7
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          1.0,
+          -0.58
+        ],
+        [
+          -0.58,
+          1.0,
+          -0.58
+        ],
+        [
+          -0.58,
+          1.0,
+          0.58
+        ],
+        [
+          0.58,
+          1.0,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 4,
+      "face_seed": 1439248641,
+      "normal_object": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.39980838589135825,
+        "atlas_bbox_pixels": [
+          437,
+          309,
+          587,
+          459
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 22500,
+        "palette_rgb": [
+          [
+            248,
+            48,
+            248
+          ],
+          [
+            48,
+            248,
+            48
+          ]
+        ],
+        "pattern_sha256": "63bda5f383fd99a5c3e736cbe7065fa0711cbd9b52f83d59cf951c03d57884bf",
+        "split_direction_pixels": [
+          -0.9638117550057735,
+          0.2665837596566804
+        ],
+        "split_threshold_local_pixels": -66.42127113540819,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "uv_polygon": [
+        [
+          0.4275,
+          0.5525
+        ],
+        [
+          0.5725,
+          0.5525
+        ],
+        [
+          0.5725,
+          0.6975
+        ],
+        [
+          0.4275,
+          0.6975
+        ]
+      ],
+      "vertex_indices0": [
+        5,
+        2,
+        6,
+        9
+      ],
+      "vertices_mesh": [
+        [
+          1.0,
+          -0.58,
+          -0.58
+        ],
+        [
+          1.0,
+          0.58,
+          -0.58
+        ],
+        [
+          1.0,
+          0.58,
+          0.58
+        ],
+        [
+          1.0,
+          -0.58,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 5,
+      "face_seed": 689958738,
+      "normal_object": [
+        0.5773502691896257,
+        0.5773502691896257,
+        -0.5773502691896257
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3154320974150317,
+        "atlas_bbox_pixels": [
+          586,
+          512,
+          640,
+          566
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 1485,
+        "palette_rgb": [
+          [
+            208,
+            48,
+            168
+          ],
+          [
+            88,
+            248,
+            128
+          ]
+        ],
+        "pattern_sha256": "2a0f1ea34e2312174223bfec223d731067a1f7d04de4dd85dfa5e1e431b4043a",
+        "split_direction_pixels": [
+          -0.988591796755615,
+          -0.15061958500641512
+        ],
+        "split_threshold_local_pixels": -28.93214329907,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        20,
+        21,
+        22
+      ],
+      "uv_polygon": [
+        [
+          0.5725,
+          0.4475
+        ],
+        [
+          0.625,
+          0.4475
+        ],
+        [
+          0.5725,
+          0.5
+        ]
+      ],
+      "vertex_indices0": [
+        0,
+        1,
+        2
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          0.58,
+          -1.0
+        ],
+        [
+          0.58,
+          1.0,
+          -0.58
+        ],
+        [
+          1.0,
+          0.58,
+          -0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 6,
+      "face_seed": 2993663356,
+      "normal_object": [
+        0.5773502691896257,
+        -0.5773502691896257,
+        -0.5773502691896257
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3673957582881424,
+        "atlas_bbox_pixels": [
+          330,
+          458,
+          385,
+          513
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 1539,
+        "palette_rgb": [
+          [
+            128,
+            248,
+            168
+          ],
+          [
+            168,
+            48,
+            128
+          ]
+        ],
+        "pattern_sha256": "31a412911e38ba9e4b3cd07a9690466b3d8ffefb8863547ee3e01b8b15e59674",
+        "split_direction_pixels": [
+          0.4925739336738613,
+          0.870270601517171
+        ],
+        "split_threshold_local_pixels": 21.361686154509897,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        1,
+        23,
+        24
+      ],
+      "uv_polygon": [
+        [
+          0.3225,
+          0.5525
+        ],
+        [
+          0.3225,
+          0.5
+        ],
+        [
+          0.375,
+          0.5525
+        ]
+      ],
+      "vertex_indices0": [
+        3,
+        4,
+        5
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          -1.0,
+          -0.58
+        ],
+        [
+          0.58,
+          -0.58,
+          -1.0
+        ],
+        [
+          1.0,
+          -0.58,
+          -0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 7,
+      "face_seed": 1421608108,
+      "normal_object": [
+        0.5773502691896257,
+        0.5773502691896257,
+        0.5773502691896257
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3452787116788903,
+        "atlas_bbox_pixels": [
+          586,
+          202,
+          640,
+          257
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 1511,
+        "palette_rgb": [
+          [
+            88,
+            88,
+            88
+          ],
+          [
+            208,
+            208,
+            208
+          ]
+        ],
+        "pattern_sha256": "827bfca149ff0a1ef6b99924f8d198451a813031cca31ff7a9909d5950785897",
+        "split_direction_pixels": [
+          -0.4701932122388567,
+          0.8825635065900388
+        ],
+        "split_threshold_local_pixels": -0.057822917887674574,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        25,
+        26,
+        9
+      ],
+      "uv_polygon": [
+        [
+          0.5725,
+          0.75
+        ],
+        [
+          0.625,
+          0.8025
+        ],
+        [
+          0.5725,
+          0.8025
+        ]
+      ],
+      "vertex_indices0": [
+        6,
+        7,
+        8
+      ],
+      "vertices_mesh": [
+        [
+          1.0,
+          0.58,
+          0.58
+        ],
+        [
+          0.58,
+          1.0,
+          0.58
+        ],
+        [
+          0.58,
+          0.58,
+          1.0
+        ]
+      ]
+    },
+    {
+      "face_id": 8,
+      "face_seed": 2399604552,
+      "normal_object": [
+        0.5773502691896257,
+        -0.5773502691896257,
+        0.5773502691896257
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3476636181515602,
+        "atlas_bbox_pixels": [
+          330,
+          256,
+          385,
+          310
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 1511,
+        "palette_rgb": [
+          [
+            128,
+            48,
+            88
+          ],
+          [
+            168,
+            248,
+            208
+          ]
+        ],
+        "pattern_sha256": "2780b47736cf97760f68c7ab22ff17c0b8d7006c63724f17f87e1a0e65e81595",
+        "split_direction_pixels": [
+          -0.5377794836630864,
+          0.8430855395219777
+        ],
+        "split_threshold_local_pixels": 15.45289467997428,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        27,
+        28,
+        2
+      ],
+      "uv_polygon": [
+        [
+          0.375,
+          0.6975
+        ],
+        [
+          0.3225,
+          0.75
+        ],
+        [
+          0.3225,
+          0.6975
+        ]
+      ],
+      "vertex_indices0": [
+        9,
+        10,
+        11
+      ],
+      "vertices_mesh": [
+        [
+          1.0,
+          -0.58,
+          0.58
+        ],
+        [
+          0.58,
+          -0.58,
+          1.0
+        ],
+        [
+          0.58,
+          -1.0,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 9,
+      "face_seed": 3594000360,
+      "normal_object": [
+        -0.5773502691896257,
+        0.5773502691896257,
+        -0.5773502691896257
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.366838347450062,
+        "atlas_bbox_pixels": [
+          586,
+          767,
+          640,
+          822
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 1511,
+        "palette_rgb": [
+          [
+            248,
+            88,
+            168
+          ],
+          [
+            48,
+            208,
+            128
+          ]
+        ],
+        "pattern_sha256": "1638c770c5bed360663fbb402557b77c5772af955296a9c684eaad63d6aa5ad9",
+        "split_direction_pixels": [
+          0.9624811216896171,
+          0.27134865098447897
+        ],
+        "split_threshold_local_pixels": 19.34231927936165,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        29,
+        6,
+        30
+      ],
+      "uv_polygon": [
+        [
+          0.5725,
+          0.25
+        ],
+        [
+          0.5725,
+          0.1975
+        ],
+        [
+          0.625,
+          0.1975
+        ]
+      ],
+      "vertex_indices0": [
+        12,
+        13,
+        14
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          0.58,
+          -1.0
+        ],
+        [
+          -1.0,
+          0.58,
+          -0.58
+        ],
+        [
+          -0.58,
+          1.0,
+          -0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 10,
+      "face_seed": 3719266376,
+      "normal_object": [
+        -0.5773502691896257,
+        -0.5773502691896257,
+        -0.5773502691896257
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.35504418126806003,
+        "atlas_bbox_pixels": [
+          128,
+          458,
+          183,
+          513
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 1539,
+        "palette_rgb": [
+          [
+            128,
+            168,
+            48
+          ],
+          [
+            168,
+            128,
+            248
+          ]
+        ],
+        "pattern_sha256": "fd896962e5d1878cd5fce81b5a54fb7fa3b1b94774e888023c6e3b97fa60d843",
+        "split_direction_pixels": [
+          0.595832623191324,
+          0.8031086384424873
+        ],
+        "split_threshold_local_pixels": 29.195798536374877,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        31,
+        32,
+        0
+      ],
+      "uv_polygon": [
+        [
+          0.125,
+          0.5525
+        ],
+        [
+          0.1775,
+          0.5
+        ],
+        [
+          0.1775,
+          0.5525
+        ]
+      ],
+      "vertex_indices0": [
+        15,
+        16,
+        17
+      ],
+      "vertices_mesh": [
+        [
+          -1.0,
+          -0.58,
+          -0.58
+        ],
+        [
+          -0.58,
+          -0.58,
+          -1.0
+        ],
+        [
+          -0.58,
+          -1.0,
+          -0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 11,
+      "face_seed": 724594502,
+      "normal_object": [
+        -0.5773502691896257,
+        0.5773502691896257,
+        0.5773502691896257
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.32456092804330383,
+        "atlas_bbox_pixels": [
+          586,
+          969,
+          640,
+          1024
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 1511,
+        "palette_rgb": [
+          [
+            168,
+            128,
+            48
+          ],
+          [
+            128,
+            168,
+            248
+          ]
+        ],
+        "pattern_sha256": "f9ce52f01b150fe14b392ff5ba6a908ba89fc20a1f06cf82edf5152048f358f1",
+        "split_direction_pixels": [
+          0.23764671580752017,
+          0.9713516554090489
+        ],
+        "split_threshold_local_pixels": 14.704097586048412,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        5,
+        33,
+        34
+      ],
+      "uv_polygon": [
+        [
+          0.5725,
+          0.0525
+        ],
+        [
+          0.5725,
+          0.0
+        ],
+        [
+          0.625,
+          0.0525
+        ]
+      ],
+      "vertex_indices0": [
+        18,
+        19,
+        20
+      ],
+      "vertices_mesh": [
+        [
+          -1.0,
+          0.58,
+          0.58
+        ],
+        [
+          -0.58,
+          0.58,
+          1.0
+        ],
+        [
+          -0.58,
+          1.0,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 12,
+      "face_seed": 2981243111,
+      "normal_object": [
+        -0.5773502691896257,
+        -0.5773502691896257,
+        0.5773502691896257
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3156282671992456,
+        "atlas_bbox_pixels": [
+          128,
+          256,
+          183,
+          310
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 1511,
+        "palette_rgb": [
+          [
+            48,
+            168,
+            248
+          ],
+          [
+            248,
+            128,
+            48
+          ]
+        ],
+        "pattern_sha256": "5eaa4de7ca42188ddddd82baa296dee51b5c4c3161594fade2854d579be3fdac",
+        "split_direction_pixels": [
+          0.6144615225222331,
+          -0.7889467899292444
+        ],
+        "split_threshold_local_pixels": -14.163411352749463,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        3,
+        35,
+        36
+      ],
+      "uv_polygon": [
+        [
+          0.1775,
+          0.6975
+        ],
+        [
+          0.1775,
+          0.75
+        ],
+        [
+          0.125,
+          0.6975
+        ]
+      ],
+      "vertex_indices0": [
+        21,
+        22,
+        23
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          -1.0,
+          0.58
+        ],
+        [
+          -0.58,
+          -0.58,
+          1.0
+        ],
+        [
+          -1.0,
+          -0.58,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 13,
+      "face_seed": 328440821,
+      "normal_object": [
+        -0.7071067811865476,
+        -0.7071067811865476,
+        0.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.39736868277390924,
+        "atlas_bbox_pixels": [
+          128,
+          310,
+          182,
+          458
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 7992,
+        "palette_rgb": [
+          [
+            168,
+            48,
+            208
+          ],
+          [
+            128,
+            248,
+            88
+          ]
+        ],
+        "pattern_sha256": "45545495f4e35fb0707af7ed1916344112c5b747ae9a6d81b79b7bbb897ac7a4",
+        "split_direction_pixels": [
+          -0.12725971863849042,
+          -0.9918694289129252
+        ],
+        "split_threshold_local_pixels": -91.35682074076911,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        0,
+        3,
+        36,
+        31
+      ],
+      "uv_polygon": [
+        [
+          0.1775,
+          0.5525
+        ],
+        [
+          0.1775,
+          0.6975
+        ],
+        [
+          0.125,
+          0.6975
+        ],
+        [
+          0.125,
+          0.5525
+        ]
+      ],
+      "vertex_indices0": [
+        17,
+        21,
+        23,
+        15
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          -1.0,
+          -0.58
+        ],
+        [
+          -0.58,
+          -1.0,
+          0.58
+        ],
+        [
+          -1.0,
+          -0.58,
+          0.58
+        ],
+        [
+          -1.0,
+          -0.58,
+          -0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 14,
+      "face_seed": 3556760900,
+      "normal_object": [
+        -0.0,
+        -0.7071067811865476,
+        -0.7071067811865476
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.33230220627372936,
+        "atlas_bbox_pixels": [
+          183,
+          459,
+          330,
+          513
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 7938,
+        "palette_rgb": [
+          [
+            88,
+            88,
+            208
+          ],
+          [
+            208,
+            208,
+            88
+          ]
+        ],
+        "pattern_sha256": "93c82f4e31f77e7bff33dd22a99236dd62cc83840a4258316f8f22fda6a0dcf3",
+        "split_direction_pixels": [
+          0.34513254452938746,
+          0.9385539551387925
+        ],
+        "split_threshold_local_pixels": 40.69575742511282,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        1,
+        0,
+        32,
+        23
+      ],
+      "uv_polygon": [
+        [
+          0.3225,
+          0.5525
+        ],
+        [
+          0.1775,
+          0.5525
+        ],
+        [
+          0.1775,
+          0.5
+        ],
+        [
+          0.3225,
+          0.5
+        ]
+      ],
+      "vertex_indices0": [
+        3,
+        17,
+        16,
+        4
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          -1.0,
+          -0.58
+        ],
+        [
+          -0.58,
+          -1.0,
+          -0.58
+        ],
+        [
+          -0.58,
+          -0.58,
+          -1.0
+        ],
+        [
+          0.58,
+          -0.58,
+          -1.0
+        ]
+      ]
+    },
+    {
+      "face_id": 15,
+      "face_seed": 657897461,
+      "normal_object": [
+        0.7071067811865476,
+        0.0,
+        -0.7071067811865476
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.34740934961870823,
+        "atlas_bbox_pixels": [
+          437,
+          459,
+          587,
+          566
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 15996,
+        "palette_rgb": [
+          [
+            88,
+            208,
+            208
+          ],
+          [
+            208,
+            88,
+            88
+          ]
+        ],
+        "pattern_sha256": "0850a5d6104321fa4322ed5c3428ce7d20473695aa910f752cc3c1ff8305fd90",
+        "split_direction_pixels": [
+          0.9262559367472414,
+          -0.3768951308261893
+        ],
+        "split_threshold_local_pixels": 27.665799514972548,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        17,
+        16,
+        37,
+        20
+      ],
+      "uv_polygon": [
+        [
+          0.5725,
+          0.5525
+        ],
+        [
+          0.4275,
+          0.5525
+        ],
+        [
+          0.4275,
+          0.4475
+        ],
+        [
+          0.5725,
+          0.4475
+        ]
+      ],
+      "vertex_indices0": [
+        2,
+        5,
+        4,
+        0
+      ],
+      "vertices_mesh": [
+        [
+          1.0,
+          0.58,
+          -0.58
+        ],
+        [
+          1.0,
+          -0.58,
+          -0.58
+        ],
+        [
+          0.58,
+          -0.58,
+          -1.0
+        ],
+        [
+          0.58,
+          0.58,
+          -1.0
+        ]
+      ]
+    },
+    {
+      "face_id": 16,
+      "face_seed": 2287986205,
+      "normal_object": [
+        -0.7071067811865476,
+        0.0,
+        0.7071067811865476
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3325994703389693,
+        "atlas_bbox_pixels": [
+          437,
+          970,
+          586,
+          1024
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 8046,
+        "palette_rgb": [
+          [
+            48,
+            128,
+            128
+          ],
+          [
+            248,
+            168,
+            168
+          ]
+        ],
+        "pattern_sha256": "2e7e34ff06530badb0ea671eb767b9ead81c204856f19c16ba28c178ea9e2e11",
+        "split_direction_pixels": [
+          0.742849693890032,
+          -0.6694582378964993
+        ],
+        "split_threshold_local_pixels": 18.691219857373753,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        38,
+        33,
+        5,
+        4
+      ],
+      "uv_polygon": [
+        [
+          0.4275,
+          0.0
+        ],
+        [
+          0.5725,
+          0.0
+        ],
+        [
+          0.5725,
+          0.0525
+        ],
+        [
+          0.4275,
+          0.0525
+        ]
+      ],
+      "vertex_indices0": [
+        22,
+        19,
+        18,
+        23
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          -0.58,
+          1.0
+        ],
+        [
+          -0.58,
+          0.58,
+          1.0
+        ],
+        [
+          -1.0,
+          0.58,
+          0.58
+        ],
+        [
+          -1.0,
+          -0.58,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 17,
+      "face_seed": 4070063519,
+      "normal_object": [
+        0.7071067811865476,
+        0.0,
+        0.7071067811865476
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.30427165534183437,
+        "atlas_bbox_pixels": [
+          437,
+          203,
+          587,
+          309
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 15846,
+        "palette_rgb": [
+          [
+            248,
+            248,
+            48
+          ],
+          [
+            48,
+            48,
+            248
+          ]
+        ],
+        "pattern_sha256": "28155c41e24c93b4632b382655147bee2449e75c60912975c7c02a6b11d1f8ce",
+        "split_direction_pixels": [
+          -0.20345523033390017,
+          0.9790842503328198
+        ],
+        "split_threshold_local_pixels": 16.135441814630585,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        9,
+        8,
+        19,
+        18
+      ],
+      "uv_polygon": [
+        [
+          0.5725,
+          0.8025
+        ],
+        [
+          0.4275,
+          0.8025
+        ],
+        [
+          0.4275,
+          0.6975
+        ],
+        [
+          0.5725,
+          0.6975
+        ]
+      ],
+      "vertex_indices0": [
+        8,
+        10,
+        9,
+        6
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          0.58,
+          1.0
+        ],
+        [
+          0.58,
+          -0.58,
+          1.0
+        ],
+        [
+          1.0,
+          -0.58,
+          0.58
+        ],
+        [
+          1.0,
+          0.58,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 18,
+      "face_seed": 255282362,
+      "normal_object": [
+        -0.7071067811865476,
+        -0.0,
+        -0.7071067811865476
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.36851586315226315,
+        "atlas_bbox_pixels": [
+          437,
+          714,
+          587,
+          821
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 15996,
+        "palette_rgb": [
+          [
+            48,
+            48,
+            128
+          ],
+          [
+            248,
+            248,
+            168
+          ]
+        ],
+        "pattern_sha256": "148f9228382f86a7dd8f21c05348642dd9d38a33df270699c7915c7f8eef9f04",
+        "split_direction_pixels": [
+          -0.9602236346048368,
+          -0.27923211052147434
+        ],
+        "split_threshold_local_pixels": -104.97197371189303,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        39,
+        40,
+        7,
+        6
+      ],
+      "uv_polygon": [
+        [
+          0.5725,
+          0.3025
+        ],
+        [
+          0.4275,
+          0.3025
+        ],
+        [
+          0.4275,
+          0.1975
+        ],
+        [
+          0.5725,
+          0.1975
+        ]
+      ],
+      "vertex_indices0": [
+        12,
+        16,
+        15,
+        13
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          0.58,
+          -1.0
+        ],
+        [
+          -0.58,
+          -0.58,
+          -1.0
+        ],
+        [
+          -1.0,
+          -0.58,
+          -0.58
+        ],
+        [
+          -1.0,
+          0.58,
+          -0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 19,
+      "face_seed": 3752107511,
+      "normal_object": [
+        0.0,
+        0.7071067811865476,
+        0.7071067811865476
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.31396343830716517,
+        "atlas_bbox_pixels": [
+          587,
+          54,
+          640,
+          202
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 7844,
+        "palette_rgb": [
+          [
+            48,
+            248,
+            168
+          ],
+          [
+            248,
+            48,
+            128
+          ]
+        ],
+        "pattern_sha256": "c05bd333b621a6cb07c66bbe6e41e80d105c30790bf5c5afd0ca8edeaae37240",
+        "split_direction_pixels": [
+          0.48241479356896333,
+          0.8759429016470277
+        ],
+        "split_threshold_local_pixels": 52.79817674244185,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        26,
+        41,
+        10,
+        9
+      ],
+      "uv_polygon": [
+        [
+          0.625,
+          0.8025
+        ],
+        [
+          0.625,
+          0.9475
+        ],
+        [
+          0.5725,
+          0.9475
+        ],
+        [
+          0.5725,
+          0.8025
+        ]
+      ],
+      "vertex_indices0": [
+        7,
+        20,
+        19,
+        8
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          1.0,
+          0.58
+        ],
+        [
+          -0.58,
+          1.0,
+          0.58
+        ],
+        [
+          -0.58,
+          0.58,
+          1.0
+        ],
+        [
+          0.58,
+          0.58,
+          1.0
+        ]
+      ]
+    },
+    {
+      "face_id": 20,
+      "face_seed": 824239060,
+      "normal_object": [
+        0.7071067811865476,
+        0.7071067811865476,
+        -0.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.34010596620519173,
+        "atlas_bbox_pixels": [
+          587,
+          309,
+          693,
+          459
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 15900,
+        "palette_rgb": [
+          [
+            208,
+            88,
+            208
+          ],
+          [
+            88,
+            208,
+            88
+          ]
+        ],
+        "pattern_sha256": "6202e3afb77ad5c0623d0e88a75e2b4ecc18d0d78adfabe4609a99ae4b45fd3a",
+        "split_direction_pixels": [
+          -0.999826750525803,
+          -0.01861367596724644
+        ],
+        "split_threshold_local_pixels": -70.80687427936505,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        12,
+        15,
+        18,
+        17
+      ],
+      "uv_polygon": [
+        [
+          0.6775,
+          0.5525
+        ],
+        [
+          0.6775,
+          0.6975
+        ],
+        [
+          0.5725,
+          0.6975
+        ],
+        [
+          0.5725,
+          0.5525
+        ]
+      ],
+      "vertex_indices0": [
+        1,
+        7,
+        6,
+        2
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          1.0,
+          -0.58
+        ],
+        [
+          0.58,
+          1.0,
+          0.58
+        ],
+        [
+          1.0,
+          0.58,
+          0.58
+        ],
+        [
+          1.0,
+          0.58,
+          -0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 21,
+      "face_seed": 1048254737,
+      "normal_object": [
+        0.0,
+        -0.7071067811865476,
+        0.7071067811865476
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.36611029884522595,
+        "atlas_bbox_pixels": [
+          183,
+          256,
+          330,
+          309
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 7791,
+        "palette_rgb": [
+          [
+            168,
+            248,
+            48
+          ],
+          [
+            128,
+            48,
+            248
+          ]
+        ],
+        "pattern_sha256": "53afb4f5c09ea57e8acdc03ef23e962036e55b03e15dab61eafa42f9d4167d76",
+        "split_direction_pixels": [
+          0.6347892595805261,
+          0.7726853149382401
+        ],
+        "split_threshold_local_pixels": 53.9285730434031,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        3,
+        2,
+        28,
+        35
+      ],
+      "uv_polygon": [
+        [
+          0.1775,
+          0.6975
+        ],
+        [
+          0.3225,
+          0.6975
+        ],
+        [
+          0.3225,
+          0.75
+        ],
+        [
+          0.1775,
+          0.75
+        ]
+      ],
+      "vertex_indices0": [
+        21,
+        11,
+        10,
+        22
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          -1.0,
+          0.58
+        ],
+        [
+          0.58,
+          -1.0,
+          0.58
+        ],
+        [
+          0.58,
+          -0.58,
+          1.0
+        ],
+        [
+          -0.58,
+          -0.58,
+          1.0
+        ]
+      ]
+    },
+    {
+      "face_id": 22,
+      "face_seed": 2100498086,
+      "normal_object": [
+        -0.7071067811865476,
+        0.7071067811865476,
+        0.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3099276583004295,
+        "atlas_bbox_pixels": [
+          587,
+          822,
+          640,
+          969
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 7791,
+        "palette_rgb": [
+          [
+            48,
+            48,
+            48
+          ],
+          [
+            248,
+            248,
+            248
+          ]
+        ],
+        "pattern_sha256": "30da3b38fd8453aa30807ccf4823823389b5d3f4653e1a600d68e2fa26d95ae1",
+        "split_direction_pixels": [
+          0.2776918213620329,
+          0.9606702099829247
+        ],
+        "split_threshold_local_pixels": 50.51023456183616,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        34,
+        30,
+        6,
+        5
+      ],
+      "uv_polygon": [
+        [
+          0.625,
+          0.0525
+        ],
+        [
+          0.625,
+          0.1975
+        ],
+        [
+          0.5725,
+          0.1975
+        ],
+        [
+          0.5725,
+          0.0525
+        ]
+      ],
+      "vertex_indices0": [
+        20,
+        14,
+        13,
+        18
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          1.0,
+          0.58
+        ],
+        [
+          -0.58,
+          1.0,
+          -0.58
+        ],
+        [
+          -1.0,
+          0.58,
+          -0.58
+        ],
+        [
+          -1.0,
+          0.58,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 23,
+      "face_seed": 2509274506,
+      "normal_object": [
+        0.0,
+        0.7071067811865476,
+        -0.7071067811865476
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3644376190932897,
+        "atlas_bbox_pixels": [
+          586,
+          566,
+          640,
+          715
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 8045,
+        "palette_rgb": [
+          [
+            248,
+            208,
+            128
+          ],
+          [
+            48,
+            88,
+            168
+          ]
+        ],
+        "pattern_sha256": "2674ecb4f3f6027964be73a8f0ea163e750f93ccb5f030c7f49ab6ca48ed6f89",
+        "split_direction_pixels": [
+          0.557152056831696,
+          0.8304104922074447
+        ],
+        "split_threshold_local_pixels": 59.40256635938751,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        42,
+        21,
+        20,
+        39
+      ],
+      "uv_polygon": [
+        [
+          0.625,
+          0.3025
+        ],
+        [
+          0.625,
+          0.4475
+        ],
+        [
+          0.5725,
+          0.4475
+        ],
+        [
+          0.5725,
+          0.3025
+        ]
+      ],
+      "vertex_indices0": [
+        14,
+        1,
+        0,
+        12
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          1.0,
+          -0.58
+        ],
+        [
+          0.58,
+          1.0,
+          -0.58
+        ],
+        [
+          0.58,
+          0.58,
+          -1.0
+        ],
+        [
+          -0.58,
+          0.58,
+          -1.0
+        ]
+      ]
+    },
+    {
+      "face_id": 24,
+      "face_seed": 2576335279,
+      "normal_object": [
+        0.7071067811865476,
+        -0.7071067811865476,
+        0.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3968626626535796,
+        "atlas_bbox_pixels": [
+          331,
+          309,
+          437,
+          459
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 15792,
+        "palette_rgb": [
+          [
+            128,
+            248,
+            248
+          ],
+          [
+            168,
+            48,
+            48
+          ]
+        ],
+        "pattern_sha256": "f272600658368262b57fbe7e57bdee923acc572a087edd3477310d2148307820",
+        "split_direction_pixels": [
+          0.47180877368580076,
+          0.8817009022753128
+        ],
+        "split_threshold_local_pixels": 76.89372843324108,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        2,
+        1,
+        16,
+        19
+      ],
+      "uv_polygon": [
+        [
+          0.3225,
+          0.6975
+        ],
+        [
+          0.3225,
+          0.5525
+        ],
+        [
+          0.4275,
+          0.5525
+        ],
+        [
+          0.4275,
+          0.6975
+        ]
+      ],
+      "vertex_indices0": [
+        11,
+        3,
+        5,
+        9
+      ],
+      "vertices_mesh": [
+        [
+          0.58,
+          -1.0,
+          0.58
+        ],
+        [
+          0.58,
+          -1.0,
+          -0.58
+        ],
+        [
+          1.0,
+          -0.58,
+          -0.58
+        ],
+        [
+          1.0,
+          -0.58,
+          0.58
+        ]
+      ]
+    },
+    {
+      "face_id": 25,
+      "face_seed": 3382502071,
+      "normal_object": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "pattern": {
+        "accent_fraction_target": 0.3129042365864966,
+        "atlas_bbox_pixels": [
+          437,
+          566,
+          586,
+          714
+        ],
+        "common_edge_band_pixels": 0,
+        "owned_pixels": 22052,
+        "palette_rgb": [
+          [
+            48,
+            168,
+            168
+          ],
+          [
+            248,
+            128,
+            128
+          ]
+        ],
+        "pattern_sha256": "f76a7590af67527ee3455d6409e24b7bae99749e206ec1bca142889daeb23b4a",
+        "split_direction_pixels": [
+          -0.5971083847259906,
+          -0.802160568022337
+        ],
+        "split_threshold_local_pixels": -125.68653486722424,
+        "style": "two_solid_colours_asymmetric_split"
+      },
+      "uv_indices0": [
+        40,
+        39,
+        20,
+        37
+      ],
+      "uv_polygon": [
+        [
+          0.4275,
+          0.3025
+        ],
+        [
+          0.5725,
+          0.3025
+        ],
+        [
+          0.5725,
+          0.4475
+        ],
+        [
+          0.4275,
+          0.4475
+        ]
+      ],
+      "vertex_indices0": [
+        16,
+        12,
+        0,
+        4
+      ],
+      "vertices_mesh": [
+        [
+          -0.58,
+          -0.58,
+          -1.0
+        ],
+        [
+          -0.58,
+          0.58,
+          -1.0
+        ],
+        [
+          0.58,
+          0.58,
+          -1.0
+        ],
+        [
+          0.58,
+          -0.58,
+          -1.0
+        ]
+      ]
+    }
+  ],
+  "generator_version": "chamfered_uv_atlas_simple_v2",
+  "mesh_file": "urdf/objects/meshes/set2/set_obj6_block_corner.obj",
+  "mesh_sha256": "cff753bc2cad97232d872680a04b41610a7e4690ed94376da10a0ace238b5d0c",
+  "object_name": "set_obj6_block_corner",
+  "palette_contract": {
+    "colours_per_face": 2,
+    "colours_total": 52,
+    "common_edge_colour": false,
+    "face_palettes_disjoint": true,
+    "sampling_note": "Bilinear texture filtering and lighting can interpolate edge/display colours."
+  },
+  "resolution": [
+    1024,
+    1024
+  ],
+  "schema_version": 1,
+  "seed": 20261102,
+  "source_mesh_scale": [
+    0.03,
+    0.03,
+    0.03
+  ],
+  "texture_file": "atlas.png",
+  "texture_id": "set_obj6_block_corner_simple_v2_s20261102_r1024_c6753e06c905",
+  "texture_sha256": "c6753e06c9052238d6974dd4e679db5321dd635e31492c180cc5c4569d74c8ca",
+  "uv_convention": {
+    "mesh_uv_origin": "bottom_left",
+    "outside_face_padding_pixels": 2,
+    "png_origin": "top_left",
+    "rasterization": "x=round(u*(width-1)); y=round((1-v)*(height-1))",
+    "shared_edge_pixel_ownership": "lowest face_id first; no common border"
+  }
+}

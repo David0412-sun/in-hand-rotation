@@ -18,6 +18,66 @@ from isaacgym import gymapi
 
 
 FINGERS = ("thumb", "index", "middle", "ring", "little")
+DATASET_CAMERAS = FINGERS + ("top",)
+
+
+def _rotation_quaternion(matrix):
+    """Convert an orthonormal, right-handed rotation matrix to Gym xyzw."""
+    matrix = np.asarray(matrix, dtype=np.float64)
+    q = np.zeros(4, dtype=np.float64)
+    trace = float(np.trace(matrix))
+    if trace > 0:
+        scale = 2 * math.sqrt(trace + 1)
+        q[:] = ((matrix[2, 1] - matrix[1, 2]) / scale,
+                (matrix[0, 2] - matrix[2, 0]) / scale,
+                (matrix[1, 0] - matrix[0, 1]) / scale, scale / 4)
+    else:
+        i = int(np.argmax(np.diag(matrix)))
+        j, k = (i + 1) % 3, (i + 2) % 3
+        scale = 2 * math.sqrt(1 + matrix[i, i] - matrix[j, j] - matrix[k, k])
+        q[i], q[j], q[k], q[3] = (scale / 4,
+            (matrix[j, i] + matrix[i, j]) / scale,
+            (matrix[k, i] + matrix[i, k]) / scale,
+            (matrix[k, j] - matrix[j, k]) / scale)
+    q /= np.linalg.norm(q)
+    return gymapi.Quat(*q)
+
+
+def _pose_array(transform):
+    return np.asarray([transform.p.x, transform.p.y, transform.p.z,
+                       transform.r.x, transform.r.y, transform.r.z, transform.r.w], dtype=np.float32)
+
+
+def top_camera_mount(config, env_cfg):
+    """Share the fixed BASE-relative camera geometry with geometric rewards."""
+    target = config.get("target_local")
+    target = np.asarray([0.005, -0.0715, 0.11] if target is None else target, dtype=np.float64)
+    normal = np.asarray(env_cfg.get("palmNormalLocal", [0, -1, 0]), dtype=np.float64)
+    up = np.asarray(config.get("up_local", [0, 0, 1]), dtype=np.float64)
+    distance = float(config.get("distance", 0.25))
+    width, height = int(config.get("width", 256)), int(config.get("height", 256))
+    fov = float(config.get("horizontal_fov", 60))
+    near, far = float(config.get("near_plane", 0.01)), float(config.get("far_plane", 2))
+    if (any(vector.shape != (3,) or not np.isfinite(vector).all() for vector in (target, normal, up))
+            or not math.isfinite(distance) or distance <= 0 or min(width, height) < 2
+            or not 0 < fov < 180 or not 0 < near < far or np.linalg.norm(normal) < 1e-8):
+        raise ValueError("Invalid dataset.top_camera dimensions, frame, distance or clipping planes")
+    normal = normal / np.linalg.norm(normal)
+    forward = -normal
+    left = np.cross(up, forward)
+    if np.linalg.norm(left) < 1e-8:
+        raise ValueError("dataset.top_camera.up_local must not be parallel to the viewing direction")
+    left /= np.linalg.norm(left)
+    corrected_up = np.cross(forward, left)
+    mount = gymapi.Transform()
+    mount.p = gymapi.Vec3(*(target + distance * normal))
+    # Gym sensor axes: +X forward, +Y left, +Z up.
+    mount.r = _rotation_quaternion(np.column_stack((forward, left, corrected_up)))
+    metadata = dict(width=width, height=height, horizontal_fov=fov, near_plane=near,
+        far_plane=far, distance=distance, base_link=str(config.get("base_link", "BASE")),
+        target_local=target.tolist(), normal_local=normal.tolist(), up_local=corrected_up.tolist(),
+        mount_pose_hand=_pose_array(mount).tolist())
+    return mount, metadata
 
 
 def resolve_env_ids(config, num_envs):
@@ -145,10 +205,12 @@ class HandCameraMonitor:
     def __init__(self, task, config):
         self.task, self.gym, self.sim = task, task.gym, task.sim
         self.config = dict(config)
-        self.env_ids = resolve_env_ids(config, task.num_envs)
+        self.env_ids = tuple(getattr(task, "camera_env_ids", resolve_env_ids(config, task.num_envs)))
         self.selected_id = int(config.get("env_id", 0))
         self.display = bool(config.get("display", False))
         self.record = bool(config.get("record", False))
+        if self.selected_id not in self.env_ids and not (self.display or self.record) and self.env_ids:
+            self.selected_id = self.env_ids[0]
         if self.display and task.headless:
             raise ValueError("camera.display=True requires headless=False; use camera.record for headless video")
         self.width, self.height = int(config.get("width", 112)), int(config.get("height", 112))
@@ -157,7 +219,7 @@ class HandCameraMonitor:
         self.segment_steps = int(config.get("segment_steps", 300))
         self.interval_steps = int(config.get("record_interval_steps", 0))
         self.record_steps = int(config.get("record_steps", 200))
-        near, far = float(config.get("near_plane", .001)), float(config.get("far_plane", 1))
+        near, far = float(config.get("near_plane", .0001)), float(config.get("far_plane", 1))
         if (min(self.width, self.height) < 2 or self.width % 2 or self.height % 2
                 or not 0 < self.horizontal_fov < 180 or not 0 < near < far
                 or min(self.capture_every, self.segment_steps, self.record_steps) < 1
@@ -169,6 +231,12 @@ class HandCameraMonitor:
         self.viewer = None
         self.window = None
         self.cameras = {}
+        self.top_cameras = {}
+        self.dataset_env_ids = tuple(getattr(task, "dataset_env_ids", ()))
+        if any(env_id not in self.env_ids for env_id in self.dataset_env_ids):
+            raise ValueError("Dataset environments must be included in the finger-camera pool")
+        self._top_camera_config = None
+        self._top_mount = None
         self.selecting = False
         self._lines_drawn = False
         self._mouse_available = True
@@ -208,7 +276,7 @@ class HandCameraMonitor:
         props.horizontal_fov, props.near_plane, props.far_plane = self.horizontal_fov, near, far
         props.enable_tensors = False
         try:
-            for env_id in self.env_ids:
+            for env_id in sorted(self.env_ids):
                 env, hand = task.envs[env_id], task.hands[env_id]
                 self.cameras[env_id] = {}
                 for finger in FINGERS:
@@ -225,11 +293,106 @@ class HandCameraMonitor:
                         raise RuntimeError("Failed to create finger camera; a graphics device is required")
                     self.cameras[env_id][finger] = handle
                     self.gym.attach_camera_to_body(handle, env, body, transform, gymapi.FOLLOW_TRANSFORM)
+                # Preview4 keeps a contiguous block of sensor indices per env.
+                # Finish this env's complete rig before creating another env's
+                # sensors: inserting a top camera later corrupts later offsets.
+                if env_id in self.dataset_env_ids:
+                    self._create_top_camera(env_id, env_cfg)
         except Exception:
             self.close()
             raise
         print("Finger cameras: {} environments, {} sensors, {}x{}, {:.3f} FPS".format(
             len(self.env_ids), 5 * len(self.env_ids), self.width, self.height, self.fps))
+        if self.top_cameras:
+            top = self._top_camera_config
+            print("Dataset top-view cameras: {}, {}x{}, {:.3f} m from fixed BASE target".format(
+                len(self.top_cameras), top["width"], top["height"], top["distance"]))
+
+    def _create_top_camera(self, env_id, env_cfg):
+        """Fixed BASE-relative view, independent of the object's initial pose."""
+        config = getattr(self.task, "dataset_config", {}).get("top_camera", {})
+        mount, metadata = top_camera_mount(config, env_cfg)
+        base_link = metadata["base_link"]
+        props = gymapi.CameraProperties()
+        props.width, props.height = metadata["width"], metadata["height"]
+        props.horizontal_fov = metadata["horizontal_fov"]
+        props.near_plane, props.far_plane = metadata["near_plane"], metadata["far_plane"]
+        props.enable_tensors = False
+        props.use_collision_geometry = False
+        env = self.task.envs[env_id]
+        body = self.gym.find_actor_rigid_body_handle(env, self.task.hands[env_id], base_link)
+        if body < 0:
+            raise ValueError("Top-view base link not found: " + base_link)
+        handle = self.gym.create_camera_sensor(env, props)
+        if handle < 0:
+            raise RuntimeError("Failed to create dataset top-view camera")
+        self.top_cameras[env_id] = handle
+        self.gym.attach_camera_to_body(handle, env, body, mount, gymapi.FOLLOW_TRANSFORM)
+        self._top_mount = mount
+        self._top_camera_config = metadata
+
+    def _dataset_handles(self, env_id):
+        if env_id not in self.top_cameras:
+            raise ValueError("Environment has no dataset camera rig: {}".format(env_id))
+        return [self.cameras[env_id][finger] for finger in FINGERS] + [self.top_cameras[env_id]]
+
+    def dataset_camera_metadata(self):
+        """Static camera intrinsics and mounting conventions for HDF5 metadata."""
+        if not self.dataset_env_ids:
+            return None
+        env_id = self.dataset_env_ids[0]
+        calibrations = []
+        for name, handle in zip(DATASET_CAMERAS, self._dataset_handles(env_id)):
+            width, height = ((self.width, self.height) if name != "top" else
+                             (self._top_camera_config["width"], self._top_camera_config["height"]))
+            projection = np.asarray(self.gym.get_camera_proj_matrix(
+                self.sim, self.task.envs[env_id], handle), dtype=np.float64)
+            if (projection.shape != (4, 4) or not np.isfinite(projection).all()
+                    or min(projection[0, 0], projection[1, 1]) <= 0):
+                raise RuntimeError("Invalid dataset projection for camera {}".format(name))
+            # Integer pixel centres: the first pixel centre is (0,0), so the
+            # image centre is ((width-1)/2, (height-1)/2).
+            intrinsics = [[float(projection[0, 0]) * width / 2, 0.,
+                           (width - 1) / 2 - float(projection[2, 0]) * width / 2],
+                          [0., float(projection[1, 1]) * height / 2,
+                           (height - 1) / 2 + float(projection[2, 1]) * height / 2], [0., 0., 1.]]
+            calibrations.append(dict(name=name, width=width, height=height,
+                K=intrinsics, gym_projection_matrix=projection.tolist()))
+        return dict(order=list(DATASET_CAMERAS), cameras=calibrations,
+            finger_mounts=self._mounts, top_camera=self._top_camera_config,
+            pose_layout="position_xyz_m,quaternion_xyzw",
+            pose_frame="OpenCV optical: +X right, +Y down, +Z forward",
+            gym_pose_frame="Gym sensor: +X forward, +Y left, +Z up",
+            pixel_coordinates="Integer pixel centres: first pixel (u,v)=(0,0)",
+            projection_convention="Raw Gym projection/view matrices use row-vector multiplication",
+            raw_view_input_frame="Simulation world: add get_env_origin to env-local positions",
+            raw_view_output_frame="OpenGL camera: +X right, +Y up, -Z forward",
+            image_model="Synthetic pinhole; no distortion")
+
+    def get_dataset_camera_poses(self, env_id, optical=True):
+        """Current six camera-to-env poses, using the declared optical frame."""
+        result = []
+        # R_gym_optical has columns [-Y_gym, -Z_gym, +X_gym].
+        optical_rotation = gymapi.Quat(-0.5, 0.5, -0.5, 0.5)
+        for name, handle in zip(DATASET_CAMERAS, self._dataset_handles(env_id)):
+            pose = self.gym.get_camera_transform(self.sim, self.task.envs[env_id], handle)
+            raw_pose = _pose_array(pose)
+            norm = float(np.linalg.norm(raw_pose[3:]))
+            if not np.isfinite(raw_pose).all() or norm <= 1e-6 or abs(norm - 1) > 1e-3:
+                raise RuntimeError("Invalid dataset camera pose: env {}, camera {}".format(env_id, name))
+            if optical:
+                pose.r = pose.r * optical_rotation
+            result.append(_pose_array(pose))
+        return np.stack(result)
+
+    def get_dataset_camera_views(self, env_id):
+        """Raw Gym view matrices, retained to disambiguate projection conventions."""
+        views = np.asarray([self.gym.get_camera_view_matrix(self.sim, self.task.envs[env_id], handle)
+                            for handle in self._dataset_handles(env_id)], dtype=np.float32)
+        if (views.shape != (len(DATASET_CAMERAS), 4, 4) or not np.isfinite(views).all()
+                or np.any(np.max(np.abs(views), axis=(1, 2)) <= 1e-10)):
+            raise RuntimeError("Invalid dataset camera view matrices for env {}".format(env_id))
+        return views
 
     @staticmethod
     def _make_box_lines(lower, upper):
@@ -362,7 +525,7 @@ class HandCameraMonitor:
     def draw_selection(self):
         if self.viewer is None or (not self.display and not self._lines_drawn):
             return
-        self.gym.clear_lines(self.viewer)
+        # RapidHand owns clearing the buffer once before drawing all overlays.
         self._lines_drawn = False
         if not self.display:
             return
@@ -400,6 +563,9 @@ class HandCameraMonitor:
                         checkpoint=str(self.config.get("checkpoint", "")),
                         mounts=self._mounts, camera_model="pinhole; approximate optical mounts",
                         timing="simulation time; synchronized five views; captured before reset")
+        object_texture = getattr(self.task, "object_texture_metadata", None)
+        if object_texture is not None:
+            metadata["object_texture"] = object_texture
         self._clip = _VideoClip(directory, self.width, self.height, self.fps, metadata)
         self._clip_start = self.control_step
         print("Recording finger cameras: " + str(directory))
@@ -409,30 +575,49 @@ class HandCameraMonitor:
             clip, self._clip = self._clip, None
             clip.close()
 
-    def capture(self):
-        """Call exactly once after each completed control step, before auto-reset."""
+    def _read_rgb(self, env_id, handle, width, height):
+        rgba = self.gym.get_camera_image(self.sim, self.task.envs[env_id], handle, gymapi.IMAGE_COLOR)
+        return np.asarray(rgba, dtype=np.uint8).reshape(height, width, 4)[:, :, :3].copy()
+
+    def capture(self, dataset_env_ids=()):
+        """Capture once pre-reset, sharing one render across all image consumers.
+
+        Return CPU-owned RGB arrays only for the requested dataset environments.
+        Preview and optional MP4 cadence remain independent of dataset cadence.
+        """
         if self._closed:
-            return
+            return {}
         self.control_step += 1
         self.poll()
+        dataset_env_ids = tuple(int(value) for value in dataset_env_ids)
+        if len(set(dataset_env_ids)) != len(dataset_env_ids) or any(
+                value not in self.top_cameras for value in dataset_env_ids):
+            raise ValueError("Requested dataset camera environments are invalid or duplicated")
         recording = self._record_now()
         if not recording:
             self._finish_clip()
         sampled = self.control_step % self.capture_every == 0
-        if sampled and (self.display or recording):
-            # Debug lines also appear in sensor renders. Keep selection overlays
-            # in the Viewer only; draw_selection restores them on its next frame.
-            if self.viewer is not None and self._lines_drawn:
-                self.gym.clear_lines(self.viewer)
-                self._lines_drawn = False
+        preview_now = sampled and (self.display or recording)
+        dataset_frames, finger_images = {}, {}
+        if preview_now or dataset_env_ids:
+            # Keep the shared selection/axis buffer clear during capture; all
+            # Viewer overlays are restored together on the next Viewer frame.
+            self.task.clear_viewer_overlays()
             self.gym.step_graphics(self.sim)
             self.gym.render_all_camera_sensors(self.sim)
-            images = {}
-            for finger, handle in self.cameras[self.selected_id].items():
-                rgba = self.gym.get_camera_image(self.sim, self.task.envs[self.selected_id],
-                                                  handle, gymapi.IMAGE_COLOR)
-                images[finger] = np.asarray(rgba, dtype=np.uint8).reshape(
-                    self.height, self.width, 4)[:, :, :3].copy()
+            requested = set(dataset_env_ids)
+            if preview_now:
+                requested.add(self.selected_id)
+            for env_id in sorted(requested):
+                finger_images[env_id] = {finger: self._read_rgb(
+                    env_id, self.cameras[env_id][finger], self.width, self.height) for finger in FINGERS}
+            for env_id in dataset_env_ids:
+                top = self._top_camera_config
+                dataset_frames[env_id] = dict(
+                    finger_rgb=np.stack([finger_images[env_id][finger] for finger in FINGERS]),
+                    top_rgb=self._read_rgb(env_id, self.top_cameras[env_id], top["width"], top["height"]))
+        if preview_now:
+            images = finger_images[self.selected_id]
             if self.window is not None:
                 for finger, rgb in images.items():
                     image = self._Image.fromarray(rgb).resize((self.width * 2, self.height * 2))
@@ -447,10 +632,13 @@ class HandCameraMonitor:
                         self._start_clip()
                     env_id = self.selected_id
                     reward = float(self.task.rew_buf[env_id].item())
-                    self._clip.write(images, dict(control_step=self.control_step,
+                    frame = dict(control_step=self.control_step,
                         sim_time=self.control_step * self.control_dt,
                         episode=self._episode_ids[env_id], done=bool(self.task.reset_buf[env_id].item()),
-                        reward=reward if math.isfinite(reward) else None))
+                        reward=reward if math.isfinite(reward) else None)
+                    if getattr(self.task, "object_texture_metadata", None) is not None:
+                        frame["object_visual_state"] = self.task.get_object_visual_state(env_id)
+                    self._clip.write(images, frame)
                     if self.control_step - self._clip_start + self.capture_every >= self.segment_steps:
                         self._finish_clip()
                 except (OSError, RuntimeError, ValueError) as error:
@@ -459,6 +647,7 @@ class HandCameraMonitor:
         # Count episode boundaries even during an interval with no video frames.
         for env_id in self.env_ids:
             self._episode_ids[env_id] += int(bool(self.task.reset_buf[env_id].item()))
+        return dataset_frames
 
     def close(self):
         if self._closed:
@@ -471,4 +660,5 @@ class HandCameraMonitor:
         # The Sim owns sensor render targets. Release them with destroy_sim,
         # after destroy_viewer, matching the SDK graphics example's lifecycle.
         self.cameras.clear()
+        self.top_cameras.clear()
         self._photos.clear()

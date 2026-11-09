@@ -1,0 +1,16 @@
+# @package _global_
+# Keep the historical 75 mm Z-axis reward in an independent task directory.
+defaults:
+  - block_corner_75mm
+  - _self_
+
+task:
+  env:
+    axis: z
+    objectScale: 1.25
+    positionTolerance: 0.005
+
+train:
+  params:
+    config:
+      train_dir: runs/rapidhand/block_corner_75mm_centered

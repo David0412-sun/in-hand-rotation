@@ -1,3 +1,6 @@
 *.egg-info
 __pycache__
 *.pyc
+
+# Generated sensor datasets (HDF5 shards and per-run metadata).
+/datasets/

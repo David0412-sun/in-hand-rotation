@@ -1,6 +1,8 @@
 # @package _global_
 # Select with +object=block_corner_60mm when using task=RapidHandRotation.
 task:
+  object_texture:
+    enabled: ${eq:${..env.objectName},set_obj6_block_corner}
   env:
     objSet: C
     objectName: set_obj6_block_corner
